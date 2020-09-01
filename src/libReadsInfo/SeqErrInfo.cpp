@@ -1,0 +1,222 @@
+/******************************************************************************
+*                                                                             *
+*  Copyright © 2010-2013 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale)                                         *
+*                           LIFL/INRIA                                        *
+*                           (Laboratoire d'Informatique Fondamentale de       *
+*                           Lille / Institut National de Recherche en         *
+*                           Informatique et Automatique)                      *
+*                           LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
+*                           LITIS                                             *
+*                           (Laboratoire d'Informatique, du Traitement de     *
+*                           l'Information et des Systèmes).                   *
+*                                                                             *
+*                                                                             *
+*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
+*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
+*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
+*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*                                                                             *
+*  Programmeurs                                                               *
+*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
+*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
+*  with additional contribution for the packaging of:	                      *
+*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*                                                                             *
+*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
+*                                                                             *
+*  -------------------------------------------------------------------------  *
+*                                                                             *
+*  Ce fichier fait partie du programme CRAC.                                  *
+*                                                                             *
+*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
+*                                                                             *
+*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
+*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
+*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
+*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
+*  le site "http://www.cecill.info".                                          *
+*                                                                             *
+*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
+*  de modification et de redistribution accordés par cette licence, il n'est  *
+*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
+*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
+*  titulaire des droits patrimoniaux et les concédants successifs.            *
+*                                                                             *
+*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
+*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
+*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
+*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
+*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
+*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
+*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
+*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
+*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
+*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
+*                                                                             *
+*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
+*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
+*  termes.                                                                    *
+*                                                                             *
+*  -------------------------------------------------------------------------  *
+*                                                                             *
+*  This File is part of the CRAC program.                                     *
+*                                                                             *
+*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
+*                                                                             *
+*  This software is governed by the CeCILL license under French law and       *
+*  abiding by the rules of distribution of free software. You can use,        *
+*  modify and/ or redistribute the software under the terms of the CeCILL     *
+*  license as circulated by CEA, CNRS and INRIA at the following URL          *
+*  "http://www.cecill.info".                                                  *
+*                                                                             *
+*  As a counterpart to the access to the source code and rights to copy,      *
+*  modify and redistribute granted by the license, users are provided only    *
+*  with a limited warranty and the software's author, the holder of the       *
+*  economic rights, and the successive licensors have only limited            *
+*  liability.                                                                 *
+*                                                                             *
+*  In this respect, the user's attention is drawn to the risks associated     *
+*  with loading, using, modifying and/or developing or reproducing the        *
+*  software by the user in light of its specific status of free software,     *
+*  that may mean that it is complicated to manipulate, and that also          *
+*  therefore means that it is reserved for developers and experienced         *
+*  professionals having in-depth computer knowledge. Users are therefore      *
+*  encouraged to load and test the software's suitability as regards their    *
+*  requirements in conditions enabling the security of their systems and/or   *
+*  data to be ensured and, more generally, to use and operate it in the same  *
+*  conditions as regards security.                                            *
+*                                                                             *
+*  The fact that you are presently reading this means that you have had       *
+*  knowledge of the CeCILL license and that you accept its terms.             *
+*                                                                             *
+******************************************************************************/
+
+#include "SeqErrInfo.h"
+#include "../libSSA/utils.h"
+
+SeqErrInfo::SeqErrInfo(ChrPosition chrPos, uint position, uint nb_ins, 
+		       uint nb_del, float score, bool is_duplicated,
+		       char *genome, char *tag,
+		       uint g_length, uint t_length): 
+  IndelInfo(chrPos, position, nb_ins, nb_del, score, is_duplicated),
+  genome_sequence(genome),
+  err_sequence(tag), g_seq_length(g_length), t_seq_length(t_length)
+{
+  genome_sequence_revcomp = NULL;
+  err_sequence_revcomp = NULL;
+  if (genome_sequence) {
+    genome_sequence_revcomp = new char[g_seq_length+1];
+    genome_sequence_revcomp[g_seq_length] = 0;
+    for (uint i=0; i < g_seq_length; i++) 
+      genome_sequence_revcomp[g_seq_length - i - 1] = complementDNA(genome_sequence[i]);
+  }
+  
+  if (err_sequence) {
+    err_sequence_revcomp = new char[t_seq_length+1];
+    err_sequence_revcomp[t_seq_length] = 0;
+    for (uint i = 0; i < t_seq_length; i++)
+      err_sequence_revcomp[t_seq_length - i - 1] = complementDNA(err_sequence[i]);
+  }
+}
+
+SeqErrInfo::~SeqErrInfo() {
+  if (genome_sequence != NULL && genome_sequence[0]!=0) {
+    free(genome_sequence);
+    delete [] genome_sequence_revcomp;
+  }
+  if (err_sequence != NULL && err_sequence[0]!=0) {
+    delete [] err_sequence;
+    delete [] err_sequence_revcomp;
+  }
+}
+
+char *SeqErrInfo::getErrorSequence(int strand) {
+  return (strand == 1) ? err_sequence : err_sequence_revcomp;
+}
+
+uint SeqErrInfo::getErrorSequenceLength() {
+  return t_seq_length;
+}
+
+char *SeqErrInfo::getGenomeSequence(int strand) {
+  return (strand == 1) ? genome_sequence : genome_sequence_revcomp;
+}
+
+uint SeqErrInfo::getGenomeSequenceLength() {
+  return g_seq_length;
+}
+
+// bool SeqErrInfo::isDuplicated() {
+//   return is_duplicated;
+// }
+
+void SeqErrInfo::samOutput(ostream &os, int strand) {
+  if (getErrorSequenceLength() == getGenomeSequenceLength() 
+      && getErrorSequenceLength() < (uint)~0)
+    // Substitution
+    os << "Error:Sub:" << getPosition(strand) << ":" << getScore() << ":" 
+       << getGenomeSequence(strand) << ":" 
+       << getErrorSequence(strand);
+  else if ((getNbIns() == (uint)~0) && (getNbDel() == (uint)~0))
+    // Unknown
+    os << "Error:Unknown:" << getPosition(strand) << ":" << getScore();
+  else if (getNbDel() > 0)
+    // Deletion
+    os << "Error:Del:" << getPosition(strand) << ":" << getScore() << ":"
+       << getNbDel() << ":" 
+       << (getGenomeSequence() == NULL ? "<snip>" : getGenomeSequence(strand));
+  else if (getNbIns() > 0)
+    os << "Error:Ins:" << getPosition(strand) << ":" << getScore() << ":"
+       << getNbIns() << ":" 
+       << (getErrorSequence() == NULL ? "<snip>" : getErrorSequence(strand));
+}
+
+ostream &operator<<(ostream &os, SeqErrInfo& i) {
+   if (i.isDuplicated()){
+    os <<"duplicate ";
+  }else{
+    os <<"single ";
+  }
+  os << i.getChrPosition() 
+     << " pos_error="<<i.getPosition()
+     << " nb_ins=";
+  uint nb = i.getNbIns();
+  if (nb == (uint)~0)
+    os << "unknown";
+  else 
+    os << nb;
+  os <<" nb_del=";
+  nb = i.getNbDel();
+  if (nb == (uint)~0)
+    os << "unknown";
+  else 
+    os << nb;
+
+  if ((i.getGenomeSequence() == NULL 
+       || i.getGenomeSequence()[0]==0)
+      && (i.getErrorSequence() == NULL
+	  || i.getErrorSequence()[0]==0))
+    return os;
+
+  os << " ";
+
+  if (i.getGenomeSequence() == NULL) 
+    os << "?";
+  else
+    os << i.getGenomeSequence();
+  
+  os << "->";
+
+  if (i.getErrorSequence() == NULL)
+    os << "?";
+  else
+    os << i.getErrorSequence();
+  os << " score=" << i.getScore();
+  return os;
+}

@@ -1,0 +1,438 @@
+------------------------------------------------------------------------
+r2851 | jaudoux | 2014-04-04 09:40:56 +0200 (ven. 04 avril 2014) | 1 ligne
+
+tlen set at 0 when PE read are completely overlapping. Add tests to consistency3
+------------------------------------------------------------------------
+r2850 | jaudoux | 2014-04-04 09:21:50 +0200 (ven. 04 avril 2014) | 1 ligne
+
+tlen is back to genomic distance
+------------------------------------------------------------------------
+r2849 | nphilippe | 2014-04-04 09:09:35 +0200 (ven. 04 avril 2014) | 1 ligne
+
+some correction in doc
+------------------------------------------------------------------------
+r2848 | nphilippe | 2014-04-04 08:57:45 +0200 (ven. 04 avril 2014) | 1 ligne
+
+some correction in doc
+------------------------------------------------------------------------
+r2847 | nphilippe | 2014-04-04 08:50:21 +0200 (ven. 04 avril 2014) | 1 ligne
+
+some correction in doc
+------------------------------------------------------------------------
+r2846 | jaudoux | 2014-04-03 17:50:03 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+Draft for the new SAM specifications
+------------------------------------------------------------------------
+r2845 | jaudoux | 2014-04-03 17:44:57 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+change tlen computing, we try to estimate the real RNA template length even if a Splice could be present in the space between PE reads
+------------------------------------------------------------------------
+r2844 | nphilippe | 2014-04-03 17:42:15 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+update doc
+------------------------------------------------------------------------
+r2843 | jaudoux | 2014-04-03 17:33:10 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+Remove Repetition field in SAM output of a repetitions since the field XX is dedicated to repetition, that would be redundant
+------------------------------------------------------------------------
+r2842 | jaudoux | 2014-04-03 17:20:58 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+Change first and second read names
+------------------------------------------------------------------------
+r2841 | nphilippe | 2014-04-03 16:23:11 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+fixed a warning
+------------------------------------------------------------------------
+r2840 | jaudoux | 2014-04-03 15:51:46 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+We display multiple alignement in SAM only when support is not single
+------------------------------------------------------------------------
+r2839 | nphilippe | 2014-04-03 15:42:59 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+decrease threshold for repetition
+------------------------------------------------------------------------
+r2838 | nphilippe | 2014-04-03 15:25:38 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+add a function in SUpport to recond the max_nb_locs in nb_locs profile
+------------------------------------------------------------------------
+r2837 | jaudoux | 2014-04-03 14:47:15 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+Add Repetition info to SAM output as 'XX' optional field
+------------------------------------------------------------------------
+r2836 | nphilippe | 2014-04-03 14:44:04 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+remove condition for repetition
+------------------------------------------------------------------------
+r2835 | jaudoux | 2014-04-03 09:52:19 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+Tlen sign depends on positions of the reads on forward strand not on paired-end identifiers
+------------------------------------------------------------------------
+r2834 | nphilippe | 2014-04-03 08:50:06 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+We did not search fastq files in Makefile.am for the make distcheck...
+------------------------------------------------------------------------
+r2833 | nphilippe | 2014-04-03 08:37:45 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+check, again.... fucking should_get
+------------------------------------------------------------------------
+r2832 | nphilippe | 2014-04-03 04:07:32 +0200 (jeu. 03 avril 2014) | 1 ligne
+
+test the should_get like that
+------------------------------------------------------------------------
+r2831 | nphilippe | 2014-04-02 18:47:16 +0200 (mer. 02 avril 2014) | 1 ligne
+
+first and second fragment are inversed
+------------------------------------------------------------------------
+r2830 | jaudoux | 2014-04-02 18:24:42 +0200 (mer. 02 avril 2014) | 1 ligne
+
+We were missing class 2 chimera in PE chimeras. I also shift PE flags 64 and 128
+------------------------------------------------------------------------
+r2829 | nphilippe | 2014-04-02 18:11:03 +0200 (mer. 02 avril 2014) | 1 ligne
+
+just change a regex to check if jenkins is fine
+------------------------------------------------------------------------
+r2828 | nphilippe | 2014-04-02 18:01:25 +0200 (mer. 02 avril 2014) | 1 ligne
+
+just change a regex to check if jenkins is fine
+------------------------------------------------------------------------
+r2827 | jaudoux | 2014-04-02 17:48:16 +0200 (mer. 02 avril 2014) | 1 ligne
+
+Add value TLEN field in SAM when we have paired-end reads
+------------------------------------------------------------------------
+r2826 | nphilippe | 2014-04-02 16:59:45 +0200 (mer. 02 avril 2014) | 1 ligne
+
+just a copy to test jenkins
+------------------------------------------------------------------------
+r2825 | jaudoux | 2014-04-02 15:46:08 +0200 (mer. 02 avril 2014) | 1 ligne
+
+Tests for bug [#16581]
+------------------------------------------------------------------------
+r2824 | jaudoux | 2014-04-02 15:11:48 +0200 (mer. 02 avril 2014) | 1 ligne
+
+Update optional fields and fix invalid read size in SamLine
+------------------------------------------------------------------------
+r2823 | nphilippe | 2014-04-02 15:07:58 +0200 (mer. 02 avril 2014) | 1 ligne
+
+replace antislash s by space in regex
+------------------------------------------------------------------------
+r2822 | nphilippe | 2014-04-02 11:59:27 +0200 (mer. 02 avril 2014) | 1 ligne
+
+exact mapping not only for DGE but for a reads factor of length k
+------------------------------------------------------------------------
+r2821 | nphilippe | 2014-04-02 11:53:14 +0200 (mer. 02 avril 2014) | 1 ligne
+
+upper case conversion for crac-emt
+------------------------------------------------------------------------
+r2820 | jaudoux | 2014-04-02 10:07:28 +0200 (mer. 02 avril 2014) | 1 ligne
+
+[efficiency] Use pointers and heap allocation to carry around SamLine objects instead of using object copy to the stack
+------------------------------------------------------------------------
+r2819 | nphilippe | 2014-04-01 18:10:33 +0200 (mar. 01 avril 2014) | 1 ligne
+
+add tests to check the consistency of new sam version
+------------------------------------------------------------------------
+r2818 | jaudoux | 2014-04-01 16:50:34 +0200 (mar. 01 avril 2014) | 1 ligne
+
+Add a bunch of new optional fields in SAM output for paired-end/mate, edit distance and remove X? fields for chimeric alignement when it's not the primary line
+------------------------------------------------------------------------
+r2817 | nphilippe | 2014-04-01 16:09:26 +0200 (mar. 01 avril 2014) | 1 ligne
+
+--emt with the possibility to map reads with a k-mer as a factor
+------------------------------------------------------------------------
+r2816 | nphilippe | 2014-04-01 14:54:51 +0200 (mar. 01 avril 2014) | 1 ligne
+
+getLocations return a pair<ChrPos **, uint> rather a ChrPos** and add a condition in hasRepeat function to check if the read is single
+------------------------------------------------------------------------
+r2815 | jaudoux | 2014-04-01 14:40:26 +0200 (mar. 01 avril 2014) | 1 ligne
+
+Set cigar once we are done with it
+------------------------------------------------------------------------
+r2814 | nphilippe | 2014-04-01 14:08:48 +0200 (mar. 01 avril 2014) | 1 ligne
+
+modify multiple nbLocations with setNbLocations was not a good idea
+------------------------------------------------------------------------
+r2813 | nphilippe | 2014-03-31 21:12:42 +0200 (lun. 31 mars 2014) | 1 ligne
+
+emt check memory leek
+------------------------------------------------------------------------
+r2812 | nphilippe | 2014-03-31 17:44:13 +0200 (lun. 31 mars 2014) | 1 ligne
+
+add missing files for compilation
+------------------------------------------------------------------------
+r2811 | nphilippe | 2014-03-31 17:43:57 +0200 (lun. 31 mars 2014) | 1 ligne
+
+add missing files for compilation
+------------------------------------------------------------------------
+r2810 | nphilippe | 2014-03-31 17:06:29 +0200 (lun. 31 mars 2014) | 1 ligne
+
+add multiples alignments in emt process
+------------------------------------------------------------------------
+r2809 | jaudoux | 2014-03-31 16:33:58 +0200 (lun. 31 mars 2014) | 1 ligne
+
+Code cleanup
+------------------------------------------------------------------------
+r2808 | nphilippe | 2014-03-31 10:11:18 +0200 (lun. 31 mars 2014) | 1 ligne
+
+fix 2 warnings
+------------------------------------------------------------------------
+r2800 | nphilippe | 2014-03-30 17:34:53 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2799 | nphilippe | 2014-03-30 17:10:32 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2798 | nphilippe | 2014-03-30 16:34:53 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2797 | nphilippe | 2014-03-30 16:30:14 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2796 | nphilippe | 2014-03-30 15:15:11 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2795 | nphilippe | 2014-03-30 15:00:46 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2794 | nphilippe | 2014-03-30 14:36:06 +0200 (dim. 30 mars 2014) | 1 ligne
+
+check leek
+------------------------------------------------------------------------
+r2793 | nphilippe | 2014-03-30 13:32:43 +0200 (dim. 30 mars 2014) | 1 ligne
+
+delete too many files
+------------------------------------------------------------------------
+r2792 | nphilippe | 2014-03-30 13:25:44 +0200 (dim. 30 mars 2014) | 1 ligne
+
+remove useless Makefile.in files
+------------------------------------------------------------------------
+r2788 | nphilippe | 2014-03-29 19:40:48 +0100 (sam. 29 mars 2014) | 1 ligne
+
+upgrade crac version
+------------------------------------------------------------------------
+r2787 | nphilippe | 2014-03-29 15:36:13 +0100 (sam. 29 mars 2014) | 1 ligne
+
+comment line [multiple.writeline(cout)]
+------------------------------------------------------------------------
+r2786 | nphilippe | 2014-03-29 15:05:02 +0100 (sam. 29 mars 2014) | 1 ligne
+
+streams were initialized two times with --all option
+------------------------------------------------------------------------
+r2785 | nphilippe | 2014-03-29 13:10:53 +0100 (sam. 29 mars 2014) | 1 ligne
+
+init sam_filename with --all
+------------------------------------------------------------------------
+r2784 | nphilippe | 2014-03-29 10:26:36 +0100 (sam. 29 mars 2014) | 1 ligne
+
+update a should get because we consider multiple aligments when the read is a duplication
+------------------------------------------------------------------------
+r2783 | nphilippe | 2014-03-29 10:20:11 +0100 (sam. 29 mars 2014) | 1 ligne
+
+consider multiple alignment when it is a duplication
+------------------------------------------------------------------------
+r2782 | nphilippe | 2014-03-28 19:43:00 +0100 (ven. 28 mars 2014) | 1 ligne
+
+update unit test with new SAM norm.
+------------------------------------------------------------------------
+r2781 | nphilippe | 2014-03-28 19:42:42 +0100 (ven. 28 mars 2014) | 1 ligne
+
+update unit test with new SAM norm.
+------------------------------------------------------------------------
+r2780 | nphilippe | 2014-03-28 16:57:59 +0100 (ven. 28 mars 2014) | 1 ligne
+
+last SAM version consistent (almost done)
+------------------------------------------------------------------------
+r2779 | jaudoux | 2014-03-28 11:30:51 +0100 (ven. 28 mars 2014) | 1 ligne
+
+[in progress] Correct paired-end flags, chimeric alignements in progress...
+------------------------------------------------------------------------
+r2778 | nphilippe | 2014-03-28 11:02:22 +0100 (ven. 28 mars 2014) | 1 ligne
+
+choose to display the most occurrences rather the less
+------------------------------------------------------------------------
+r2777 | jaudoux | 2014-03-28 10:39:01 +0100 (ven. 28 mars 2014) | 1 ligne
+
+Quality should not be defined unless we have a value for it
+------------------------------------------------------------------------
+r2776 | jaudoux | 2014-03-27 18:05:37 +0100 (jeu. 27 mars 2014) | 1 ligne
+
+Integration of new the SAM standart for chimeric alignements
+------------------------------------------------------------------------
+r2775 | salson | 2014-03-27 17:55:22 +0100 (jeu. 27 mars 2014) | 2 lignes
+
+Tests: Missing characters for regexp escape in should_get
+
+------------------------------------------------------------------------
+r2774 | salson | 2014-03-27 17:52:55 +0100 (jeu. 27 mars 2014) | 2 lignes
+
+Tests: should_get files now accept a e flag for exact match
+
+------------------------------------------------------------------------
+r2773 | nphilippe | 2014-03-27 16:03:46 +0100 (jeu. 27 mars 2014) | 1 ligne
+
+only getLocations until max-locs if there are more
+------------------------------------------------------------------------
+r2772 | nphilippe | 2014-03-27 13:26:23 +0100 (jeu. 27 mars 2014) | 1 ligne
+
+add getLocations in Support to manage multiple alignments
+------------------------------------------------------------------------
+r2771 | jaudoux | 2014-03-26 15:35:55 +0100 (mer. 26 mars 2014) | 1 ligne
+
+Problem fot bitset of unmapped PE reads corrected
+------------------------------------------------------------------------
+r2770 | jaudoux | 2014-03-26 14:40:28 +0100 (mer. 26 mars 2014) | 1 ligne
+
+isMapped function has been removed from samline, now please use isSegmentUnmapped that is linked to the corresponding flag of the samline
+------------------------------------------------------------------------
+r2769 | nphilippe | 2014-03-25 17:26:13 +0100 (mar. 25 mars 2014) | 1 ligne
+
+update sam standard [in progress]
+------------------------------------------------------------------------
+r2768 | jaudoux | 2014-03-25 17:11:46 +0100 (mar. 25 mars 2014) | 1 ligne
+
+[In progress] Integration of new SAM specifications
+------------------------------------------------------------------------
+r2767 | jaudoux | 2014-03-18 14:17:58 +0100 (mar. 18 mars 2014) | 1 ligne
+
+Correction to commit 2766
+------------------------------------------------------------------------
+r2766 | jaudoux | 2014-03-18 11:16:15 +0100 (mar. 18 mars 2014) | 1 ligne
+
+Add extended PE field to SAM file in order to indicate at the line of the first PE read the location type we have for the second one if it's mapped (uniqu,multi,dupli)
+------------------------------------------------------------------------
+r2765 | jaudoux | 2014-03-18 11:12:30 +0100 (mar. 18 mars 2014) | 1 ligne
+
+We were setting the reverse value for setIsMapped method
+------------------------------------------------------------------------
+r2764 | jaudoux | 2014-03-18 10:54:44 +0100 (mar. 18 mars 2014) | 1 ligne
+
+Update version micro number
+------------------------------------------------------------------------
+r2763 | jaudoux | 2014-03-18 10:37:29 +0100 (mar. 18 mars 2014) | 1 ligne
+
+bad initialisation of read quality in tagInfo.cpp. The char array was too small and an overlapping in the strncpy copy function was occuring. As a result, strange caracters were appearing at the end of the quality field in the SAM file
+------------------------------------------------------------------------
+r2758 | salson | 2014-01-31 17:53:44 +0100 (ven. 31 janv. 2014) | 5 lignes
+
+CRAC: Version 1.4.1
+
+- Small memory leak corrected in crac-index 
+- Bug #16931 addressed (XO field was not correct in some condition)
+
+------------------------------------------------------------------------
+r2757 | salson | 2014-01-31 17:48:50 +0100 (ven. 31 janv. 2014) | 4 lignes
+
+CracIndex: Small memory leak in function get()
+
+GenomeInfo was instantiated but never deleted.
+
+------------------------------------------------------------------------
+r2756 | salson | 2014-01-31 17:34:51 +0100 (ven. 31 janv. 2014) | 4 lignes
+
+CRAC: Correction of bug #16931 reported by M. Hebrard
+
+In some conditions, we were having loc and loc_to_display that were identical (when we just have undetermined breaks).
+Modifying loc_to_display to make it start just after the undetermined break was also modifying loc since they were poiting to the same location. This is corrected. In that case before modifying loc_to_display, we make sure to copy the ChrPosition.
+------------------------------------------------------------------------
+r2752 | jaudoux | 2013-12-18 15:09:55 +0100 (mer. 18 déc. 2013) | 1 ligne
+
+Correct bug [#16807] inconsistency between seq length and quality length in sam file using -m argument
+------------------------------------------------------------------------
+r2747 | nphilippe | 2013-12-11 15:32:26 +0100 (mer. 11 déc. 2013) | 1 ligne
+
+bug fixed fake tty caused bad display of progressBar
+------------------------------------------------------------------------
+r2746 | salson | 2013-12-06 16:20:18 +0100 (ven. 06 déc. 2013) | 1 ligne
+
+Crac: Add tests on genome indexing and retrieval
+------------------------------------------------------------------------
+r2745 | salson | 2013-12-06 16:06:46 +0100 (ven. 06 déc. 2013) | 4 lignes
+
+CRAC-index: Use Dna5 string rather than char
+
+Hence characters different from ACGTN are converted to N.
+
+------------------------------------------------------------------------
+r2744 | salson | 2013-12-06 15:07:57 +0100 (ven. 06 déc. 2013) | 5 lignes
+
+Crac-index: Command get was not working properly with multiple sequences.
+
+There was only one counter for taking into account positions (the position inside the sequence). 
+However we need to also record the position inside the global sequence (the concatenation of sequences),
+so that we don't always start the extraction from the start of the global sequence.
+------------------------------------------------------------------------
+r2743 | nphilippe | 2013-12-05 19:39:37 +0100 (jeu. 05 déc. 2013) | 1 ligne
+
+progressBar not by default
+------------------------------------------------------------------------
+r2739 | mancheron | 2013-11-29 19:08:37 +0100 (ven. 29 nov. 2013) | 1 ligne
+
+
+------------------------------------------------------------------------
+r2738 | mancheron | 2013-11-29 19:07:04 +0100 (ven. 29 nov. 2013) | 5 lignes
+
+Updating libProgressBar library.
+Enhance display.
+Remove pkg-config usage to detect library since some people dislike it.
+
+
+------------------------------------------------------------------------
+r2733 | mancheron | 2013-11-28 17:55:30 +0100 (jeu. 28 nov. 2013) | 1 ligne
+
+
+------------------------------------------------------------------------
+r2732 | mancheron | 2013-11-28 17:54:44 +0100 (jeu. 28 nov. 2013) | 2 lignes
+
+Adding Progress Bar.
+
+------------------------------------------------------------------------
+r2726 | mancheron | 2013-11-28 16:51:48 +0100 (jeu. 28 nov. 2013) | 2 lignes
+
+Bug Fix: intel compiler already has __int64 type. 
+
+------------------------------------------------------------------------
+r2642 | jaudoux | 2013-10-22 17:26:13 +0200 (mar. 22 oct. 2013) | 1 ligne
+
+Update nb_merges const from --strigent-chimera option to be little less stringent
+------------------------------------------------------------------------
+r2633 | jaudoux | 2013-10-17 14:47:27 +0200 (jeu. 17 oct. 2013) | 1 ligne
+
+hasChimera was indeed hasSpliceInterChr, this name should be updataded one day
+------------------------------------------------------------------------
+r2632 | jaudoux | 2013-10-17 13:54:09 +0200 (jeu. 17 oct. 2013) | 1 ligne
+
+Add Paired-end chimeras information to the SAM and correct paired-end chimera detections to avoid PE reads when one of the read span a chimera
+------------------------------------------------------------------------
+r2622 | nphilippe | 2013-10-15 10:15:58 +0200 (mar. 15 oct. 2013) | 1 ligne
+
+formatting summary
+------------------------------------------------------------------------
+r2576 | nphilippe | 2013-10-03 20:07:22 +0200 (jeu. 03 oct. 2013) | 1 ligne
+
+restablish bug-15672-genome.fa and change the regex in should get because the correction about max_extension_length in SupportBreak
+------------------------------------------------------------------------
+r2575 | nphilippe | 2013-10-03 16:37:32 +0200 (jeu. 03 oct. 2013) | 1 ligne
+
+just a probleme in bug-15646-genome.fa
+------------------------------------------------------------------------
+r2572 | nphilippe | 2013-10-02 10:46:09 +0200 (mer. 02 oct. 2013) | 1 ligne
+
+make a fullhelp lite-version, details are described in man page
+------------------------------------------------------------------------
+r2571 | nphilippe | 2013-10-02 08:54:22 +0200 (mer. 02 oct. 2013) | 1 ligne
+
+change condition to allow an extension until max_extension_length instead of max_extension_length-1
+------------------------------------------------------------------------
+r2570 | jaudoux | 2013-10-01 18:52:11 +0200 (mar. 01 oct. 2013) | 1 ligne
+
+Less tests before writing paired-end chimeras, only asked for both paired-end reads to be single
+------------------------------------------------------------------------
+r2567 | nphilippe | 2013-09-30 17:27:49 +0200 (lun. 30 sept. 2013) | 1 ligne
+
+update doc and man page
+------------------------------------------------------------------------
