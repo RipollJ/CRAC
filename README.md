@@ -1,5 +1,5 @@
 # CRAC
-Forked from INRIA forge for bioconda recipes
+Forked from [INRIA forge](http://crac.gforge.inria.fr/) for bioconda recipes
 
 -------------------------------------------------------------
 
@@ -43,36 +43,27 @@ inside the doc directory and a man page is also available.
 
 -------------------------------------------------------------------------
 
- Copyright © 2010-2013 -- IRB/INSERM
-                          (Institut de Recherches en Biothérapie /
-                          Institut National de la Santé et de la Recherche
-                          Médicale)
-                          LIFL/INRIA
-                          (Laboratoire d'Informatique Fondamentale de
-                          Lille / Institut National de Recherche en
-                          Informatique et Automatique)
-                          LIRMM/CNRS
-                          (Laboratoire d'Informatique, de Robotique et de
-                          Microélectronique de Montpellier /
-                          Centre National de la Recherche Scientifique)
-                          LITIS
-                          (Laboratoire d'Informatique, du Traitement de
-                          l'Information et des Systèmes).
+Copyright © 2010-2013 --
+- IRB/INSERM  (Institut de Recherches en Biothérapie / Institut National de la Santé et de la Recherche Médicale)
+- LIFL/INRIA  (Laboratoire d'Informatique Fondamentale de Lille / Institut National de Recherche en Informatique et Automatique)
+- LIRMM/CNRS   (Laboratoire d'Informatique, de Robotique et de Microélectronique de Montpellier / Centre National de la Recherche Scientifique)
+- LITIS        (Laboratoire d'Informatique, du Traitement de l'Information et des Systèmes).
 
- Auteurs/Authors:  
-                   Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>
-                   Mikaël SALSON    <mikael.salson@lifl.fr>
-                   Thérèse COMMES   <commes@univ-montp2.fr>
-                   Éric RIVALS      <eric.rivals@lirmm.fr>
+Auteurs/Authors:  
+ - Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>
+ - Mikaël SALSON    <mikael.salson@lifl.fr>
+ - Thérèse COMMES   <commes@univ-montp2.fr>
+ - Éric RIVALS      <eric.rivals@lirmm.fr>
 
- Programmeurs                                                               
-      /Progammers: 
-                   Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              
-                   Mikaël SALSON    <mikael.salson@lifl.fr>                  
-  with additional contribution for the packaging of:	                      
-                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               
+Programmeurs/Progammers: 
+ - Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>
+ - Mikaël SALSON    <mikael.salson@lifl.fr>        
+
+with additional contribution for the packaging of:	                      
+ - Alban MANCHERON  <alban.mancheron@lirmm.fr>               
                                                                              
-  Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr> 
+Contact: CRAC list   <crac-bugs@lists.gforge.inria.fr> 
+  
  -------------------------------------------------------------------------
 
  Ce fichier fait partie du programme CRAC.
