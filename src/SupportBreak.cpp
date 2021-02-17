@@ -1,99 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -134,6 +86,7 @@ SupportBreak::SupportBreak(SupportBreak &b1, SupportBreak &b2) {
   uint pos_break = first->getPositionStartBreak();
   uint pos_end = last->getPositionEndBreak();
 
+  // TODO: why check the two conditions? Is it not the same?
   if (first->hasNoStartBreak() && pos_break == 0) {
     // If the k-mers are located, we have extended the breaks.  We come back
     // to the original positions so that the extension can be performed
@@ -153,12 +106,12 @@ SupportBreak::SupportBreak(SupportBreak &b1, SupportBreak &b2) {
   parameters = first->parameters;
   range_occs_fwd = first->range_occs_fwd;
   range_occs_rev = first->range_occs_rev;
-
+  nb_merges = b1.getNbMerges() + b2.getNbMerges() + 1;
   init();
 }
 
 SupportBreak::~SupportBreak(){
-  for (uint i=0; i < nb_candidats; i++) {
+  for (int i=0; i < nb_candidats; i++) {
     delete candidats[i];
   } 
   free(candidats);
@@ -181,6 +134,36 @@ void SupportBreak::computeScore(uint pos_start, uint pos_end){
   setOutsideScore(max_pos_start, max_pos_end);
 }
 
+float SupportBreak::getMedianInside() {
+  return median_inside;
+}
+
+float SupportBreak::getVarianceInside() {
+  float variance_inside=0;
+  uint nb_inside=0;
+  for (uint i=pos_start_break ; i<=pos_end_break ; i++){
+    if (support->getNbLocs()[i] == 0) {
+      variance_inside += pow((support->getSupport(i)-getInsideScore()),2);
+      nb_inside++;
+    }
+  }
+  variance_inside /= nb_inside;
+  return variance_inside;
+}
+
+float SupportBreak::getStandardDeviationInside() {
+  if (getVarianceInside())
+    return sqrt(getVarianceInside());
+  else 
+    return 0;
+}
+
+float SupportBreak::getCoefficientVariationInside() {
+  if (getInsideScore())
+    return getStandardDeviationInside()*1.0 / getInsideScore();
+  return 0;
+}
+
 float SupportBreak::getAverageLowInside() {
   return average_low_inside;
 }
@@ -191,6 +174,20 @@ float SupportBreak::getAverageHighInside() {
 
 CandidatBreak *SupportBreak::getCandidatChosen(){
   return candidat_chosen;
+}
+
+int SupportBreak::getChimeraClass(){
+  if (getTagBreakLength() < getThreshold() && hasLongEnoughTagBreak()){
+    if  (getChrId(START_BREAK) != getChrId(END_BREAK))
+      return 1;
+    if (getStrandLocation(START_BREAK) != getStrandLocation(END_BREAK))
+      return 4;
+    if (getGenomeGapLength() < 0)
+      return 3;
+    if (labs(getGenomeGapLength()) > parameters->max_splice_length)
+      return 2;
+  }
+  return 0;
 }
 
 const uchar *SupportBreak::getChr(pos_location_break p){
@@ -271,7 +268,7 @@ ChrPosition *SupportBreak::getLocationStartBreak() {
   return getChrPosition(START_BREAK);
 }
 
-ulong SupportBreak::getNbCandidats(){
+int SupportBreak::getNbCandidats(){
   return nb_candidats;
 }
 
@@ -295,6 +292,10 @@ int SupportBreak::getNbTagIndels(){
 
 float SupportBreak::getOutsideScore(){
   return score_outside_break;
+}
+
+Parameters *SupportBreak::getParameters() {
+  return parameters;
 }
 
 uint SupportBreak::getPositionEndBreak(int strand){
@@ -393,8 +394,12 @@ uint SupportBreak::getTagBreakLength(){
   return getPositionEndBreak()-getPositionStartBreak() + 1;
 }
 
+uint SupportBreak::getOriginalTagBreakLength(){
+  return original_break_length;
+}
+
 uint SupportBreak::getTagLength(){
-  return support->getTagLength();
+  return support->getRead()->getLength();
 }
 
 uint SupportBreak::getThreshold(){
@@ -446,20 +451,23 @@ bool SupportBreak::hasNoCover() {
 }
 
 bool SupportBreak::hasNoEndBreak(int strand) {
-  return (strand == 1 
-          ? getPositionEndBreakOnTheRead() + 1 == getTagLength()
-          : hasNoStartBreak(1));
+  return getNbCandidats() == 0 || isAtEnd(strand);
 }
 
 bool SupportBreak::hasNoStartBreak(int strand) {
-  return (strand == 1 
-          ? getPositionStartBreak() == 0
-          : hasNoEndBreak(1));
+  return getNbCandidats() == 0 || isAtStart(strand);
 }
 
 bool SupportBreak::hasPositionEndBreakOnTheRead(int strand) {
   return override_pos_end_break != 0;
-  // TODO
+}
+
+bool SupportBreak::isAtEnd(int strand) {
+  return (strand == 1 ? getPositionEndBreakOnTheRead() + 1 == getTagLength() : isAtStart(1));
+}
+
+bool SupportBreak::isAtStart(int strand) {
+  return (strand == 1 ? getPositionStartBreak() == 0 : isAtEnd(1));
 }
 
 bool SupportBreak::isBiologicalEvent(){
@@ -485,14 +493,11 @@ bool SupportBreak::isBiologicalInterEvent(){
     
 
 bool SupportBreak::isChimera(){
-  return 
-    ((getChrId(START_BREAK) != getChrId(END_BREAK)
-      || getStrandLocation(START_BREAK) != getStrandLocation(END_BREAK)
-      || getGenomeGapLength() < 0
-      || labs(getGenomeGapLength()) > parameters->max_splice_length
-      ) 
-     && (getTagBreakLength() < getThreshold())
-     && hasLongEnoughTagBreak());
+  return (getChimeraClass() != 0);
+}
+
+bool SupportBreak::isChimeric() {
+  return ! hasNoStartBreak() && ! hasNoEndBreak() && ! isNiceBreak();
 }
 
 bool SupportBreak::isDeviated(){
@@ -537,6 +542,8 @@ bool SupportBreak::isGenomeInsertion(){
 }
 
 bool SupportBreak::isNiceBreak() {
+  if (!hasLongEnoughTagBreak())
+    return false;
   return (isVeryNiceBreak() || isGenomeInsertion()
           || isGenomeDeletion())
     && ! isChimera();
@@ -545,6 +552,15 @@ bool SupportBreak::isNiceBreak() {
 
 bool SupportBreak::isNiceMerge(SupportBreak *sb) {
   return check_nice_merge(this, sb, false);
+}
+
+bool SupportBreak::isShortChimeric() {
+  return isChimeric() && ! hasLongEnoughTagBreak();
+}
+
+bool SupportBreak::isSplice(){
+  return isGenomeInsertion() 
+    && (labs(getGenomeGapLength()) > parameters->max_bio_ins_del);
 }
 
 bool SupportBreak::isSupportFalling() {
@@ -580,7 +596,7 @@ bool SupportBreak::isTagIndel(){
   }else{
     isAGoodTagBreakLength = (getThreshold() + getNbTagIndels() > getGenomeGapLength());
   }
-  return (isAGoodTagBreakLength 
+  return (isAGoodTagBreakLength
           && getChrId(START_BREAK) == getChrId(END_BREAK)
           && getStrandLocation(START_BREAK) == getStrandLocation(END_BREAK) 
           && ! isTagSubstitution() 
@@ -611,8 +627,7 @@ void SupportBreak::setInsideScore(uint pos_start, uint pos_end){
       nb_inside++;
     }
   }
-
-  score_during_break /= nb_inside;  
+  score_during_break /= nb_inside; 
 }
 
 void SupportBreak::setLocationEndBreak(uint loc_end){
@@ -662,7 +677,7 @@ void SupportBreak::setOutsideScore(uint pos_start, uint pos_end) {
     score_outside_break = (support->getNbLocs()[pos_start]
                            + support->getNbLocs()[pos_end]) / 2.;
 
-  //make the process of stardard deviations
+  //compute some metrics on support variation inside break
   computeHighAndLowAverages(pos_start, pos_end);
 }
 
@@ -714,9 +729,11 @@ void SupportBreak::init() {
   candidat_chosen = NULL;
   repeated = false;
   
+  original_break_length = getPositionEndBreak()-getPositionStartBreak() + 1;
   // maximal allocation to save candidats during extension process
   int max_nb_candidats = parameters->max_extension_length + 1;
-  nb_candidats = 0;
+  // we init nb_candidats == -1 in order to distinguish init case and no-candidat case
+  nb_candidats = -1;
   candidats = (CandidatBreak**)malloc(sizeof(CandidatBreak*)*max_nb_candidats);
 
   if (pos_start_break > 0 || pos_end_break < getLength() - 1) 
@@ -731,7 +748,120 @@ void SupportBreak::init() {
     strand_end_break = candidat_chosen->getStrandEndBreak();
   }
 
+  // compute the score inside and outside the break for the candidat_chosen
   computeScore();
+}
+
+
+void SupportBreak::adjustBreakWithSplicingSites(){
+  if (hasNoStartBreak() || hasNoEndBreak())
+    // We can't adjust if a part of the break is mising.
+    return;
+  // TODO: we only consider chimeric junction of class 2
+  // to avoid a merge of overlap breaks...
+  // But this behaviour could be improved
+  if (getChimeraClass()==2 || isSplice()){
+    int overlap = getThreshold() - getTagBreakLength() - 1;
+    bool found_donorsite = false;
+    char nuc1=0;
+    char nuc2=0;
+    bool out_of_scope = false;
+    uint i=0;
+    if (overlap > 0){
+      // first step: we remove overlap by switching left
+      // (only if we can...)
+      if (strand_start_break == 1) {
+        if(pos_start_break > (uint)overlap){
+          pos_start_break -= overlap;
+          loc_start_break -= overlap;
+        } else {
+          pos_start_break = 0;
+          loc_start_break = ~0;
+          strand_start_break = 0;
+          out_of_scope = true;
+        }
+      }else {
+        if(pos_end_break + overlap < support->getLength() - 1) {
+          pos_end_break += overlap;
+          loc_end_break -= overlap;
+        } else {
+          pos_end_break = support->getLength()-1;
+          loc_end_break = ~0;
+          strand_end_break = 0;
+          out_of_scope = true;
+        }
+      }
+      if(!out_of_scope) {
+        // second step: adjust the windows according to the donor site
+        // We loop until the donor site (if there is)
+        // donor site: GT in fwd strand 
+        //             AC in rev strand
+        while (i < (uint)overlap && !found_donorsite && !out_of_scope){
+          // Reset nucleotides value to avoid conflict with previous one
+          nuc1 = 0;
+          nuc2 = 0;
+          if (strand_start_break == 1){
+            if (pos_end_break+1+i < getLength()) {
+              nuc1 = support->getRead()->seq[pos_end_break+1+i];
+	      if (pos_end_break+2+i < getLength())
+                nuc2 = support->getRead()->seq[pos_end_break+2+i];
+	      if (nuc1 == 'G'){
+                if (overlap == 1) 
+                  found_donorsite = true;
+                else if (nuc2 == 'T')
+                  found_donorsite = true;
+              }
+            } else {
+              out_of_scope = true;
+            }
+          }else{
+            if (pos_start_break > i) {
+              nuc1 = support->getRead()->seq[pos_end_break-i];
+              if (pos_start_break > i + 1)
+                nuc2 = support->getRead()->seq[pos_end_break-1-i];
+              if (nuc1 == 'C'){
+                if (overlap == 1) 
+                  found_donorsite = true;
+                else if (nuc2 == 'A')
+                  found_donorsite = true;
+              }
+            } else {
+              out_of_scope = true;
+            }
+          }
+	  if (!found_donorsite)
+            i++;
+        }
+        // we may have gone too far in the last i++ iteration
+        // and we could have gone out of scope on the other side of the splice
+        // (or the chimera);
+        if(strand_start_break == 1 && pos_end_break + i > getLength() - 1) {
+          out_of_scope = true;
+        } else if(strand_start_break == -1 && pos_start_break <= i) {
+          out_of_scope = true;
+        }
+        // If we are out of scope, we set a no start break or no_end_break according to the strand
+        if(out_of_scope) {
+          if(strand_start_break == 1) {
+            pos_end_break = support->getLength()-1;
+            loc_end_break = ~0;
+            strand_end_break = 0;
+          } else {
+            pos_start_break = 0;
+            loc_start_break = ~0;
+            strand_start_break = 0;
+          }
+        }
+        // we adjust start_break and end_break
+        else if (i>0){
+          pos_start_break += i*strand_start_break;
+          pos_end_break += i*strand_start_break;
+          loc_start_break += i;
+          loc_end_break += i;
+        }
+      }
+    }
+  }
 }
 
 void SupportBreak::adjustBoundaries(){
@@ -919,21 +1049,18 @@ bool SupportBreak::canCheckPositions(ulong start, ulong end) {
 
 bool SupportBreak::check_nice_merge(SupportBreak *sb1, SupportBreak *sb2, 
                                     bool very_nice) {
-  SupportBreak *merged;
   if (sb1 == sb2)
     return (very_nice) ? sb1->isVeryNiceBreak() : sb1->isNiceBreak();
   
-  merged = new SupportBreak(*sb1, *sb2);
+  SupportBreak merged(*sb1, *sb2);
   
-  bool result = (very_nice) ? merged->isVeryNiceBreak() : merged->isNiceBreak();
+  bool result = (very_nice) ? merged.isVeryNiceBreak() : merged.isNiceBreak();
 
-  delete merged;
   return result;
 }
 
 void SupportBreak::computeHighAndLowAverages(uint pos_start, uint pos_end){
-  uint nb_outside = 0;
-  uint nb_inside = 0;
+  // uint nb_outside = 0;
   uint pos_start_out, pos_end_out;
   if (pos_start < parameters->support_score_window_length/2)
     pos_start_out = 0;
@@ -948,53 +1075,57 @@ void SupportBreak::computeHighAndLowAverages(uint pos_start, uint pos_end){
   //computing standard deviations    
   for (uint i = pos_start_out; i < pos_start ; i++) {
     if (support->getNbLocs()[i] == 0){
-      nb_outside=0;
+      //nb_outside=0;
       pos_start_out = i+1;
-    }else{
-      nb_outside++;
-    }
+    }// else{
+    //   nb_outside++;
+    // }
   }
 
-  uint support_without_loc = 0;
+  // uint support_without_loc = 0;
 
-  // We only consider the support which are not located
-  // because it may bias the computation.
-  for (uint i = pos_start; i<=pos_end ; i++){
-    if (support->getNbLocs()[i] == 0
-        || (support_without_loc > 0 
-            && support_without_loc >= support->getSupport(i))){
-      nb_inside++;
-    } else
-      support_without_loc = support->getSupport(i);
-  } 
-  for (uint i=pos_end+1; i <= pos_end_out 
-	 && support->getNbLocs()[i] != 0; i++) {
-    nb_outside++;
-  }
+  // // We only consider the support which are not located
+  // // because it may bias the computation.
+  // for (uint i = pos_start; i<=pos_end ; i++){
+  //   if (support->getNbLocs()[i] == 0
+  //       || (support_without_loc > 0 
+  //           && support_without_loc >= support->getSupport(i))){
+  //     nb_inside++;
+  //   } else
+  //     support_without_loc = support->getSupport(i);
+  // } 
+  // for (uint i=pos_end+1; i <= pos_end_out 
+  // 	 && support->getNbLocs()[i] != 0; i++) {
+  //   nb_outside++;
+  // }
   
-  uint *inside_elements = new uint[nb_inside];
+  //  uint *inside_elements = new uint[nb_inside];
+  uint *inside_elements = new uint[pos_end-pos_start+1];
 
-  nb_outside = 0;
-  nb_inside = 0;
+  // nb_outside = 0;
+  // nb_inside = 0;
 
-  support_without_loc = 0;
+  // support_without_loc = 0;
 
   // We only consider the support which are not located
   // because it may bias the computation.
+  uint nb_inside = 0;
   for (uint i = pos_start; i<=pos_end ; i++){
     if (support->getNbLocs()[i] == 0
-        || (support_without_loc > 0 
-            && support_without_loc >= support->getSupport(i))){
+        // || (support_without_loc > 0 
+        //     && support_without_loc >= support->getSupport(i))
+	){
       inside_elements[nb_inside] = support->getSupport(i);
       nb_inside++;
-    } else
-      support_without_loc = support->getSupport(i);
+    } // else
+      // support_without_loc = support->getSupport(i);
   } 
   // Sorting the positions so that we can take
   // the lowest ones and the highest ones.
   qsort(inside_elements, nb_inside, sizeof(uint), comparUint);
-
+  
   // Get the first and last quartiles
+  median_inside = inside_elements[nb_inside/2];
   inside_quartile1 = inside_elements[nb_inside/4];
   inside_quartile4 = inside_elements[3*nb_inside/4];
 
@@ -1216,7 +1347,6 @@ void SupportBreak::fillWithClosestMatch() {
     /////////////////// CH0OSE THE BEST CANDIDAT///////////////////////////
     ///////////////////////////////////////////////////////////////////////
 
-    // nb_candidats == 0 if there are directly a repetion at the first step of pos_start and pos_end breaks both.    
     if (nb_candidats > 0){
       candidat_chosen = new CandidatBreak(*candidats[getBestCandidat()]);
 
@@ -1230,9 +1360,13 @@ void SupportBreak::fillWithClosestMatch() {
 	candidat_chosen->setPosStartBreak(pos_start_extension+1);
 	candidat_chosen->setPosEndBreak(pos_end_extension-1);   
       }
-  // a candidat is chosen, so its boundaries are updated 
+      // a candidat is chosen, so its boundaries are updated 
       else
 	adjustBoundaries();
+    }
+    // nb_candidats == 0 if there are directly a repetion at the first step of pos_start and pos_end breaks both.    
+    else{
+      nb_candidats = 0;
     }
   }
 }
@@ -1245,9 +1379,9 @@ void SupportBreak::fillWithClosestMatch() {
   * - the minimal break on the genome
   * And notify a duplicated candidat if the table contains several good candidats or (several not godd candidats)
   */
- ulong SupportBreak::getBestCandidat(CandidatBreak **potential_candidats, ulong nb_potential_candidats, bool after_extension){
-   ulong i_chosen = 0;
-   for (ulong i = 1 ; i < nb_potential_candidats ; i++){
+ int SupportBreak::getBestCandidat(CandidatBreak **potential_candidats, int nb_potential_candidats, bool after_extension){
+   int i_chosen = 0;
+   for (int i = 1 ; i < nb_potential_candidats ; i++){
     // current candidat is a chimera
     if (!potential_candidats[i_chosen]->isNiceCandidat()){
       // new candidat is at least a splice, so it is better
@@ -1358,7 +1492,7 @@ void SupportBreak::fillWithClosestMatch() {
   return i_chosen;
 }
 
-ulong SupportBreak::getBestCandidat(){
+int SupportBreak::getBestCandidat(){
   return getBestCandidat(this->candidats, this->nb_candidats, true);
 }
 
@@ -1425,9 +1559,9 @@ void SupportBreak::saveCandidates(uint pos_before_break, uint pos_after_break,
   uint pos_occ_single = ~0;
   
   // get single_loc features
-  if (support->getLocation() != NULL){
-    loc_occ_single = getGenome()->getAbsolutePosition(support->getLocation());
-    strand_occ_single = support->getLocation()->getStrand();
+  if (support->getBestLocation() != NULL){
+    loc_occ_single = getGenome()->getAbsolutePosition(support->getBestLocation());
+    strand_occ_single = support->getBestLocation()->getStrand();
     pos_occ_single = support->getPositionOfLocation();
   }
   
@@ -1541,12 +1675,12 @@ void SupportBreak::updateLocation(uint pos_before_break,
   // test if there is a good candidat (at least a splice)
   bool isIntermediarySplice = false;
   if (nb_potential_candidats > 0){
-    ulong i_chosen = getBestCandidat(potential_candidats, nb_potential_candidats);
+    int i_chosen = getBestCandidat(potential_candidats, nb_potential_candidats);
     if (i_chosen != 0){
       delete potential_candidats[0];
       potential_candidats[0] = new CandidatBreak(*potential_candidats[i_chosen]);
     }
-    for (ulong i=1; i < nb_potential_candidats; i++) {
+    for (uint i=1; i < nb_potential_candidats; i++) {
       delete potential_candidats[i];
     }
     nb_potential_candidats = 1;
@@ -1575,11 +1709,15 @@ void SupportBreak::updateLocation(uint pos_before_break,
   ////////////////////////////////////////////////////////////////////////
 
   if (nb_potential_candidats > 0){
-    ulong i_chosen = 0;
+    int i_chosen = 0;
     // a new candidat is chosen only if it is not an at least intermediary splice
     if (!isIntermediarySplice && nb_potential_candidats > 1){
       i_chosen = getBestCandidat(potential_candidats, nb_potential_candidats);
     }
+    // we have init nb_candidats == -1 in order to distinguish init case and no-candidat case
+    if (nb_candidats == -1)
+      nb_candidats=0;
+
     candidats[nb_candidats] = new CandidatBreak(*potential_candidats[i_chosen]);
     nb_candidats++;
   }
@@ -1595,10 +1733,11 @@ void SupportBreak::updateLocation(uint pos_before_break,
   if (has_end_reverse_strand)
     free(pos_occ_end_rev);
   
-  for (ulong i=0; i < nb_potential_candidats; i++) {
+  for (uint i=0; i < nb_potential_candidats; i++) {
     delete potential_candidats[i];
   }
-  free(potential_candidats);
+  if (nb_potential_candidats>0)
+    free(potential_candidats);
 }
 
 

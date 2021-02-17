@@ -1,99 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -111,14 +63,16 @@ class Support;
 class SupportBreak {
 
   CandidatBreak **candidats;
-  ulong nb_candidats;
+  int nb_candidats;
   CandidatBreak *candidat_chosen;
 
   uint k;                       /* Threshold, size of k-mer used */
   /* bool duplicated;             /\* true iff there are two possible causes *\/ */
 
+  uint original_break_length; /* Original break length, before adjustment are done */
+
   bool repeated;		/* true iff the break is in a repeated region.
-  				   In that case, loc_{start,end}_break are not
+  				   In that case, loc_{start,end}_break are no;
   				   defined. */
   
   uint pos_start_break;		/* Position in the support of the start 
@@ -138,6 +92,7 @@ class SupportBreak {
 
   float average_low_inside;     /* Average of the lowest values inside the break */
   float average_high_inside;    /* Average of the highest values inside the break */
+  float median_inside;
   float pc_ones_left_inside,    /* Percentage of 1s in the support on the */
     pc_ones_left_outside,       /* border of the breaks */
     pc_ones_right_inside,
@@ -189,6 +144,13 @@ class SupportBreak {
 
   ~SupportBreak();
 
+  /** 
+   * Adjust start_break and end_break positions of splicing events (splices, chimeras) 
+   * for overlaping cases (break_length < k-1)
+   * we use GT--AG splicing sites
+   */
+  void adjustBreakWithSplicingSites();
+  
   /**
    * Computes score inside and outside break. It depends of
    * pos_start_break and pos_end_break
@@ -202,6 +164,26 @@ class SupportBreak {
    * pos_end defined in argument.
    */
   void computeScore(uint pos_start, uint pos_end);
+
+  /**
+   * @return the median support inside the break
+   */
+  float getMedianInside();
+  
+  /**
+   * @return the variance support inside the break
+   */
+  float getVarianceInside();
+    
+  /**
+   * @return the standard deviation support inside the break
+   */
+  float getStandardDeviationInside();
+  
+  /**
+   * @return the coefficient of variation of the support inside the break
+   */
+  float getCoefficientVariationInside();
 
   /**
    * @return the average low support inside the break
@@ -222,6 +204,20 @@ class SupportBreak {
    * @return the candidat number i among the potential candidats
    */
   CandidatBreak *getPotentialCandidat(uint i);
+
+  /**
+   * For a chimera the break length in the tag
+   * cannot be greater than threshold - 1 but it must be long enough.
+   * There is a chimera is two parts of the read
+   * are not colinear.
+   * @return 1 if the two parts are not on the same chromosome 
+   * @return 2 if it is a splicing event but with 
+   *           getGenomeGapLength() > parameters->max_splice_length
+   * @return 3 getGenomeGapLength() < 0
+   * @return 4 if the two parts are not located on the same strand 
+   * @return 0 otherwise (it is not a chimera)
+   */
+  int getChimeraClass();
 
   /**
    * @param: position of the location
@@ -307,7 +303,7 @@ class SupportBreak {
   /**
    * @return the number of candidats saved during the extension process
    */
-  ulong getNbCandidats();
+  int getNbCandidats();
 
   /**
    * @return the number of merge processed to create this break
@@ -333,6 +329,11 @@ class SupportBreak {
    * the average of support for each position outside the break
    */
   float getOutsideScore();
+
+  /**
+   * @return the parameters used for this support break.
+   */
+  Parameters *getParameters();
 
   /**
    * @param strand: if -1 consider the break is on the other strand
@@ -423,6 +424,13 @@ class SupportBreak {
   uint getTagBreakLength();
 
   /**
+   * The break length between the the break and after the break, in the tag as it was before
+   * adjusting break positions.
+   * @return original_break_length
+   */
+  uint getOriginalTagBreakLength();
+
+  /**
    * @return the length of the current read
    */
   uint getTagLength();
@@ -481,6 +489,16 @@ class SupportBreak {
    *         using setPositionEndBreakOnTheRead()
    */
   bool hasPositionEndBreakOnTheRead(int strand=1);
+
+  /**
+   * @return whether the break ends at the end of the read.
+   */
+  bool isAtEnd(int strand=1);
+
+  /**
+   * @return whether the break starts at the start of the read.
+   */
+  bool isAtStart(int strand=1);
   
   /**
    * @return return ! hasNoCover() 
@@ -505,17 +523,18 @@ class SupportBreak {
   bool isBiologicalInterEvent();
 
   /**
-   * For a chimera the break length in the tag
-   * cannot be greater than threshold - 1.
-   * There is a chimera is two parts of the read
-   * are not located on the same strand or not on 
-   * the same chromosome or when the break on the 
-   * genome is larger than parameters->max_splice_length
-   * or when the break length is long enough
-   * @return true if the break is a chimera
+   * @return false if getChimeraClass() == 0
+   * @return true otherwise
    */
   bool isChimera();
 
+  /**
+   * Not to be mistaken for isChimera()!  isChimeric() is less strict and
+   * just wants to know if we have a well defined break (start and end are
+   * defined) that cannot be explained by a point mutation or a genome indel.
+   */
+  bool isChimeric();
+  
   /**
    * @return true if a part of the support is low because of an error
    *         occuring at the same time as a mutation
@@ -564,10 +583,24 @@ class SupportBreak {
   bool isNiceMerge(SupportBreak *sb);
 
   /**
+   * @return true iff 
+   * - isGenomeInsertion
+   * - labs(getGenomeGapLength()) > parameters->max_bio_ins_del
+   */
+  bool isSplice();
+
+  /**
    * @return true iff the break is in a repeated region and we didn't find 
    * a ``nice'' location (ie. locations before and after the break must be close).
    */
   bool isRepeated();
+
+  /**
+   * @see isChimeric()
+   * Add the conditinon that the break is short meaning that
+   * @return isChimeric() && ! hasLongEnoughTagBreak()
+   */ 
+  bool isShortChimeric();
 
   /**
    * @return true if the support falls on the left or on the right border of
@@ -715,13 +748,12 @@ class SupportBreak {
   void setSupport(Support *);
 
  private:
-
+  
   /**
    * Adjust the boundaries of getCandidatChosen because 
    * it has not necessary the good ones after the extension process
    */
   void adjustBoundaries();
-
 
   /**
    * Return true if we can check locations at positions start and end
@@ -762,12 +794,12 @@ class SupportBreak {
    * - the minimal gap on the genome
    * And notify a duplicated candidat if the table contains several good candidats
    */
-  ulong getBestCandidat(CandidatBreak** potential_candidats, ulong nb_potential_candidats, bool after_extension = false);
+  int getBestCandidat(CandidatBreak** potential_candidats, int nb_potential_candidats, bool after_extension = false);
   
   /**
    * @return getBestCandidat(this->candidats,this->nb_candidats,true) after the extension process
    */
-  ulong getBestCandidat();
+  int getBestCandidat();
   
   /**
    * Initialises the members (called by the different constructors);

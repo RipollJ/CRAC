@@ -7,5 +7,5 @@
 !OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
 
 $Bug 16931: XO should be the position of the k-mer at position given in XQ
-2:XO:Z:chr.16403_3\\|1,59
+2:XO:Z:chr-16403_3\\|1,60
 

@@ -105,23 +105,33 @@ CRAC_LINKS = crac-index
 all-local: $(bin_PROGRAMS) $(CRAC_LINKS)
 
 
-SUBDIRS = libReadsInfo libSSA libgzstream
+SUBDIRS = libReadsInfo libSSA libgzstream libReadsReader
 if INCLUDED_GKARRAYS
   SUBDIRS += libGkArrays
+endif
+if INCLUDED_JELLYFISH
+  SUBDIRS += libJellyfish-2.0
 endif
 
 crac_SOURCES =                    \
   basic.h const.h types.h         \
-  Classifier.cpp Classifier.h	  \
+  Classifier.cpp Classifier.h	    \
   classifyTags.cpp classifyTags.h \
-  locateServer.cpp locateServer.h \
-  crac.cpp             \
+	ReadIndex.h                     \
+	GkReadIndex.h										\
+	Read.h												  \
+	GkReadIndex.cpp GkReadIndex.h   \
+	JellyReadIndex.cpp JellyReadIndex.h   \
+  crac.cpp                        \
   Parameters.cpp Parameters.h     \
   SupportBreak.cpp SupportBreak.h \
+  BreakList.cpp BreakList.h \
   CandidatBreak.cpp CandidatBreak.h \
   Support.cpp Support.h           \
-  utils.cpp utils.h
-crac_LDADD = @abs_builddir@/libSSA/libSSA.a @abs_builddir@/libReadsInfo/libReadsInfo.a @abs_builddir@/libgzstream/libgzstream.a
+  locateServer.cpp locateServer.h \
+  utils.cpp utils.h \
+  Bitset.cpp Bitset.h
+crac_LDADD = @abs_builddir@/libSSA/libSSA.a @abs_builddir@/libReadsInfo/libReadsInfo.a @abs_builddir@/libgzstream/libgzstream.a @abs_builddir@/libReadsReader/libReadsReader.a 
 
 #crac_index_SOURCES = @abs_srcdir@/libSSA/cracIndex.cpp
 #crac_index_LDADD = @abs_builddir@/libSSA/libSSA.a
@@ -133,8 +143,14 @@ crac-emt: @abs_builddir@/libSSA/crac-emt
 	$(LN_S) -f $^ $@
 
 
-AM_LDFLAGS = -lm -lpthread -lSSA -lReadsInfo -L@abs_builddir@/libSSA -L@abs_builddir@/libReadsInfo -L@abs_builddir@/libgzstream
-AM_CPPFLAGS = -I@abs_top_srcdir@ -I@abs_srcdir@ -I@abs_srcdir@/libSSA -I@abs_srcdir@/libSSA/karkkainen_bwt -I@abs_srcdir@/libgzstream # -IlibSSA -IlibReadsInfo 
+AM_LDFLAGS = -lm -lpthread -lhts -lSSA -lReadsInfo -lReadsReader -lgzstream -L@abs_builddir@/libSSA -L@abs_builddir@/libReadsInfo -L@abs_builddir@/libgzstream -L@abs_builddir@/libReadsReader  #-pg # for Gprof
+AM_CPPFLAGS = -I@abs_top_srcdir@ -I@abs_srcdir@ -I@abs_srcdir@/libSSA -I@abs_srcdir@/libSSA/karkkainen_bwt -I@abs_srcdir@/libgzstream 
+
+if INCLUDED_JELLYFISH
+  AM_LDFLAGS += -L@abs_builddir@/libJellyfish-2.0/.libs
+  AM_CPPFLAGS += -I@abs_srcdir@/libJellyfish-2.0/include
+  AM_CXXFLAGS = -std=c++0x
+endif
 
 if INCLUDED_GKARRAYS
   AM_LDFLAGS += -L@abs_builddir@/libGkArrays/src/.libs
@@ -145,8 +161,16 @@ if INCLUDED_PROGRESSBAR
 endif
 endif
 
-crac_LDFLAGS = -lGkArrays $(AM_LDFLAGS)
+crac_LDFLAGS =
 
+if HAVE_LIBGKARRAYS
+  crac_LDFLAGS += -lGkArrays
+endif
+if HAVE_LIBJELLYFISH
+  crac_LDFLAGS += -ljellyfish-2.0
+endif
+
+crac_LDFLAGS += $(AM_LDFLAGS)
 
 MOSTLYCLEANFILES=*~
 CLEANFILES=*~ $(EXTRA_PROGRAMS) $(CRAC_LINKS)

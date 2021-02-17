@@ -1,106 +1,58 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
 #include <Classifier.h>
 #include <iostream>
 #include <sstream>
+#include <math.h>
 #include "utils.h"
 
 using namespace std;
@@ -109,14 +61,17 @@ using namespace std;
 *         SingleReadClassifier          *
 ****************************************/
 
-SingleReadClassifier::SingleReadClassifier(uint tagId, 
+SingleReadClassifier::SingleReadClassifier(Read *r, 
                       LocateOnGenome *genome, 
-                      gkArrays *tags, 
+                      ReadIndex *tags, 
                       Parameters *parameters):
-  tags(tags),genome(genome),parameters(parameters),tagId(tagId){
-  uint *S = tags->getSupport(tagId);
-  this->suppo = new Support(parameters, S, tagId, genome, tags);
-  this->taginfo = new TagInfo(genome, suppo);
+  read(r),genome(genome),tags(tags),parameters(parameters),pair_support(NULL){
+}
+
+void SingleReadClassifier::init() {
+  uint *S = tags->getSupport(read);
+  this->suppo = new Support(parameters, S, read, genome, tags, pair_support);
+  this->taginfo = new TagInfo(genome, suppo, read);
 }
 
 SingleReadClassifier::~SingleReadClassifier() {
@@ -124,16 +79,20 @@ SingleReadClassifier::~SingleReadClassifier() {
     delete taginfo;
   if (suppo != NULL)
     delete suppo;
+  if (read != NULL)
+    delete read;
+  if (sam_lines != NULL) {
+    for (vector<SamLine*>::iterator it = sam_lines->begin() ; it != sam_lines->end(); ++it) {
+      delete (*it);
+    }
+    delete sam_lines;
+  }
 }
 
 void SingleReadClassifier::classify() {
-  char *tag = tags->getTag(tagId);
+  char *tag = read->seq;
   int nb_tag_indel;
   int nb_genome_indel;
-
-  if (tagId >= tags->getNbTags()) {
-    // TODO return NULL;
-  }
 
   if (! suppo->isContinuous() 
       && ( suppo->isSingle() || suppo->isDuplicate() || suppo->isMultiple() )
@@ -146,12 +105,30 @@ void SingleReadClassifier::classify() {
       nb_tag_indel = suppoBreak->getNbTagIndels();
       nb_genome_indel = suppoBreak->getNbGenomeIndels();
 
+      // We check if there is a N character causing the break
+      bool found_N = false;
+      for (uint j = suppoBreak->getPositionStartBreak() + suppoBreak->getThreshold() -1; j <= suppoBreak->getPositionEndBreak(); j++) {
+        if(tag[j] == 'N' || tag[j] == 'n') {
+          found_N = true;
+          break;
+        }
+      }
+      if(found_N) {
+        taginfo->addUndeterminedError(UndeterminedErrorInfo::N_LETTERS,"Break involves a N letter(s)");
+        //taginfo->addSeqErr(FIRST_SUBSTITUTION,
+        //       suppoBreak->getPositionEndBreak(),0,0,
+        //       suppoBreak->getScoreComputedIntraExon(),
+        //       1, 
+        //       getTagAtEndBreak(suppoBreak, tag, 1), 1);
+        continue;
+      }
+
       // if (suppoBreak->isDuplicated()){
       // 	cout << "DUPLICATION" << endl;
       // }
 
       if (! suppoBreak->hasLongEnoughTagBreak()) {
-	  taginfo->addUndeterminedError("The break in the tag is too small (break length: %d)",
+	  taginfo->addUndeterminedError(UndeterminedErrorInfo::BREAK_TOO_SMALL,"The break in the tag is too small (break length: %d)",
 					suppoBreak->getTagBreakLength());
       } else if (suppoBreak->hasNoCover()) {
 	if (suppoBreak->isGenomeInsertion()
@@ -161,7 +138,7 @@ void SingleReadClassifier::classify() {
 	  // Todo: change the category
 	  taginfo->addSpliceNoCover(nb_genome_indel);
 	} else {
-	  taginfo->addUndeterminedError("The read (or the part of read) has no cover, we cannot deduce anything! (score in break:%.2f, score outside break:%.2f)",
+	  taginfo->addUndeterminedError(UndeterminedErrorInfo::NO_COVER,"The read (or the part of read) has no cover, we cannot deduce anything! (score in break:%.2f, score outside break:%.2f)",
 					suppoBreak->getScoreInsideBreak(), suppoBreak->getScoreOutsideBreak());
 	}
       }
@@ -169,29 +146,37 @@ void SingleReadClassifier::classify() {
       else if (suppoBreak->isBiologicalEvent()) {
         // In this case we have a combination of biological reason and error
         // But we can't really say anything on that.
-        if (suppoBreak->isDeviated()){
+        if (suppoBreak->isDeviated()
+	    // a splice deviated is considered as a good candidat
+	    && !suppoBreak->isGenomeInsertion()) {
           taginfo->addBioUndetermined(NULL,
                                       suppoBreak->getPositionEndBreak(),
-                                      "Combination of error and biological reason (deviation score: %.2f)", 
+                                      BioUndeterminedInfo::COMBINATION_ERROR_BIOLOGICAL,
+                                      "Combination of error and biological reason (deviation score: %.2f)",
                                       suppoBreak->getScoreInsideAverages());
-        }  else if (suppoBreak->isRepeated()) {
+        }  else if (suppoBreak->isRepeated()
+	    // a splice deviated is considered as a good candidat
+		    && !suppoBreak->isGenomeInsertion()) {
 	// ambiguous cases (no limit start or end)
 	  taginfo->addBioUndetermined(NULL, suppoBreak->getPositionStartBreak(),
-				      "Repetition around the break");
+        BioUndeterminedInfo::REPETITION_AROUND_THE_BREAK,
+        "Repetition around the break");
 	} 
 	else if (suppoBreak->hasNoStartBreak()){ 
-	  taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak()
-				      ,suppoBreak->getPositionEndBreak()
-				      ,"ambiguous case : no start break");
-          if (parameters->deep_snp_search) {
+	  taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
+				      suppoBreak->getPositionEndBreak(),
+              BioUndeterminedInfo::NO_START_BREAK,
+              "ambiguous case : no start break");
+          if (parameters->deep_snp_search && !suppoBreak->hasNoEndBreak()) {
             perform_deep_snp_search(suppoBreak, i);
           }
 	}	
 	else if (suppoBreak->hasNoEndBreak()){
-	  taginfo->addBioUndetermined(suppoBreak->getLocationStartBreak()
-				      ,suppoBreak->getPositionStartBreak()
-				      ,"ambiguous case : no end break");
-          if (parameters->deep_snp_search) {
+	  taginfo->addBioUndetermined(suppoBreak->getLocationStartBreak(),
+				      suppoBreak->getPositionStartBreak(),
+              BioUndeterminedInfo::NO_END_BREAK,
+              "ambiguous case : no end break");
+          if (parameters->deep_snp_search && !suppoBreak->hasNoStartBreak()) {
             perform_deep_snp_search(suppoBreak, i);
           }
 	}      
@@ -199,34 +184,60 @@ void SingleReadClassifier::classify() {
 	else {
 	  // Check if the candidat is ambiguous or not
 	  if (parameters->no_ambiguity && suppoBreak->isDuplicated()){
+      BioUndeterminedInfo::Type bioundetermined_type;
       string message = "Biological event reclassication because of #no-ambiguity option. Probably several matches of the candidat on the genome.";
       if(suppoBreak->isTagSubstitution()) {
         message += " #snp";
+        bioundetermined_type = BioUndeterminedInfo::AMBIGUOUS_SNP;
       } else if(suppoBreak->isTagIndel() || suppoBreak->isGenomeDeletion() ||
                 (suppoBreak->isGenomeInsertion() && parameters->max_bio_ins_del > labs(nb_genome_indel))) {
         message += " #indel";
+        bioundetermined_type = BioUndeterminedInfo::AMBIGUOUS_INDEL;
       } else if(suppoBreak->isGenomeInsertion() && parameters->max_splice_length > labs(nb_genome_indel)) {
         message += " #splice";
+        bioundetermined_type = BioUndeterminedInfo::AMBIGUOUS_SPLICE;
       } else if(suppoBreak->isChimera()) {
         message += " #chimera";
+        bioundetermined_type = BioUndeterminedInfo::AMBIGUOUS_CHIMERA;
       }
 	    taginfo->addBioUndetermined(suppoBreak->getLocationStartBreak(),
 					suppoBreak->getPositionStartBreak(),
-					message.c_str());
+					bioundetermined_type,
+          message.c_str());
 	  }else{
 	    // SNP 
 	    if (suppoBreak->isTagSubstitution() 
 		&& suppoBreak->isBiologicalIntraEvent()){
+	      //char nuc;
 	      // two substituions
 	      if (suppoBreak->getTagBreakLength() > suppo->getThreshold()) {
-		taginfo->addSNP(tag[suppoBreak->getPositionEndBreak()
-				    -(suppoBreak->getTagBreakLength() - suppo->getThreshold())],
-				SECOND_SUBSTITUTION);
+		// nuc = tag[suppoBreak->getPositionEndBreak()
+		// 	  -(suppoBreak->getTagBreakLength() - suppo->getThreshold())];
+		//if (nuc != 'N'){
+		  taginfo->addSNP(tag[suppoBreak->getPositionEndBreak()
+				      -(suppoBreak->getTagBreakLength() - suppo->getThreshold())],
+				  SECOND_SUBSTITUTION);
+		//}else{
+		//  uint shift = suppoBreak->getTagBreakLength() - suppo->getThreshold();
+		//  taginfo->addSeqErr(SECOND_SUBSTITUTION
+		//		     ,suppoBreak->getPositionEndBreak()-shift,0,0,
+		//		     suppoBreak->getScoreComputedIntraExon(),
+		//		     1,
+		//		     getTagAtEndBreak(suppoBreak, tag, 1, -shift), 1);
+		//}
 	      }
-	      
+	      //nuc = tag[suppoBreak->getPositionEndBreak()];
 	      // one substitution
-	      taginfo->addSNP(tag[suppoBreak->getPositionEndBreak()],
-			      FIRST_SUBSTITUTION);  
+	      //if (nuc != 'N'){
+		taginfo->addSNP(tag[suppoBreak->getPositionEndBreak()],
+				FIRST_SUBSTITUTION);
+	      //}else{
+		//taginfo->addSeqErr(FIRST_SUBSTITUTION,
+		//		   suppoBreak->getPositionEndBreak(),0,0,
+		//		   suppoBreak->getScoreComputedIntraExon(),
+		//		   1, 
+		//		   getTagAtEndBreak(suppoBreak, tag, 1), 1);
+	  //    }
 	    } // end if snp
 	    // case biological tag ins/del
 	    else if (suppoBreak->isTagIndel()
@@ -266,44 +277,27 @@ void SingleReadClassifier::classify() {
 	      } else {
 		taginfo->addBioUndetermined(suppoBreak->getLocationStartBreak(),
 					    suppoBreak->getPositionStartBreak(),
-					    "Unknown type of genome insertion");
+              BioUndeterminedInfo::UNEXPECTED_CASE,
+              "This case was not expected.");
 	      }
 	    } // end if genomeInsertion
 	    // case inter/intra transplicing (chimera)
 	    else if (suppoBreak->isChimera()){
-    uint stringentChim = 0;
-    string message = "";
-	      // If we are using stringent chimera option
-	      if(parameters->stringent_chimera) {
-		stringentChim = isStringentChimera(suppoBreak,i);
-    message = "Chimera reclassication because of stringent-chimera option. Cause is: ";
-		switch(stringentChim) {
-		case 1:
-      message += "break_length";
-		  break;
-		case 2:
-      message += "nb_merges";
-		  break;
-		case 3:
-      message += "repeated_read";
-		  break;
-		case 4:
-      message += "support_variation";
-		  break;
-		case 5:
-      message += "kmer_verification";
-		  break;
-		case 6:
-      message += "no_single_loc";
-		  break;
-		}
-        }
-      if(stringentChim > 0) {
+        string message = "";
+	      pair<float,string> stringent_info = getChimeraScore(suppoBreak);
+	      // We re-classify chimera when chim_score < DEFAULT_CHIMERA_SCORE
+	      // If we are using stringent chimera option, the chim_score must be greater than parameters->min_stringent_chimera_score 
+	      if(stringent_info.first < parameters->min_chimera_score
+		 || (parameters->stringent_chimera && stringent_info.first < parameters->min_stringent_chimera_score)){
+          message = concatStringAndFloat("Chimera reclassication because of stringent-chimera option. Score is: ",stringent_info.first);
+          message += " and features are: ";
+          message += stringent_info.second;
 		  taginfo->addBioUndetermined(suppoBreak->getLocationStartBreak(),
 					      suppoBreak->getPositionStartBreak(),
-					      message.c_str());
-	      } else {
-		taginfo->addSpliceInter();
+					      BioUndeterminedInfo::WEAK_CHIMERA,
+                message.c_str());
+	      }else{
+		taginfo->addSpliceInter(stringent_info.first,stringent_info.second);
 	      }
 	    } // end if chimera
 	    // is continuous but no known biological reasons
@@ -312,8 +306,9 @@ void SingleReadClassifier::classify() {
 	      if (suppoBreak->getTagBreakLength() >= suppo->getThreshold())
 		taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
 					    suppoBreak->getPositionEndBreak(),
-					    "The break in the tag is too large (%d). There may have several biological causes",
-					    suppoBreak->getTagBreakLength());
+              BioUndeterminedInfo::BREAK_TOO_LARGE,
+              "The break in the tag is too large (%d). There may have several biological causes",
+              suppoBreak->getTagBreakLength());
 	      // else if (suppoBreak->getBreakLength() > suppo->getThreshold())
 	      //   taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
 	      // 				  suppoBreak->getPositionEndBreak(),
@@ -322,17 +317,20 @@ void SingleReadClassifier::classify() {
 	      else if (suppoBreak->getTagBreakLength() < parameters->min_break_length)
 		taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
 					    suppoBreak->getPositionEndBreak(),
-					    "The break is too short (%d).",
-					    suppoBreak->getTagBreakLength());
+              BioUndeterminedInfo::BREAK_TOO_SMALL,
+              "The break is too short (%d).",
+              suppoBreak->getTagBreakLength());
 	      else if (! suppoBreak->isBiologicalIntraEvent() 
 		       && suppoBreak->isBiologicalInterEvent()) {
 		taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
 					    suppoBreak->getPositionEndBreak(),
-					    "Support is ok for an inter event but not for an intra.");
+              BioUndeterminedInfo::LOW_SUPPORT_INTRA_EVENT,
+              "Support is ok for an inter event but not for an intra.");
 	      } else {
 		taginfo->addBioUndetermined(suppoBreak->getLocationEndBreak(),
 					    suppoBreak->getPositionEndBreak(),
-					    "This case was not expected.");
+              BioUndeterminedInfo::UNEXPECTED_CASE,
+              "This case was not expected.");
 	      }
 	    }
 	  } 
@@ -343,7 +341,8 @@ void SingleReadClassifier::classify() {
 	if (suppoBreak->isRepeated()) {
 	  // In this case we have generally a few positions which are not located
 	  // But we can't really say anything on that.
-	  taginfo->addUndeterminedError("pos=%d-%d Repetitions around the break",
+	  taginfo->addUndeterminedError(UndeterminedErrorInfo::REPETITION_AROUND_THE_BREAK,
+          "pos=%d-%d Repetitions around the break",
 					suppoBreak->getPositionStartBreak(),
 					suppoBreak->getPositionEndBreak());
 	}
@@ -355,7 +354,7 @@ void SingleReadClassifier::classify() {
 	}else if(suppoBreak->hasNoEndBreak()){
 	  uint pos = suppoBreak->getPositionStartBreak() + suppo->getThreshold() - 1;
 	  taginfo->addSeqErr(UNKNOWN_END_MISSING,
-			     pos >= tags->getTagLength(i) ? tags->getTagLength(i)-1 : pos,~0,~0,
+			     pos >= read->getLength() ? read->getLength()-1 : pos,~0,~0,
 			     suppoBreak->getScoreComputedIntraExon());	    
 	}
 	// seq error ---------------------------> (unambiguous choice)
@@ -411,9 +410,13 @@ void SingleReadClassifier::classify() {
 	    taginfo->addSpliceNoCover(nb_genome_indel);
 	  }else {
             ChrPosition *chrPos = suppoBreak->getLocationEndBreak();
-            taginfo->addUndeterminedError("position %d. Too many indels to be an error (probably a splice gap=%d, location=%s|%d,%u).", suppoBreak->getPositionEndBreak(), nb_genome_indel,suppoBreak->getChr(END_BREAK),
-                                          suppoBreak->getStrandLocation(END_BREAK), chrPos->getRelativePosition());
-            delete chrPos;
+            taginfo->addUndeterminedError(UndeterminedErrorInfo::LARGE_INDEL,
+                "position %d. Too many indels to be an error (probably a splice gap=%d, location=%s|%d,%u).", 
+                suppoBreak->getPositionEndBreak(), 
+                nb_genome_indel,suppoBreak->getChr(END_BREAK),
+                suppoBreak->getStrandLocation(END_BREAK),
+                chrPos->getRelativePosition());
+            //delete chrPos;
           }
 	}
 	//suppresion of lg labs(ins_del_genome) 
@@ -428,7 +431,8 @@ void SingleReadClassifier::classify() {
 	}
 	// is not continuous but no erroneous reason
 	else{
-	  taginfo->addUndeterminedError("position = %d -> No location neither biological nor erroneous cause found (ins_del_tag: %d and ins_del_genome: %d, chr_before_break: %d and  chr_after_break: %d, strand_before_break: %d and strand_after_break: %d)"
+	  taginfo->addUndeterminedError(UndeterminedErrorInfo::UNEXPECTED_CASE,
+        "position = %d -> No location neither biological nor erroneous cause found (ins_del_tag: %d and ins_del_genome: %d, chr_before_break: %d and  chr_after_break: %d, strand_before_break: %d and strand_after_break: %d)"
 					,suppoBreak->getPositionEndBreak()
 					,nb_tag_indel
 					,nb_genome_indel
@@ -441,28 +445,42 @@ void SingleReadClassifier::classify() {
     }
     taginfo->setCurrentBreak(suppo->getNbBreaks());
   }
-  delete [] tag;
+
+  sam_lines = taginfo->getSamLines();
 }
 
-uint SingleReadClassifier::getTagId() {
-  return tagId;
+Read *SingleReadClassifier::getRead() {
+  return read;
 }
 
 TagInfo *SingleReadClassifier::getTagInfo() {
   return taginfo;
 }
 
-readIterator *SingleReadClassifier::setInfos(readIterator *readIt) {
-  taginfo->setReadName(readIt->getName());
-  taginfo->setReadQuality(readIt->getQuality());
-  taginfo->setReadNumber(readIt->getReadNumber());  
-  ++(*readIt);
-  return readIt;
+Support *SingleReadClassifier::getSupport() {
+  return suppo;
+}
+
+void SingleReadClassifier::setPairSupport(Support *pair_support){
+  this->pair_support = pair_support;
+}
+
+vector<SamLine*> *SingleReadClassifier::getSamLines() {
+  return sam_lines;
 }
 
 ostream &SingleReadClassifier::samOutput(ostream &os) {
-  taginfo->samOutput(os);
+  for (vector<SamLine*>::iterator it = sam_lines->begin() ; it != sam_lines->end(); ++it) {
+    (*it)->writeLine(os);
+  }
   return os;
+}
+
+int SingleReadClassifier::samOutput(samFile *out, const bam_hdr_t *h) {
+  for (vector<SamLine*>::iterator it = sam_lines->begin() ; it != sam_lines->end(); ++it) {
+    (*it)->writeBamRecord(out,h);
+  }
+  return 0;
 }
 
 void SingleReadClassifier::writeOutputs(ostream *snp
@@ -482,7 +500,7 @@ void SingleReadClassifier::writeOutputs(ostream *snp
       , ostream *bioUndermined
       , ostream *single) {
 
-  uint i = taginfo->getReadNumber();
+  uint i = read->id;
 
   // First step : the mapping output
   if (taginfo->hasNothing()){
@@ -543,7 +561,7 @@ void SingleReadClassifier::writeOutputs(ostream *snp
       *bioUndermined << i << " " << *taginfo->getInfosBioUndetermined()[j] << " " << *taginfo << endl ;
 }
 
-void SingleReadClassifier::updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable) {
+void SingleReadClassifier::updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable, uint *nb_single, uint *nb_duplication, uint *nb_multiple, uint *nb_none) {
   int code = taginfo->getCode();
   for (uint j=0; j < NB_MASKS; j++) {
     if (code & (1<<j))
@@ -553,6 +571,17 @@ void SingleReadClassifier::updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint
     (*nb_explainable)++;
   if (code == 0)
     (*nb_classes)[NB_MASKS]++;
+
+  // We save NH information for statistics
+  uint nb_locs = getSupport()->getNbLocsMax();
+    if (nb_locs == 0)
+      (*nb_none)++;
+    else if (nb_locs == 1)
+      (*nb_single)++;
+    else if (nb_locs <= parameters->max_localisation_duplication)
+      (*nb_duplication)++;
+    else
+      (*nb_multiple)++;
 }
 
 /// PRIVATE ///
@@ -599,8 +628,8 @@ void SingleReadClassifier::perform_deep_snp_search(SupportBreak *sbreak, uint br
   uint loc_start_break;
   uint loc_end_break;
 
-  const char *read = taginfo->getTag();
-  uint read_length = taginfo->getSupportObject()->getTagLength();
+  //const char *read = taginfo->getTag();
+  uint read_length = read->getLength();
   if (sbreak->hasNoStartBreak() 
       && sbreak->getPositionEndBreak() >= nb_nuc ) {
     
@@ -618,7 +647,7 @@ void SingleReadClassifier::perform_deep_snp_search(SupportBreak *sbreak, uint br
     pos_of_test_qmer = sbreak->getPositionEndBreak() - nb_nuc;
     pos_start_break = pos_of_test_qmer + 1;
     strncpy((char *)test_qmer,
-            &read[pos_of_test_qmer],
+            &read->seq[pos_of_test_qmer],
             nb_nuc+1);
     pos_snp_in_qmer = nb_nuc;
     if (strand == 1) {
@@ -648,7 +677,7 @@ void SingleReadClassifier::perform_deep_snp_search(SupportBreak *sbreak, uint br
       loc_start_break += taginfo->getThreshold() - nb_nuc; 
 
     strncpy((char *)test_qmer,
-            &read[pos_of_test_qmer],
+            &read->seq[pos_of_test_qmer],
             nb_nuc+1);
     pos_snp_in_qmer = 0;
 
@@ -705,178 +734,129 @@ void SingleReadClassifier::perform_deep_snp_search(SupportBreak *sbreak, uint br
   free(real_content);
 }
 
-uint SingleReadClassifier::isStringentChimera(SupportBreak *sbreak, uint break_num) {
+pair<float,string> SingleReadClassifier::getChimeraScore(SupportBreak *sbreak) {
 
-  // TODO add tests for strigent-chimera option
-  uint is_strigent_chimera = 0;
+  float score_chimera = 1;
+  std::ostringstream score_detailed;
+  
+  // Check the size of break with higher expectations than usual
+  // Theoric size : k - 1
+  float score_break_length = (float)sbreak->getOriginalTagBreakLength()/((sbreak->getThreshold()-1)*1.0);
+  score_detailed << "bl=" << score_break_length;
 
-  // Check the size of support with higer expectations than usual
-  if (sbreak->getTagBreakLength() < parameters->stringent_chimera_min_break_length) {
-    is_strigent_chimera = 1;
+  // Check if the chimera is ambiguous
+  float score_is_duplicated = 0;
+  if (!sbreak->isDuplicated()){
+    score_is_duplicated = 1;
   }
+  score_detailed << ",id=" << score_is_duplicated;
 
-  // Check if the break where the chimera is from has a number of merges < to the related parameter
-  if(is_strigent_chimera == 0 && sbreak->getNbMerges() > parameters->stringent_chimera_max_number_of_merges) {
-    is_strigent_chimera = 2;
+  //Compute the coefficient of variation of the support in the break
+  float score_coefficient_variation_inside = sbreak->getCoefficientVariationInside(); 
+  score_detailed << ",cb=" << score_coefficient_variation_inside;
+
+  //Compute the coefficient of variation of the support ion the read
+  float score_coefficient_variation = getSupport()->getCoefficientVariation(); 
+  score_detailed << ",cv=" << score_coefficient_variation;
+  
+  
+  //Score chimera
+  // Extraction of rules from random forest model (inTRees R package)
+  // (version 2.0)
+  // len freq    err    
+  // [1,] "3" "0.333" "0.045"
+  // [2,] "4" "0.114" "0.036"
+  // [3,] "2" "0.09"  "0.185"
+  // [4,] "4" "0.014" "0.153"
+  // [5,] "1" "0.577" "0.081"
+  // condition                                                      pred   
+  // [1,] "bl>0.9761905 & cb<=0.6316135 & id>0.5"                        "TRUE" 
+  // [2,] "bl>0.9285715 & cb<=0.234149 & cb>0.04478385 & id>0.5"         "TRUE" 
+  // [3,] "bl>0.8333335 & cb<=0.01267865"                                "TRUE" 
+  // [4,] "bl>0.8333335 & bl<=0.9285715 & cb<=0.01625305 & cb>0.0119848" "TRUE" 
+  // [5,] "bl<=0.9761905"                                                "FALSE"
+  // impRRF              
+  // [1,] "1"                 
+  // [2,] "0.0705675317455272"
+  // [3,] "0.0501957113882427"
+  // [4,] "0.0189422300867082"
+  // [5,] "0.0111771619880209"
+  //
+  // (version 2.1)
+  // len freq    err
+  // [1,] "3" "0.333" "0.045"
+  // [2,] "4" "0.114" "0.036"
+  // [3,] "2" "0.483" "0.124"
+  // [4,] "5" "0.208" "0.152"
+  // [5,] "2" "0.012" "0"
+  // [6,] "2" "0.03"  "0"
+  //       pred    impRRF
+  // [1,] "TRUE"  "1"                 
+  // [2,] "TRUE"  "0.0705675317455272"
+  // [3,] "TRUE"  "1"
+  // [4,] "TRUE"  "0.0330776033257221"
+  // [5,] "FALSE" "0.0718883203646134"
+  // [6,] "FALSE" "0.164602339595228"
+  // condition
+  // [1,] "bl>0.9761905 & cb<=0.6316135 & id>0.5"
+  // [2,] "bl>0.9285715 & cb<=0.234149 & cb>0.04478385 & id>0.5"
+  // [3,] "bl>0.9761905 & id>0.5"
+  // [4,] "bl>0.9285715 & cb>0.04063885 & cb<=0.526224 & cv>0.2247855 & id>0.5"
+  // [5,] "cb<=0.0999676 & cb>0.0984417"
+  // [6,] "cb>0.0648697 & cb<=0.07375785"
+
+  
+  if (score_break_length>0.9761905 && score_coefficient_variation_inside<=0.6316135 && score_is_duplicated==1) {
+    //Then TRUE
+    score_chimera = ((((1.0-score_break_length)+score_coefficient_variation_inside)/2.0));
+  }   
+  else if (score_break_length>0.9285715 && score_coefficient_variation_inside<=0.234149 && score_coefficient_variation_inside>0.04478385 && score_is_duplicated==1) {
+    //Then TRUE
+    score_chimera = (((1.0-score_break_length)+score_coefficient_variation_inside)/2.0);
   }
-
-  // Check if the break is in a repeated region
-  // TODO naive check, we should try to know how far is the repeat region
-  // from the chimera and add a min length parameter in const.h
-  if (is_strigent_chimera == 0 && taginfo->getSupportObject()->hasRepeat()) {
-    is_strigent_chimera = 3;
+  else if (score_break_length>0.9761905 && score_is_duplicated==1) {
+    //Then TRUE
+    score_chimera = ((1.0-4*score_break_length)/2.0);
+  }   
+  else if (score_break_length>0.9285715 && score_coefficient_variation_inside<=0.526224 && score_coefficient_variation_inside>0.04063885 && score_coefficient_variation>0.2247855 && score_is_duplicated==1) {
+    //Then TRUE
+    score_chimera = (((1.0-score_break_length)+score_coefficient_variation_inside)/2.0);
   }
-
-  // Check interquartile range of support values in the break
-  if(is_strigent_chimera == 0 && (float)(sbreak->getInsideQuartile4() - sbreak->getInsideQuartile1()) > sbreak->getAverageHighInside()*PERCENT_SUPPORT_VARIATION_ALMOST_NORMAL) {
-    is_strigent_chimera = 4;
+  else {
+    //Then FALSE
+    if (score_is_duplicated == 1)
+      score_chimera = (1.0-2*pow(score_break_length,2));    
   }
+  
+  //Reverse value for min stringent chimera
+  score_chimera = 1-score_chimera;
 
-  // Check if we found a single loc before and after the break within a window of k-1
-  if(is_strigent_chimera == 0){ 
-    int first_single_loc_before_break, first_single_loc_after_break;
-    uint startBreak = sbreak->getPositionStartBreak();
-    uint endBreak = sbreak->getPositionEndBreak();
-    int max_ext_length = parameters->threshold - (endBreak - startBreak + 1) - 1;
-
-    if(max_ext_length > 0) {
-      // First we try to find a single loc before the break
-      first_single_loc_before_break = startBreak - 1;
-      while (first_single_loc_before_break >= 0 &&
-             suppo->getNbLocs()[first_single_loc_before_break] != 1 &&
-             (int) (startBreak - first_single_loc_before_break) <= max_ext_length) {
-        first_single_loc_before_break--;
-      }
-
-      // First we try to find a single loc before the break
-      first_single_loc_after_break = endBreak + 1;
-      while (first_single_loc_after_break < (int) suppo->getLength() &&
-             suppo->getNbLocs()[first_single_loc_after_break] != 1 &&
-             (int) (first_single_loc_after_break - endBreak) <= max_ext_length) {
-        first_single_loc_after_break++;
-      }
-
-      if(first_single_loc_before_break < 0 || first_single_loc_after_break >= (int) suppo->getLength() ||
-         (first_single_loc_after_break - first_single_loc_before_break) >= (int) parameters->threshold) {
-        is_strigent_chimera = 6;
-      }
-    }
+  //Some extreme value are superior to 1
+  if(score_chimera>1) {
+    score_chimera=1;
   }
-
-  // Check a k_mer location profile after and before the chimera
-  if(is_strigent_chimera == 0) {
-    uint start_break = sbreak->getPositionStartBreak();
-    uint end_break = sbreak->getPositionEndBreak();
-    Support *suppo = taginfo->getSupportObject();
-    int before_pos = start_break - parameters->max_extension_length * 2;
-    bool loc_match_found = false;
-    uint nb_locs;
-
-    // if the k-mer before the chimera is in the support
-    if ( before_pos >= 0 && before_pos < (int) suppo->getLength()) {
-      if(suppo->getNbLocs()[before_pos] > 0) {
-        ChrPosition *start_break_pos = sbreak->getChrPosition(START_BREAK);
-        if(start_break_pos) {
-          ChrPosition *before_chrPos;
-          pair <uint, uint> before_range;
-          ulong *locs_before_pos;
-
-          if(start_break_pos->getStrand() == 1) {
-            before_range = suppo->getKmerRange(before_pos,FORWARD_STRAND);
-          }
-          else {
-            before_range = suppo->getKmerRange(before_pos,REVERSE_STRAND);
-          }
-
-          genome->getOccurrencesFMIndexRange(before_range.first,
-                                               before_range.second,
-                                               &locs_before_pos);
-
-          nb_locs = min(before_range.second - before_range.first + 1,genome->getNbLocations());
-          uint i = 0;
-          while(!loc_match_found && i < nb_locs) {
-            before_chrPos = genome->getChrPos(locs_before_pos[i],start_break_pos->getStrand());
-            long long int relativeDist = labs((long long int)before_chrPos->getRelativePosition() - (long long int)start_break_pos->getRelativePosition());
-            if (((before_chrPos->getRelativePosition() < start_break_pos->getRelativePosition()) == (start_break_pos->getStrand() == 1))
-                && strcmp(before_chrPos->getChrPosition(),start_break_pos->getChrPosition()) == 0
-                && relativeDist < parameters->max_splice_length) {
-              loc_match_found = true;
-            } 
-            delete before_chrPos;
-            i++;
-          }
-          free(locs_before_pos);
-          if (!loc_match_found)
-            is_strigent_chimera = 5;
-        }
-        if (start_break_pos) 
-          delete start_break_pos;
-      }
-    }
-    // if the k-mer after the chimera is still in the support
-    if (is_strigent_chimera == 0) {
-      int after_pos = end_break + parameters->max_extension_length * 2;
-      if (after_pos < (int) suppo->getLength() && after_pos >= 0) {
-        if(suppo->getNbLocs()[after_pos] > 0) {
-          ChrPosition *end_break_pos = sbreak->getChrPosition(END_BREAK);
-          if(end_break_pos) {
-            ChrPosition *after_chrPos;
-            pair <uint, uint> after_range;
-            ulong *locs_after_pos;
-
-            if(end_break_pos->getStrand() == 1) {
-              after_range = suppo->getKmerRange(after_pos,FORWARD_STRAND);
-            }
-            else {
-              after_range = suppo->getKmerRange(after_pos,REVERSE_STRAND);
-            }
-
-            genome->getOccurrencesFMIndexRange(after_range.first,
-                                                 after_range.second,
-                                                 &locs_after_pos);
-
-            nb_locs = min(after_range.second - after_range.first + 1,genome->getNbLocations());
-            uint i = 0;
-            loc_match_found = false;
-            while(!loc_match_found && i < nb_locs) {
-              after_chrPos = genome->getChrPos(locs_after_pos[i],end_break_pos->getStrand());
-              long long int relativeDist = labs((long long int)after_chrPos->getRelativePosition() - (long long int)end_break_pos->getRelativePosition());
-              if (((after_chrPos->getRelativePosition() > end_break_pos->getRelativePosition()) == (end_break_pos->getStrand() == 1))
-                  && strcmp(after_chrPos->getChrPosition(),end_break_pos->getChrPosition()) == 0
-                  && relativeDist < parameters->max_splice_length) {
-                loc_match_found = true;
-              } 
-              delete after_chrPos;
-              i++;
-            }
-            free(locs_after_pos);
-            if (!loc_match_found)
-              is_strigent_chimera = 5;
-          }
-          if (end_break_pos)
-            delete end_break_pos;
-        }
-      }
-    }
-  }
-
-  return is_strigent_chimera;
+  
+  return make_pair(score_chimera,score_detailed.str());
 }
 
 /****************************************
 *       PairedEndReadClassifier         *
 ****************************************/
 
-PairedEndReadClassifier::PairedEndReadClassifier(uint tagId1, uint tagId2,
+PairedEndReadClassifier::PairedEndReadClassifier(Read *r1, Read *r2,
                          LocateOnGenome *genome, 
-                         gkArrays *tags, 
-                         Parameters *parameters) {
-  this->tags = tags;
-  this->genome = genome;
-  this->parameters = parameters;
-  this->paired_end_chimera = 0;
-  classifier1 = new SingleReadClassifier(tagId1,genome,tags,parameters);
-  classifier2 = new SingleReadClassifier(tagId2,genome,tags,parameters);
+                         ReadIndex *tags, 
+                         Parameters *parameters):
+  r1(r1),r2(r2),tags(tags),genome(genome),parameters(parameters) {
+    this->paired_end_chimera = 0;
+    classifier1 = new SingleReadClassifier(r1,genome,tags,parameters);
+    classifier2 = new SingleReadClassifier(r2,genome,tags,parameters);
+}
+
+void PairedEndReadClassifier::init() {
+  classifier1->init();
+  classifier2->setPairSupport(classifier1->getSupport());
+  classifier2->init();
 }
 
 PairedEndReadClassifier::~PairedEndReadClassifier() {
@@ -895,7 +875,7 @@ void PairedEndReadClassifier::classify() {
   uint i = 0;
   while (i < taginfo1->getNbSpliceInter()) {
     if(!chimeraPairedEndCheck(taginfo1->getInfosSpliceInter()[i],classifier2)) {
-      taginfo1->removeSpliceInter(i,"Chimera reclassification because paired-end informations does not match the chimera.");
+      taginfo1->removeSpliceInter(i,BioUndeterminedInfo::DISCORDANT_PAIR,"Chimera reclassification because paired-end informations does not match the chimera.");
     } else {
       i++;
     }
@@ -905,7 +885,7 @@ void PairedEndReadClassifier::classify() {
   i = 0;
   while (i < taginfo2->getNbSpliceInter()) {
     if(!chimeraPairedEndCheck(taginfo2->getInfosSpliceInter()[i],classifier1)) {
-      taginfo2->removeSpliceInter(i,"Chimera reclassification because paired-end informations does not match the chimera.");
+      taginfo2->removeSpliceInter(i,BioUndeterminedInfo::DISCORDANT_PAIR,"Chimera reclassification because paired-end informations does not match the chimera.");
     } else {
       i++;
     }
@@ -939,15 +919,58 @@ void PairedEndReadClassifier::classify() {
 }
 
 ostream &PairedEndReadClassifier::samOutput(ostream &os) {
-  vector<SamLine*> *sam_lines1 = getFirstTagInfo()->getSamLines();
-  vector<SamLine*> *sam_lines2 = getSecondTagInfo()->getSamLines();
+  vector<SamLine*> sam_lines = getSamLines();
+
+  for (vector<SamLine*>::iterator it = sam_lines.begin() ; it != sam_lines.end(); ++it) {
+    (*it)->writeLine(os);
+  }
+
+  return os;
+}
+
+int PairedEndReadClassifier::samOutput(samFile *out, const bam_hdr_t *h) {
+  vector<SamLine*> sam_lines = getSamLines();
+
+  for (vector<SamLine*>::iterator it = sam_lines.begin() ; it != sam_lines.end(); ++it) {
+    (*it)->writeBamRecord(out,h);
+  }
+  return 0;
+}
+
+vector<SamLine*> PairedEndReadClassifier::getSamLines() {
+  vector<SamLine*> sam_lines;
+
+  vector<SamLine*> *sam_lines1 = classifier1->getSamLines();
+  vector<SamLine*> *sam_lines2 = classifier2->getSamLines();
 
   SamLine *primary_line1 = (*sam_lines1)[0];
   SamLine *primary_line2 = (*sam_lines2)[0];
 
+  postProcessSamLines(*sam_lines1,*primary_line1,*primary_line2,true);
+  postProcessSamLines(*sam_lines2,*primary_line2,*primary_line1,false);
 
+  sam_lines.insert(sam_lines.end(), sam_lines1->begin(), sam_lines1->end());
+  sam_lines.insert(sam_lines.end(), sam_lines2->begin(), sam_lines2->end());
+
+  return sam_lines;
+}
+
+void PairedEndReadClassifier::setPairedEndOptionalFields(SamLine &line, const SamLine &paired_line) {
+  ostringstream string_stream;
+
+  //line.addOptionalField("R2",paired_line.getSeq());
+  string_stream << paired_line.getCigar();
+  line.addOptionalField("MC",string_stream.str());
+  line.addOptionalField("MQ",paired_line.getMapQ());
+}
+
+void PairedEndReadClassifier::postProcessSamLines(vector<SamLine*> &sam_lines, SamLine &primary_line, SamLine &paired_primary_line, bool is_first_taginfo) {
+
+  setPairedEndOptionalFields(primary_line, paired_primary_line);
+  setPairedEndOptionalFields(paired_primary_line, primary_line);
+  
   // If PE read is mapped we print paired-end additional fields
-  if(!primary_line2->isSegmentUnmapped()) {
+  if(!paired_primary_line.isSegmentUnmapped()) {
     ostringstream additionalInfos;
     additionalInfos << "loc:" << getSecondTagInfo()->isSingle() << ':' << getSecondTagInfo()->isDuplication() << ':' << getSecondTagInfo()->isMultiple();
     // If there is a chimera between both reads, we print that
@@ -955,36 +978,9 @@ ostream &PairedEndReadClassifier::samOutput(ostream &os) {
     if(this->hasPairedEndChimera()) {
       additionalInfos << ";chimera:" << *getFirstTagInfo()->getLocation() << ':' << *getSecondTagInfo()->getLocation();
     }
-    primary_line1->addOptionalField("XP",additionalInfos.str());
+    primary_line.addOptionalField("XP",additionalInfos.str());
   }
 
-
-  setPairedEndOptionalFields(*primary_line1,*primary_line2);
-  setPairedEndOptionalFields(*primary_line2,*primary_line1);
-
-  writeSamLines(os,*sam_lines1,*primary_line1,*primary_line2,true);
-  writeSamLines(os,*sam_lines2,*primary_line2,*primary_line1,false);
-
-  for (vector<SamLine*>::iterator it = sam_lines1->begin() ; it != sam_lines1->end(); ++it)
-    delete (*it);
-  delete sam_lines1;
-  for (vector<SamLine*>::iterator it = sam_lines2->begin() ; it != sam_lines2->end(); ++it)
-    delete (*it);
-  delete sam_lines2;
-
-  return os;
-}
-
-void PairedEndReadClassifier::setPairedEndOptionalFields(SamLine &line, const SamLine &paired_line) {
-  ostringstream string_stream;
-
-  line.addOptionalField("R2",paired_line.getSeq());
-  string_stream << paired_line.getCigar();
-  line.addOptionalField("MC",string_stream.str());
-  line.addOptionalField("MQ",paired_line.getMapQ());
-}
-
-void PairedEndReadClassifier::writeSamLines(ostream &os, vector<SamLine*> &sam_lines, SamLine &primary_line, SamLine &paired_primary_line, bool is_first_taginfo) {
   // We add informations about paired-end in the SAM lines
   // Setting flag bits for paired-end
   for (vector<SamLine*>::iterator it = sam_lines.begin() ; it != sam_lines.end(); ++it) {
@@ -994,6 +990,43 @@ void PairedEndReadClassifier::writeSamLines(ostream &os, vector<SamLine*> &sam_l
     } else {
       (*it)->setLastSegmentInTheTemplate();
     }
+
+    if ((is_first_taginfo &&
+	 !getFirstTagInfo()->isNone() &&
+	 (getFirstTagInfo()->hasSplice() || getFirstTagInfo()->hasSpliceNoCover() || getFirstTagInfo()->hasSpliceIntraChr()))
+	||
+	(!is_first_taginfo &&
+	 !getSecondTagInfo()->isNone() &&
+	 (getSecondTagInfo()->hasSplice() || getSecondTagInfo()->hasSpliceNoCover() || getSecondTagInfo()->hasSpliceIntraChr()))
+	){
+      // update XS field
+      switch (parameters->paired_end_orientation) {
+      case FORWARD_REVERSE:
+	if ((!(*it)->isSeqReverseComplemented() && (*it)->isFirstSegmentInTheTemplate())
+	    || ((*it)->isSeqReverseComplemented() && !(*it)->isFirstSegmentInTheTemplate()))
+	  (*it)->addOptionalField("XS",'+');
+	else
+	  (*it)->addOptionalField("XS",'-');
+	break;
+      case REVERSE_FORWARD:
+	if ((!(*it)->isSeqReverseComplemented() && !(*it)->isFirstSegmentInTheTemplate())
+	    || ((*it)->isSeqReverseComplemented() && (*it)->isFirstSegmentInTheTemplate()))
+	  (*it)->addOptionalField("XS",'+');
+	else
+	  (*it)->addOptionalField("XS",'-');
+	break;
+      case FORWARD_FORWARD:
+	if ((*it)->isSeqReverseComplemented())
+	  (*it)->addOptionalField("XS",'-');
+	else
+	  (*it)->addOptionalField("XS",'+');
+	break;
+      default:
+	cerr << "Wrong paired_end_orientation value" << endl;
+	exit(1);
+      }
+    }
+    // Manage multiple alignments
     (*it)->setTemplateHavingMultipleSegments();
     if(primary_line.isSegmentUnmapped() || paired_primary_line.isSegmentUnmapped()) {
       (*it)->unsetEachSegmentsMapped();
@@ -1008,9 +1041,9 @@ void PairedEndReadClassifier::writeSamLines(ostream &os, vector<SamLine*> &sam_l
     (*it)->setPnext(paired_primary_line.getPos());
     // Set Rnext (field 8)
     if((*it)->getRname() == paired_primary_line.getRname()) {
-      (*it)->setRnext("=");
+      (*it)->setRnext("=",paired_primary_line.getRid());
     } else {
-      (*it)->setRnext(paired_primary_line.getRname());
+      (*it)->setRnext(paired_primary_line.getRname(),paired_primary_line.getRid());
     }
     // Set TLEN (field 9)
     // if both segment are mapped to the same reference
@@ -1032,16 +1065,9 @@ void PairedEndReadClassifier::writeSamLines(ostream &os, vector<SamLine*> &sam_l
       //primary_line1->setTlen(primary_line1->getPos() - (primary_line2->getPos() + primary_line2->getCigar().getReferenceAlignementLength())
       //primary_line2->setTlen(primary_line2->getPos() - (primary_line1->getPos() + primary_line1->getCigar().getReferenceAlignementLength())
     }
-    (*it)->writeLine(os);
+    //(*it)->writeLine(os);
   }
 }
-
-readIterator *PairedEndReadClassifier::setInfos(readIterator *readIt) {
-  classifier1->setInfos(readIt);
-  classifier2->setInfos(readIt);
-  return readIt;
-}
-
 
 void PairedEndReadClassifier::writeOutputs(ostream *snp
       , ostream *bioTagIndel
@@ -1095,9 +1121,9 @@ void PairedEndReadClassifier::writeOutputs(ostream *snp
       single);
 }
 
-void PairedEndReadClassifier::updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable) {
-  classifier1->updateStatistics(nb_classes, nb_explainable);
-  classifier2->updateStatistics(nb_classes, nb_explainable);
+void PairedEndReadClassifier::updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable, uint *nb_single, uint *nb_duplication, uint *nb_multiple, uint *nb_none) {
+  classifier1->updateStatistics(nb_classes, nb_explainable, nb_single, nb_duplication, nb_multiple, nb_none);
+  classifier2->updateStatistics(nb_classes, nb_explainable, nb_single, nb_duplication, nb_multiple, nb_none);
   if(this->hasPairedEndChimera()) {
     (*nb_classes)[posBitInMask(MASK_PAIRED_END_CHIMERA)]++;
   }
@@ -1118,7 +1144,7 @@ bool PairedEndReadClassifier::hasPairedEndChimera() {
 void PairedEndReadClassifier::writePairedEndChimera(ostream *pairedEndChimera) {
   // If there is a chimera between the paired-end tags
   if(this->hasPairedEndChimera()) {
-    *pairedEndChimera << paired_end_chimera << " " << getFirstTagInfo()->getReadNumber() << " " << *getFirstTagInfo() << " " << getSecondTagInfo()->getReadNumber() << " " << *getSecondTagInfo() << endl;
+    *pairedEndChimera << paired_end_chimera << " " << classifier1->getRead()->id << " " << *getFirstTagInfo() << " " << classifier2->getRead()->id << " " << *getSecondTagInfo() << endl;
   }
 }
 
@@ -1135,67 +1161,77 @@ bool PairedEndReadClassifier::chimeraPairedEndCheck(SpliceInterInfo *chimera,
 
   bool isAValidChimera = false;
 
-  // If the paired-end read is located and has no chimera
-  if (pairePos != NULL && !pairedEndTag->hasSpliceInterChr()) {
-    // ------------------------------------
-    // 1. We use P1 position of the chimera
-    // ------------------------------------
-    // a) P1(+) Case
-    //                                        ^ (P1)
-    //                                 -------|\\\\\|--------- strand : +
-    // ======================================================= (ADN)
-    // -------------------- (paired-end read)                  strand : -
-    if (P1.getStrand() == 1) {
-      if (P1.getStrand() != pairePos->getStrand() &&
-          strcmp(P1.getChrPosition(), pairePos->getChrPosition()) == 0 &&
-          P1.getRelativePosition() >= pairePos->getRelativePosition() &&
-          (P1.getRelativePosition() - pairePos->getRelativePosition()) <= parameters->max_splice_length) {
-        isAValidChimera = true;
-      }
-    } else if (!isAValidChimera) {
-    // b) P1(-) Case
-    //                  (paired-end read) -------------------- strand : +
-    // ======================================================= (ADN)
-    // -------|\\\\\|---------                                 strand : -
-    //              ^ (P1)
-      if (P1.getStrand() != pairePos->getStrand() &&
-          strcmp(P1.getChrPosition(), pairePos->getChrPosition()) == 0 &&
-          P1.getRelativePosition() <= pairePos->getRelativePosition() &&
-          (pairePos->getRelativePosition() - P1.getRelativePosition()) <= parameters->max_splice_length) {
-        isAValidChimera = true;
+  // If the paired-end read is located
+  if (pairePos != NULL) {
+    bool chimera_class2 = true;
+    if (pairedEndTag->hasSpliceInterChr()){
+      SpliceInterInfo **chimeraInfos = pairedEndTag->getInfosSpliceInter();
+      for (uint i=0 ; i < pairedEndTag->getNbSpliceInter() && chimera_class2 ; i++){
+	chimera_class2 = (chimeraInfos[i]->getChimeraClass() == 2);
       }
     }
-    // ------------------------------------
-    // 2. We use P2 position of the chimera
-    // ------------------------------------
-    // a) P2(+) Case
-    //              ^ (P2)
-    // -------|\\\\\|---------                                 strand : +
-    // ======================================================= (ADN)
-    //                  (paired-end read) -------------------- strand : -
-    if (P2.getStrand() == 1) {
-      if (P2.getStrand() != pairePos->getStrand() &&
-          strcmp(P2.getChrPosition(), pairePos->getChrPosition()) == 0 &&
-          P2.getRelativePosition() <= pairePos->getRelativePosition() &&
-          (pairePos->getRelativePosition() - P2.getRelativePosition()) <= parameters->max_splice_length) {
-        isAValidChimera = true;
+    // if it only has chimeras of class 2
+    if (chimera_class2){
+      // ------------------------------------
+      // 1. We use P1 position of the chimera
+      // ------------------------------------
+      // a) P1(+) Case
+      //                                        ^ (P1)
+      //                                 -------|\\\\\|--------- strand : +
+      // ======================================================= (ADN)
+      // -------------------- (paired-end read)                  strand : -
+      if (P1.getStrand() == 1) {
+	if (P1.getStrand() != pairePos->getStrand() &&
+	    strcmp(P1.getChrPosition(), pairePos->getChrPosition()) == 0 &&
+	    P1.getRelativePosition() >= pairePos->getRelativePosition() &&
+	    (P1.getRelativePosition() - pairePos->getRelativePosition()) <= parameters->max_splice_length) {
+	  isAValidChimera = true;
+	}
+      } else if (!isAValidChimera) {
+	// b) P1(-) Case
+	//                  (paired-end read) -------------------- strand : +
+	// ======================================================= (ADN)
+	// -------|\\\\\|---------                                 strand : -
+	//              ^ (P1)
+	if (P1.getStrand() != pairePos->getStrand() &&
+	    strcmp(P1.getChrPosition(), pairePos->getChrPosition()) == 0 &&
+	    P1.getRelativePosition() <= pairePos->getRelativePosition() &&
+	    (pairePos->getRelativePosition() - P1.getRelativePosition()) <= parameters->max_splice_length) {
+	  isAValidChimera = true;
+	}
       }
-    } else if (!isAValidChimera) {
-    // b) P2(-) Case
-    // -------------------- (paired-end read)                  strand : +
-    // ======================================================= (ADN)
-    //                                 -------|\\\\\|--------- strand : +
-    //                                        ^ (P2)
-      if (P2.getStrand() != pairePos->getStrand() &&
-          strcmp(P2.getChrPosition(), pairePos->getChrPosition()) == 0 &&
-          P2.getRelativePosition() >= pairePos->getRelativePosition() &&
-          (P2.getRelativePosition() - pairePos->getRelativePosition()) <= parameters->max_splice_length) {
-        isAValidChimera = true;
+      // ------------------------------------
+      // 2. We use P2 position of the chimera
+      // ------------------------------------
+      // a) P2(+) Case
+      //              ^ (P2)
+      // -------|\\\\\|---------                                 strand : +
+      // ======================================================= (ADN)
+      //                  (paired-end read) -------------------- strand : -
+      if (P2.getStrand() == 1) {
+	if (P2.getStrand() != pairePos->getStrand() &&
+	    strcmp(P2.getChrPosition(), pairePos->getChrPosition()) == 0 &&
+	    P2.getRelativePosition() <= pairePos->getRelativePosition() &&
+	    (pairePos->getRelativePosition() - P2.getRelativePosition()) <= parameters->max_splice_length) {
+	  isAValidChimera = true;
+	}
+      } else if (!isAValidChimera) {
+	// b) P2(-) Case
+	// -------------------- (paired-end read)                  strand : +
+	// ======================================================= (ADN)
+	//                                 -------|\\\\\|--------- strand : +
+	//                                        ^ (P2)
+	if (P2.getStrand() != pairePos->getStrand() &&
+	    strcmp(P2.getChrPosition(), pairePos->getChrPosition()) == 0 &&
+	    P2.getRelativePosition() >= pairePos->getRelativePosition() &&
+	    (P2.getRelativePosition() - pairePos->getRelativePosition()) <= parameters->max_splice_length) {
+	  isAValidChimera = true;
+	}
       }
+    } else {
+      // no assumption can be made about the paired-end tag, the chimera is not discarded
+      isAValidChimera = true;
     }
-  } else {
-    // no assumption can be made about the paired-end tag, the chimera is not discarded
-    isAValidChimera = true;
   }
 
   return isAValidChimera;

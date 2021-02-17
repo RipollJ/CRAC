@@ -100,7 +100,7 @@
 # SUBDIRS=causes cigar 
 
 MOSTLYCLEANFILES=*~
-CLEANFILES=*~ *.tap *.ssa *.conf *.sam
+CLEANFILES=*~ *.tap *.ssa *.conf *.sam *.valgrind
 DISTCLEANFILES=*~
 MAINTAINERCLEANFILES=*~
 

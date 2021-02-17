@@ -1,99 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -116,7 +68,14 @@
 
 BitRankW32Int::BitRankW32Int( ulong *bitarray, ulong _n, bool owner, ulong _factor){
   data=bitarray;
+  //cdata = (ulong *)calloc(_n/W+1, sizeof(ulong));  
+  //ulong tmp = 0;
+  //for(ulong i=0; i<(_n/W+1); i++)  {
+  //  tmp += popcount32(data[i]);
+  //  cdata[i] = tmp;
+  //}
   this->owner = owner;
+  this->as_cache = false;
   this->n=_n;
 	ulong lgn=bits(n-1);
 	this->factor=_factor;
@@ -131,6 +90,7 @@ BitRankW32Int::BitRankW32Int( ulong *bitarray, ulong _n, bool owner, ulong _fact
 BitRankW32Int::~BitRankW32Int() {
 	delete [] Rs;
 	if (owner) free(data);
+	if (as_cache) free(cache_rank);
 }
 
 //Metodo que realiza la busqueda d
@@ -145,6 +105,7 @@ void BitRankW32Int::BuildRank(){
 		Rs[j]=Rs[j-1];
 		Rs[j]+=BuildRankSub((j-1)*factor,factor);
 	}
+	BuildCacheRank();
 }
 
 ulong BitRankW32Int::BuildRankSub(ulong ini,ulong bloques){
@@ -159,14 +120,53 @@ ulong BitRankW32Int::BuildRankSub(ulong ini,ulong bloques){
 
 }
 
+/*
+ * Building cache rank array
+ * Block of 8x32 set of data
+ * [ RS ] [ sum/sum/sum sum/sum/sum ] [ data0 data1 data2 data3 data4 data5 data6 data7 ]
+ * RS => contain total sum  ( 32bit )
+ * sum => contain local sum ( 8bit  )
+ * dataX => contain data n  ( 32bit )
+ */
+void BitRankW32Int::BuildCacheRank() {
+  if ( this->as_cache == true ) return;
+  ulong num_sblock = n/(8 * 32);
+  num_sblock++;
+  as_cache = true;
+  cache_rank = (s_cache_rank *)calloc(num_sblock, sizeof(s_cache_rank));
+  ulong nb_data = n/32;
+  ulong pc, i, j, k;
+  unsigned char lcount, tpc;
+  pc = 0;
+  k = 0;
+  for (j=0; j<=nb_data; j+=8) {
+    cache_rank[k].total_sum = pc;                          // Sum of all popcount32 seen before
+    lcount = 0;
+    for( i=j; i<(j+8); i++ ) {
+      if ( i <= nb_data ) {
+        cache_rank[k].data[i-j] = data[i];
+        tpc = popcount32( data[i] );
+        pc += tpc;
+        cache_rank[k].local_sum[i-j] = lcount;
+        lcount += tpc;
+      }
+    }
+    k++;
+   }
+}
+
+
 ulong BitRankW32Int::rank(ulong i) {
-  ++i;
-  ulong resp=Rs[i/s];
-  ulong aux=(i/s)*factor;
-  for (ulong a=aux;a<i/W;a++)
-    resp+=popcount32(data[a]);
-  resp+=popcount32(data[i/W]  & ((1<<(i & mask31))-1));
-  return resp;
+  if ( i > n ) return 0;
+  ulong rang, cas, somm;
+  unsigned short rest_i, rest;
+  cas = (i / 32);
+  rest_i = 31 - (i % 32);
+  rang = cas / 8;
+  rest = cas % 8;
+  somm = cache_rank[rang].total_sum + cache_rank[rang].local_sum[rest];
+  somm += popcount32(cache_rank[rang].data[rest] << rest_i );
+  return somm;
 }
 
 bool BitRankW32Int::IsBitSet(ulong i) {
@@ -197,6 +197,8 @@ int BitRankW32Int::load(FILE *f) {
   if (!data) return 1;
   if (fread (data,sizeof(ulong),n/W+1,f) != n/W+1) return 25;
   this->owner = true;
+  this->as_cache = false;
+  BuildCacheRank();
   Rs= new ulong[n/s+1];
   if (!Rs) return 1;
   if (fread (Rs,sizeof(ulong),n/s+1,f) != n/s+1) return 25;

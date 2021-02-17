@@ -1,99 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -104,32 +56,36 @@
 #include "libSSA/locateOnGenome.h"
 #include "Parameters.h"
 #include "SupportBreak.h"
-#include <gkArrays.h>
+#include "ReadIndex.h"
+#include "Read.h"
+#include "Bitset.h"
 
 using namespace std;
-using namespace gkarrays;
 
+// TODO BLURF THIS DO NOT LOOK GOOD AT ALL!!!
+// Is there a really good reason for that?
+// Mike? Nico? Eric? (Ok I'm just kidding for the last one...)
 class TagInfo;
 
 class Support {
   
   Parameters *parameters;	/* parameters to init constant values*/
   uint *support; 		/* the support by itself */
-  uint tag_num; 			/* tag number */
+  Read *read;       /* the read we ara analyzing */
   uint length;			/* support length */
-  uint threshold;		/* size of the factors */
-  uint tag_length;		/* length of the tag */
-  char *current_tag;		/* tag corresponding to this support */
   LocateOnGenome *genome;	/* genome we are matching on */
-  gkArrays *tags;		/* index of the tags */
+  ReadIndex *tags;		/* index of the tags */
+
+  Support *pair_support;
+
+  uint nb_pos_located;		/* number of distinct factors that are located 
+				   (at most getLength()) */
   
 /*   uint min_occ;			/\* minimal number of occurrences for the support *\/ */
 /*   uint max_occ;			/\* maximal number of occurrences for the support *\/ */
   uint nb_single;		/* number of factors single located */
   uint nb_multiple;		/* number of factors located many times (>1) */
   uint nb_duplicate;		// number of duplicates 
-  uint nb_pos_located;		/* number of distinct factors that are located 
-				   (at most getLength()) */
   bool almostNormal;          
 
   // The range support[start_pos_repeat ... end_pos_repeat] is such that
@@ -137,13 +93,13 @@ class Support {
   int start_pos_repeat;	/* start position of the repeat in the support */
   int end_pos_repeat;		/* end position of the repeat in the support */
   
+  uint position_of_location;    /* Position in the read of the best k-mer locations */
 
-  ChrPosition *pos;		/* Position of an occurrence of one factor 
-				   and its strand (if any) */
-  uint position_of_location;    /* Position in the read of the k-mer location */
-  uint position_of_locations;    /* Position in the read of k-mer locations for 
-				    multiple treatment */
-
+  ChrPosition *best_location;
+  
+  ChrPosition **locations;     /* Locations of occurrences of the best k-mer 
+				  and its strand (if any) */
+  
   uint *nb_locs;                /* number of occurrences of each factor are 
 				   located on the genome */
 
@@ -152,7 +108,6 @@ class Support {
 
   uint nb_breaks;		/* number of times consecutive factors are not
 				   located on the genome */
-
      
   SupportBreak **breaks;
 
@@ -162,10 +117,13 @@ class Support {
   pair <uint, uint> *ranges_reverse; /* Range of occurrences, in the FM-index, 
 					on the reverse strand. */
 
+  float average_support;        /* The average support of the read */
+
+  
  public:
 
-  Support(Parameters *p, uint *s, uint tag_num
-	  ,LocateOnGenome *g, gkArrays *i);
+  Support(Parameters *p, uint *s, Read *r
+	  ,LocateOnGenome *g, ReadIndex *i, Support *psupport = NULL);
 
   Support(const Support &);
 
@@ -189,6 +147,26 @@ class Support {
   bool canMergeBreak(uint i, uint j);
 
   /**
+  * @return the average support in the read
+  */
+  float getAverage();
+
+  /**
+   * @return the variance of support in the read
+  */
+  float getVariance();
+
+  /**
+   * @return the standard deviation of support in the read
+  */
+  float getStandardDeviation();
+
+  /**
+  * @return the coefficient variation of support in the read
+  */
+  float getCoefficientVariation();
+  
+  /**
    * @param i: the SupportBreak to return
    * @param consider_strand: should we consider the strand when returning
    *                the break number i?
@@ -209,7 +187,7 @@ class Support {
   /**
    * @return tags 
    */
-  gkArrays *getIndexTags();
+  ReadIndex *getIndexTags();
 
   /**
    * @return genome
@@ -220,28 +198,6 @@ class Support {
    * @return the support length
    */
   uint getLength();
-
-  /**
-   * @return the 'best' location of a factor (of length getThreshold()) in the
-   *         read. 
-   *         This is the location in the middle of a "run" of 
-   *         single-located factors. If no such location is found
-   *         take a location in the middle of a run of located factors.
-   *         If nothing is found return NULL
-   */
-  ChrPosition *getLocation();
-
-  /**
-   * @return all locations of a factor (of length getThreshold()) in
-   *         the read and its numbers.  This is the first factor with
-   *         the most of occurrences on the reference.  If too much
-   *         locations return only getGenome()->getNbLocations()
-   *         locations If nothing is found return a pair<ChrPosition
-   *         **, uint> empty.  In addition, position_of_locations is
-   *         set after pair<ChrPosition **,uint> which determines
-   *         position of the k-mer chosen for locations
-   */
-  pair<ChrPosition **, uint> getLocations(uint &position_of_locations);
 
   /**
    * @return min_occ
@@ -303,13 +259,44 @@ class Support {
   Parameters *getParameters();
 
   /**
+   * @return the 'best' location of a factor (of length getThreshold()) in the
+   *         read. 
+   *         This is the location in the middle of a "run" of 
+   *         single-located factors. If no such location is found
+   *         take a location in the middle of a run of located factors.
+   *         If nothing is found return NULL
+   */
+  ChrPosition *getBestLocation();
+  
+  /**
    * getLocation() is the position of the k-mer at position
    * getPositionOfLocation() in the read.
-   * Return getTagLength() if getLocation() == NULL
+   * Return read->getLength() if getLocation() == NULL
    */
   uint getPositionOfLocation();
 
-  /** Return the range of the k-mer at position i of
+  /**
+   * @return position_of_location != read->getLength() 
+   */ 
+  bool hasPositionOfLocation();
+
+  /**
+   * @return the ChrPos location at pos i in locations at position_of_location;
+   */
+  ChrPosition *getLocation(uint i);
+  
+  /**
+   * @return all the ChrPos locations at position_of_location;
+   */
+  ChrPosition **getLocations();
+
+  /**
+   * @post best_location = new ChrPosition(pos, chr, strand);
+   */
+  void setBestLocation(ChrPosition *best_location);
+    
+  /** 
+   * Return the range of the k-mer at position i of
    * the profile on a specific strand
    *
    * @param i the number of the kmer if the support
@@ -339,19 +326,14 @@ class Support {
   uint getSupport(uint i);
 
   /**
-   * @return the tag for this support
+   * @return pair_support or NULL (in case of pair_support is not defined)
    */
-  char *getTag();
-
+  Support *getPairSupport();
+  
   /**
-   * @return the tag number
+   * @return the read object
    */
-  uint getTagNum();
-
-  /**
-   * @return the length of the current read
-   */
-  uint getTagLength();
+  Read *getRead();
 
   /**
    * @return threshold
@@ -401,14 +383,52 @@ class Support {
  private:
 
   /**
-   * Compute the best location either for k-mer only single located
-   * or for any k-mer.
-   * @param only_single if the parameter is true we only search for k-mers that 
-   *        are located unambiguously (ie. only once)
-   * @post getLocation() will return the location (if a suitable one was found)
-   * NULL otherwise
+   * All locations of a factor (of length getThreshold()) in
+   * the read (at @parameter pos) and its number of occurences. If too much
+   * locations return only getGenome()->getNbLocations() locations.
+   * @post set locations
+   * @post set nb_locs_max
    */
-  void computeBestLocation(bool only_single);
+  void setLocationsAt(uint pos);
+
+  /**
+   * Check when the support drop between two consecutives value in order to 
+   * define a chunck
+   */
+  bool isFallenSupport(uint s1, uint s2);
+
+  /**
+   * Check is the single chunck is not an artefact
+   */
+  bool isSingleConsistent(uint start, uint length, uint windows);
+
+  /**
+   * According to the PE protocol (fr,rf,ff) we check if the pos chosen for the 
+   * mates are consistent
+   */
+  bool isPairedEndOrientationConsistent(ChrPosition *pos1, ChrPosition *pos2);
+     
+  /**
+   * Check if locations oscillate inside a chunck
+   * We use min, max, average, variance, standard_deviation and standard_error
+   */
+  bool isOscillateLoc(uint start, uint length);
+
+  /**
+   * Check if the break just before/after the chunck is long enough 
+   * and greater than (k-1) by adding the chunck length
+   */
+  bool isGoodBreak(uint start_chunck, uint chunck_length, uint start_break, uint break_length);
+  
+  /**
+   * @return the median pos of the chunck of representatives locations number
+   */
+  uint getMedianRun(uint start, uint length, bool accept_single=false);
+
+  /**
+   * Choose the position of the k-mer anchor for the mapping process
+   */  
+  void computeBestLocation(bool only_single, bool accept_single=false);
   
   /**
    * Will merge breaks using the following algorithm:
@@ -443,20 +463,17 @@ class Support {
   void tryToMergeBreaks();
 
   /**
-   * Merge break i vith break i+1.
-   * The other arrays are updated accordingly.
-   * @param no_chim: is it a chimeric break being merged?
-   * @post merged_with[i+1] == i
-   *       breaks[i+1] == breaks[i]
-   *       chimeric_breaks[i+1] == chimeric_breaks[i]
-   *       short_chimeric_breaks[i+1] == short_chimeric_breaks[i]
+   * Will merge locations of the representative k-mer of both paired reads
+   * in order to reduce false positives k-mer located. If the intersection 
+   * of locations is empty, we do nothing.
    */
-  void merge(list<SupportBreak*> &break_list, list<bool> &chimeric_breaks,
-             list<bool> &short_chimeric_breaks,
-             list<SupportBreak*>::iterator &i, list<bool>::iterator &chim, 
-             list<bool>::iterator &shortB, bool no_chim=false);
-  
-};
+  void checkPairedConnection();
+
+  /**
+   * Erase locations according to a Bitset of false_positive positions
+   */
+  void removeLocations(Bitset *false_positives);
+
+  };
 
 #endif
-

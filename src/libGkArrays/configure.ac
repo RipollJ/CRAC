@@ -104,7 +104,7 @@ AC_PREREQ(2.64)
 
 m4_define([VERSION_MAJOR], [2])
 m4_define([VERSION_MINOR], [1])
-m4_define([VERSION_MICRO], [0])
+m4_define([VERSION_MICRO], [1])
 
 AC_INIT([libGkArrays],
         [VERSION_MAJOR.VERSION_MINOR.VERSION_MICRO],
@@ -216,12 +216,13 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_CHECK_PROG([TEXI2DVI], [texi2dvi], [texi2dvi])
+AC_CHECK_PROG([MAKEINFO], [makeinfo], [makeinfo])
 AC_CHECK_PROG([PDFTEX], [pdftex], [pdftex])
 AC_CHECK_PROG([KPSEWHICH], [kpsewhich], [kpsewhich])
 BUILD_DOC=false
-AS_IF([test "x$TEXI2DVI" != "xtexi2dvi" || test "x$PDFTEX" != "xpdftex"],
+AS_IF([test "x$TEXI2DVI" != "xtexi2dvi" || test "x$PDFTEX" != "xpdftex" || test "x$MAKEINFO" != "xmakeinfo"],
       [BUILD_DOC=false
-       AC_MSG_WARN([The 'texi2dvi' or 'pdftex' program could not be found. This isn't critical, but it means that you won't be able to create the documentation and thus to make releases.])])
+       AC_MSG_WARN([The 'texi2dvi' or 'pdftex' or 'makeinfo' program could not be found. This isn't critical, but it means that you won't be able to create the documentation and thus to make releases.])])
 
 AS_IF([test "x$KPSEWHICH" != "xkpsewhich" || test "$(kpsewhich  -show-path=fmt)" == "/nonesuch"],
       [BUILD_DOC=false

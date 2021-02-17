@@ -3,4 +3,4 @@
 !OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
 
 $Bug 16403: Segmentation fault when using a small --max-extension-length value and --stringent-chimera option
-2:no_single_loc
+2: 23M27S 
