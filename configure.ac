@@ -56,7 +56,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.64])
 m4_define([V_MAJOR], [2])
 m4_define([V_MINOR], [5])
-m4_define([V_MICRO], [0])
+m4_define([V_MICRO], [2])
 
 AC_INIT(
   [crac],
@@ -153,7 +153,8 @@ AC_PROG_LN_S
 AC_SUBST([VERSION])
 
 dnl Disable shared library construction by default (must appear before LT_INIT)
-AC_DISABLE_SHARED
+AC_ENABLE_SHARED
+AC_DISABLE_STATIC
 
 LT_INIT
 LT_PATH_LD
@@ -307,7 +308,7 @@ AM_CONDITIONAL([INCLUDED_PROGRESSBAR], [test "x$with_included_ProgressBar" == "x
 AC_CHECK_LIB([z], [gzread], ,
              [AC_MSG_ERROR([zlib not found, see http://www.zlib.net])])
 
-AC_CHECK_LIB([hts], [hts_open], ,
+AC_CHECK_LIB([hts], [hts_hopen], ,
              [AC_MSG_ERROR([htslib not found, see http://www.htslib.org/])])
 
 GK_OK=1
@@ -359,7 +360,8 @@ AS_IF([test "x$enable_shared" == "xyes" ],
       [AS_VAR_APPEND([ac_configure_args], [" --enable-shared"])],
       [AS_VAR_APPEND([ac_configure_args], [" --disable-shared"])])
 AS_IF([test "x$enable_static" == "xyes" ],
-      [AS_VAR_APPEND([ac_configure_args], [" --enable-static"])],
+      [LDFLAGS="$LDFLAGS -all-static"
+       AS_VAR_APPEND([ac_configure_args], [" --enable-static"])],
       [AS_VAR_APPEND([ac_configure_args], [" --disable-static"])])
 
 dnl Forward FLAGS to libGkArrays/libProgressBar configure scripts if needed

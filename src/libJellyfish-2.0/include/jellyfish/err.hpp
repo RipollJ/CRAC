@@ -108,7 +108,7 @@ class raise_t {
   std::ostringstream oss;
 public:
   raise_t() : _errno(errno) {}
-  ~raise_t() { throw err_t(oss.str()); }
+  ~raise_t() noexcept(false) { throw err_t(oss.str()); }
 
   raise_t & operator<<(const no_t &x) {
     x.write(oss, _errno);
