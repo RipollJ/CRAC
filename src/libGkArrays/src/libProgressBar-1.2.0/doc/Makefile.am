@@ -10,10 +10,6 @@ DOCDIR = $(datadir)/$(PACKAGE)-$(VERSION)/
 DOCS   = $(HTMLS) $(PSS) $(PDFS)
 
 AM_MAKEINFOFLAGS = --enable-encoding
-
-## OLD Version
-# TEXI2DVI         = texi2dvi -E -r
-## NEW Version
 TEXI2DVI         = texi2dvi -E
 
 all-local: info ps pdf html

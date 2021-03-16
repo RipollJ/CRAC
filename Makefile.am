@@ -99,9 +99,6 @@
 
 
 SUBDIRS = src man scripts test_f
-if BUILD_DOC
-  SUBDIRS += doc
-endif
 
 #  uncomment the following if crac requires the math library
 #crac_LDADD=-lm

@@ -1,108 +1,56 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
 #include "classifyTags.h"
 #include "utils.h"
-#include "libReadsInfo/tagInfo.h"
-#include "Support.h"
-#include "SupportBreak.h"
 #include <config.h>
 #include <pthread.h>
 #include <cstdlib>
@@ -117,10 +65,16 @@
 using namespace std;
 
 ClassifyTags::ClassifyTags(LocateOnGenome *genome,
-			   gkArrays *tags,
+			   ReadIndex *tags,
+         readsReader *reads_reader,
 			   Parameters *param):
-  genome(genome),tags(tags),parameters(param)
-{}
+  genome(genome),tags(tags),reads_reader(reads_reader),parameters(param),nb_reads(0)
+{
+  nb_single = 0;
+  nb_none = 0;
+  nb_duplication = 0;
+  nb_multiple = 0;
+}
 
 void ClassifyTags::classify(ostream *snp
 			    , ostream *bioTagIndel
@@ -138,18 +92,23 @@ void ClassifyTags::classify(ostream *snp
 			    , ostream *none
 			    , ostream *bioUndermined
 			    , ostream *single
-			    , ostream *sam
-          , ostream *pairedEndChimera) {
+          , ostream *pairedEndChimera
+          , samFile *sam_f
+          , bam_hdr_t *sam_h
+          ) {
+
+  pthread_t threads[parameters->nb_threads]; // Threads objects
+  classify_thread_t params[parameters->nb_threads]; // Threads parameters
+  readIterator *readItForBuffer = reads_reader->begin(); // ReadIterator to iterate through the reads and feed the threads
+  Classifier **store_classifiers[parameters->nb_threads-1]; // An array of classifier for each thread
+  sem_t remaining_seats[parameters->nb_threads-1]; // Semaphore to control classifier waiting to be classified
+  sem_t processed_tags[parameters->nb_threads-1]; // Semaphore to control classifier that has been classified
+  uint *positions = NULL; // Array to track possition in the store_classifiers arrays
+  uint nb_classifiers; // Number of element in each store_classifiers arrays
+  bool isPairedEnd = reads_reader->isPairedEnd(); // Can tell if the readIterators are pairedEnd or not
+
+  // Variable to avoid re-declaration
   Classifier *classifier;
-  pthread_t threads[parameters->nb_threads];
-  classify_thread_t params[parameters->nb_threads];
-  readIterator *readIt = tags->getReads()->begin();
-  Classifier **store_tagsInfo[parameters->nb_threads-1];
-  sem_t remaining_seats[parameters->nb_threads-1];
-  sem_t processed_tags[parameters->nb_threads-1];
-  uint *positions = NULL;
-  uint nb_tagsInfo;
-  bool isPairedEnd = tags->getReads()->isPairedEnd();
 
 
 #ifdef HAVE_LIBPROGRESSBAR
@@ -176,38 +135,66 @@ void ClassifyTags::classify(ostream *snp
   }
 #endif
 
+  // Init statistics
   for (uint i=0; i <= NB_MASKS; i++)
     nb_classes[i] = 0;
 
   nb_explainable=0;
 
+  // Init threads
   if (parameters->nb_threads >  1) {
-    nb_tagsInfo = parameters->nb_tags_info_stored;
+    nb_classifiers = parameters->nb_tags_info_stored;
 
     positions = new uint[parameters->nb_threads - 1];
 
     for (uint j = 0; j < parameters->nb_threads - 1; j++) {
       positions[j] = 0;
-      params[j].classify = this;
-      sem_init(&remaining_seats[j],0,nb_tagsInfo-1);
-      sem_init(&processed_tags[j],0,0);
-      params[j].remaining_seats = &remaining_seats[j];
+      sem_init(&processed_tags[j], 0, 0);
       params[j].processed_tags = &processed_tags[j];
-      params[j].total_seats = nb_tagsInfo;
+      params[j].total_seats = nb_classifiers;
       if(isPairedEnd) {
-        store_tagsInfo[j] = (Classifier**)calloc(nb_tagsInfo, sizeof(PairedEndReadClassifier*));
+        store_classifiers[j] = (Classifier**)calloc(nb_classifiers, sizeof(PairedEndReadClassifier*));
       } else {
-        store_tagsInfo[j] = (Classifier**)calloc(nb_tagsInfo, sizeof(SingleReadClassifier*));
+        store_classifiers[j] = (Classifier**)calloc(nb_classifiers, sizeof(SingleReadClassifier*));
       }
-      params[j].seats = store_tagsInfo[j];
+      params[j].seats = store_classifiers[j];
       params[j].thread_num = j;
-      params[j].nb_threads = parameters->nb_threads-1;
+      params[j].keepGoing = true;
     }
   } else {
-    nb_tagsInfo = 1;
+    nb_classifiers = 1;
   }
 
+  // We give some food (reads to treat) to the threads
   if (parameters->nb_threads > 1) {
+    // add reads data in threads
+    uint i = 0;
+    uint j = 0;
+    while (!readItForBuffer->isFinished() && i < nb_classifiers) {
+      j = 0;
+      while (j < (parameters->nb_threads -1) && !readItForBuffer->isFinished()) {
+        store_classifiers[j][i] = newClassifier(readItForBuffer,isPairedEnd);
+	nb_reads++;
+	
+        j++;
+      }
+      i++;
+    }
+    // threads 0..j-1 have buffered i Classifiers
+    // threads j..nb_threads-1 have buffered i-1 Classifiers
+    
+    // Init the semaphore according to the number of reads stored
+    // in each thread
+    for (uint k = 0; k < parameters->nb_threads -1; k++) {
+      if (k >= j) {
+        sem_init(&remaining_seats[k], 0, i-1);
+        params[k].remaining_seats = &remaining_seats[k];
+      } else {
+        sem_init(&remaining_seats[k], 0, i);
+        params[k].remaining_seats = &remaining_seats[k];
+      }
+    }
+
     // Launching threads
     for (uint j = 0; j < parameters->nb_threads - 1; j++) {
       pthread_create(&threads[j], NULL, fillInfos, &params[j]);
@@ -215,29 +202,31 @@ void ClassifyTags::classify(ostream *snp
   } 
 
   uint i = 0;
-  while (!readIt->isFinished()) {
+  while (i < nb_reads || !readItForBuffer->isFinished()) {
     if (parameters->nb_threads > 1) {
-      uint j;
-      if(isPairedEnd && i > 0) {
-        j = i/2 % (parameters->nb_threads - 1);
-      }
-      else {
-        j = i % (parameters->nb_threads - 1);
-      }
+      // get the number of the thread we are waiting for
+      uint j = i % (parameters->nb_threads - 1);
+      // wait until the read(s) has been processed
       sem_wait(&processed_tags[j]);
-      classifier = store_tagsInfo[j][positions[j]];
-      sem_post(&remaining_seats[j]);
-      positions[j] = (positions[j] + 1) % nb_tagsInfo;
-    } else {
-      if(isPairedEnd) {
-        classifier = new PairedEndReadClassifier(i,i+1,genome,tags,parameters);
-      } else {
-        classifier = new SingleReadClassifier(i,genome,tags,parameters);
+      // get the Classifier object resulting of the read location
+      classifier = store_classifiers[j][positions[j]];
+      // Add a new read to the thread buffer
+      if (!readItForBuffer->isFinished()) {
+        params[j].seats[positions[j]] = newClassifier(readItForBuffer,isPairedEnd);
+	nb_reads++;
+        // Tell the tread that it can locate this new read
+        sem_post(&remaining_seats[j]);
       }
+      // Update the position of the next read to get from
+      // this thread
+      positions[j] = (positions[j] + 1) % nb_classifiers;
+    } else {
+      nb_reads++;
+      classifier = newClassifier(readItForBuffer,isPairedEnd);
+      classifier->init();
       classifier->classify();
     }
-
-    classifier->setInfos(readIt);
+      
     classifier->writeOutputs(snp,
       bioTagIndel,
       seqErr,
@@ -254,25 +243,22 @@ void ClassifyTags::classify(ostream *snp
       none,
       bioUndermined,
       single);
-    classifier->samOutput(*sam);
+    //classifier->samOutput(*sam);
+    classifier->samOutput(sam_f,sam_h);
     if(isPairedEnd && pairedEndChimera != NULL)
       ((PairedEndReadClassifier*)classifier)->writePairedEndChimera(pairedEndChimera);
-    classifier->updateStatistics(&nb_classes,&nb_explainable);
+    classifier->updateStatistics(&nb_classes,&nb_explainable,&nb_single,&nb_duplication,&nb_multiple,&nb_none);
     delete classifier;
 
+    i++;
+
+#ifdef HAVE_LIBPROGRESSBAR
     // If we are using paired-end tags, increments loop ind by 2
     if(isPairedEnd) {
-      i += 2;
-#ifdef HAVE_LIBPROGRESSBAR
       cpt += 2;
-#endif
     } else {
-      i++;
-#ifdef HAVE_LIBPROGRESSBAR
       cpt++;
-#endif
     }
-#ifdef HAVE_LIBPROGRESSBAR
     if ((cpt >= reset_cpt) && parameters->show_progressbar) {
       PB->Step();
       cpt = 0;
@@ -287,12 +273,20 @@ void ClassifyTags::classify(ostream *snp
     delete PB;
   }
 #endif
+  
+  // unlock threads
+  for (uint j = 0; j < parameters->nb_threads -1; j++) {
+    params[j].keepGoing = false;
+    sem_post(&remaining_seats[j]);
+  }
 
-  // deleting the iterator
-  delete readIt;
+  // deleting the iterators, buffers and semaphores
+  if (readItForBuffer != NULL) 
+    delete readItForBuffer;
   for (uint j = 0; j < parameters->nb_threads - 1; j++) {
-    free(store_tagsInfo[j]);
+    free(store_classifiers[j]);
     sem_destroy(&remaining_seats[j]);
+    sem_destroy(&processed_tags[j]);
   }
   for (uint j = 0; j < parameters->nb_threads - 1; j++) {
     pthread_join(threads[j], NULL);
@@ -300,6 +294,7 @@ void ClassifyTags::classify(ostream *snp
 
   if (positions)
     delete [] positions;
+
 }
 
 LocateOnGenome *ClassifyTags::getGenomeIndex() {
@@ -310,20 +305,31 @@ Parameters *ClassifyTags::getParameters() {
   return parameters;
 }
 
-gkArrays *ClassifyTags::getReadIndex() {
+ReadIndex *ClassifyTags::getReadIndex() {
   return tags;
 }
 
+readsReader *ClassifyTags::getReadsReader() {
+  return reads_reader;
+}
+
+uint ClassifyTags::getNbReads() {
+  return nb_reads;
+}
+
 uint ClassifyTags::getNbNone() {
-  return nb_classes[posBitInMask(MASK_NONE)];
+  return nb_none;
+  // return nb_classes[posBitInMask(MASK_NONE)];
 }
 
 uint ClassifyTags::getNbMultiple() {
-  return nb_classes[posBitInMask(MASK_MULTIPLE)];
+  return nb_multiple;
+  // return nb_classes[posBitInMask(MASK_MULTIPLE)];
 }
 
 uint ClassifyTags::getNbSingle() {
-  return nb_classes[posBitInMask(MASK_SINGLE)];
+  return nb_single;
+  // return nb_classes[posBitInMask(MASK_SINGLE)];
 }
 
 uint ClassifyTags::getNbAlmostNormal() {
@@ -339,7 +345,8 @@ uint ClassifyTags::getNbNormal() {
 }
 
 uint ClassifyTags::getNbDuplication() {
-  return nb_classes[posBitInMask(MASK_DUPLICATION)];
+  return nb_duplication;
+  // return nb_classes[posBitInMask(MASK_DUPLICATION)];
 }
 
 uint ClassifyTags::getNbSNP() {
@@ -452,7 +459,7 @@ void ClassifyTags::getHeaders(ostream *snp
   if (spliceInter){
     *spliceInter << headerTemplate.str() << chrPosPatternInfo << endl;
     *spliceInter << "#A tag \"single\" is noted if there is one possibility of chimera, a tag \"duplicate\" is noted otherwise" << endl;
-    *spliceInter << "#read_id tag_chimera loc_end_first_exon_on_genome loc_start_second_exon_on_genome pos_junction_on_read single_loc_on_genome(private) pos_single_loc_on_read(private) read p_support p_loc" << endl;
+    *spliceInter << "#read_id tag_chimera chimera_class chimera_score loc_end_first_exon_on_genome loc_start_second_exon_on_genome pos_junction_on_read single_loc_on_genome(private) pos_single_loc_on_read(private) read p_support p_loc" << endl;
   }
 
   if (pairedEndChimera){
@@ -510,32 +517,54 @@ void ClassifyTags::getHeaders(ostream *snp
   }
 }
 
+Classifier *ClassifyTags::newClassifier(readIterator *readIt, bool isPairedEnd) {
+  Classifier *classifier;
+  if (isPairedEnd) {
+    Read *r1, *r2;
+    r1 = newRead(readIt);
+    ++(*readIt);
+    r2 = newRead(readIt);
+    ++(*readIt);
+    classifier = new PairedEndReadClassifier(r1,r2,getGenomeIndex(),getReadIndex(),getParameters());
+  } else {
+    Read *r = newRead(readIt);
+    ++(*readIt);
+    classifier = new SingleReadClassifier(r,getGenomeIndex(),getReadIndex(),getParameters());
+  }
+  return classifier;
+}
+
 /// PRIVATE ///
+
+Read *ClassifyTags::newRead(readIterator *it) {
+  Read *r;
+  if(parameters->reads_length > 0) {
+    r = new Read(it->getReadNumber(), it->getSequence(), it->getName(), it->getQuality(), parameters->reads_length);
+  } else {
+    r = new Read(it->getReadNumber(), it->getSequence(), it->getName(), it->getQuality());
+  }
+  return r;
+}
 
 void *fillInfos(void *args) {
   classify_thread_t params = ((classify_thread_t *)args)[0];
-  uint id = params.thread_num;
-  uintSA nb_reads = params.classify->getReadIndex()->getNbTags();
-  bool isPairedEnd = params.classify->getReadIndex()->getReads()->isPairedEnd();
   uint current_pos = 0;
-  uint k = id;
-  uint increment = params.nb_threads;
-  if(isPairedEnd) {
-    k = 2*k;
-    increment = 2*increment;
-  }
-  for (; k < nb_reads; k += increment) {
+  while(((classify_thread_t *)args)[0].keepGoing) {
     // We need one seat for the current read
-    if (isPairedEnd) {
-      params.seats[current_pos] = new PairedEndReadClassifier(k,k+1,params.classify->getGenomeIndex(),params.classify->getReadIndex(),params.classify->getParameters());
-    } else {
-      params.seats[current_pos] = new SingleReadClassifier(k,params.classify->getGenomeIndex(),params.classify->getReadIndex(),params.classify->getParameters());
-    }
-    params.seats[current_pos]->classify();
-    //params.seats[current_pos]->generateSAM();
-    sem_post(params.processed_tags);
     sem_wait(params.remaining_seats);
-    current_pos = (current_pos + 1) % params.total_seats;
+
+    // This supplementary test is a security for the main thread to unlock
+    // this thread
+    if(((classify_thread_t *)args)[0].keepGoing) {
+      // init the classifier attributes (support profile, loc profile)
+      params.seats[current_pos]->init();
+      // Run the analysis of the read's alignement
+      params.seats[current_pos]->classify();
+      // Tell the main thread that we have classified a read
+      sem_post(params.processed_tags);
+      // Update the position for the next classifier to process
+      current_pos = (current_pos + 1) % params.total_seats;
+    }
   }
   pthread_exit(NULL);
   return NULL;

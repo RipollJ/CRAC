@@ -1,127 +1,95 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                                  *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
 #include <iostream>
 #include <fstream>
 #include <ostream>
+#include <sstream>
 #include <string>
 #include <cstdlib>
 #include <algorithm>
-#include "types.h"
-#include "utils.h"
-#include <gkArrays.h>
-#include <gkArraysTypes.h>
-#include "classifyTags.h"
-#include "libSSA/locateOnGenome.h"
-#include "locateTags.h"
-#include "libSSA/cracIndex.h"
-#include "Parameters.h"
-#include "locateServer.h"
 #include <cstdio>
 #include <unistd.h>
 #include <getopt.h>
 #include <sys/stat.h>
+
+#include "types.h"
+#include "utils.h"
+#include "classifyTags.h"
+
+#include <gzstream.h>
+#include <gkArrays.h>
+#include "htslib/sam.h"
+
+//#include <gkArraysTypes.h>
+#ifdef HAVE_LIBGKARRAYS
+#include "GkReadIndex.h"
+#endif //HAVE_LIBGKARRAYS
+#ifdef HAVE_LIBJELLYFISH
+#include "JellyReadIndex.h"
+#endif //HAVE_LIBJELLYFISH
+
+#include "libSSA/locateOnGenome.h"
+#include "libReadsInfo/samHeader.h"
+#include "locateTags.h"
+#include "libSSA/cracIndex.h"
+#include "Parameters.h"
+/* TODO 
+ * for now locateServer has been disable with the abstraction of the ReadIndex
+ * structure This should be resolved soon...
+ */
+#include "locateServer.h" 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
-#include <gzstream.h>
 
 using namespace std;
 
@@ -227,6 +195,18 @@ using namespace std;
 #define SUMMARY 74
 #define PROGRESSBAR 75
 #define TREAT_MULTIPLE_CST 76
+#define STRINGENT_CHIMERA_MAX_NUMBER_OF_MERGES_CST 77
+#define MIN_STRINGENT_CHIMERA_SCORE_CST 78
+#define READS_INDEX_CST 79
+#define MAX_MAPPING_COMPARISON_CST 80
+#define USE_X_IN_CIGAR_CST 81
+#define BAM 82
+#define FORWARD_REVERSE_ORIENTATION_CST 83
+#define REVERSE_FORWARD_ORIENTATION_CST 84
+#define FORWARD_FORWARD_ORIENTATION_CST 85
+#define MIN_CHIMERA_SCORE_CST 86
+
+static const char* paired_end_orientation_options[NB_ENUM_PAIRED_END_ORIENTATION] = {"--fr","--rf","--ff"};
 
 void print_help() {
   printf(PACKAGE_STRING);
@@ -245,15 +225,20 @@ void print_help() {
 
   printf("Optional arguments\n");
   printf("  * Protocol\n");
+  printf("   --fr/--rf/--ff       <none>          set the mates alignement orientation (DEFAULT %s)\n",paired_end_orientation_options[PAIRED_END_ORIENTATION]);
   printf("   --stranded           <none>          set the read mapping with for a strand specific library (DEFAULT non-strand specific)\n\n");
   printf("  * Efficiency\n");
   printf("   --nb-threads         <INT>           set the number of worker threads (DEFAULT %d)\n", NB_THREADS);
-  printf("   --reads-length, -m    <INT>           set read length in case of all reads have the same length to optimize\n\
+  printf("   --reads-length, -m   <INT>           set read length in case of all reads have the same length to optimize\n\
                                         CPU and memory times\n"); 
-  printf("   --treat-multiple     <none>          write alignments with multiple locations (>max-duplication and <=max-locs) in the SAM file rather than only one occurrence\n"); 
+  printf("   --treat-multiple     <INT>           write alignments with multiple locations (with a fixed limit) in the SAM file rather than only one occurrence\n"); 
   printf("   --max-locs           <INT>           set the maximum number of locations on the reference index (DEFAULT %d)\n\n", MAX_NB_LOCATED_OCCS);
+  printf("  * Output\n");
+  printf("   --bam                <none>          sam output is encode in binary format(BAM)\n");
+  printf("   --summary            <FILE>          set output summary file with some statistics about mapping and classification\n\n");
   printf("  * Accuracy\n");
   printf("   --no-ambiguity       <none>          discard biological events (splice, snv, indel, chimera) which have several matches on the reference index\n\n");
+
 }
 
 void print_fullhelp() {
@@ -262,9 +247,9 @@ void print_fullhelp() {
   printf("   --all                              <FILE>     set output base filename for all homemade file formats (see man page for more details)\n\
                                                  in addition to SAM output \n");
   printf("   --gz                               <none>     all output files specified after this argument are gzipped (included SAM output file)\n");
-  printf("   --summary                          <FILE>     set output summary file with some statistics about mapping and classification\n"); 
 #ifdef HAVE_LIBPROGRESSBAR
   printf("   --show-progressbar                 <none>     show a progress bar for the process times on STDERR\n\n"); 
+  printf("   --use-x-in-cigar                   <none>     use X cigar operator when CRAC identifies a mismatch\n\n"); 
 #else
   printf("\n"); 
 #endif
@@ -325,6 +310,7 @@ void print_fullhelp() {
   printf("  * Biological causes\n");
   printf("   --max-splice-length                <INT>      DEFAULT %d\n", MAX_SPLICE_LENGTH);
   printf("   --max-bio-indel                    <INT>      DEFAULT %d\n", MAX_BIO_INS_DEL);
+  printf("   --min-chimera-score                <FLOAT>    DEFAULT %.2f\n", MIN_CHIMERA_SCORE);
   printf("   --max-bases-retrieved              <INT>      DEFAULT %d\n\n", MAX_BASES_RETRIEVED);
 
   printf("  * Undetermined\n");
@@ -333,16 +319,23 @@ void print_fullhelp() {
 
   printf("Additional settings for advanced users\n");
   printf("  * Break verification and fusion (merging mirage breaks)\n");
-  printf("   --min-break-length                 <FLOAT> DEFAULT %.2f\n", MIN_BREAK_LENGTH);
-  printf("   --max-bases-randomly-matched       <INT>   DEFAULT %d\n", MAX_BASES_RANDOMLY_MATCHED);
-  printf("   --max-extension-length             <INT>   DEFAULT %d\n\n", MAX_EXTENSION_LENGTH);
+  printf("   --min-break-length                 <FLOAT>    DEFAULT %.2f\n", MIN_BREAK_LENGTH);
+  printf("   --max-bases-randomly-matched       <INT>      DEFAULT %d\n", MAX_BASES_RANDOMLY_MATCHED);
+  printf("   --max-extension-length             <INT>      DEFAULT %d\n\n", MAX_EXTENSION_LENGTH);
 
   printf("  * Threading\n");
-  printf("   --nb-tags-info-stored              <INT>   DEFAULT %d\n\n", NB_TAGS_INFO_STORED);
+  printf("   --nb-tags-info-stored              <INT>      DEFAULT %d\n\n", NB_TAGS_INFO_STORED);
+
+  printf("  * Data structures\n");
+  printf("   --reads-index                      <STRING>   DEFAULT %s\n\n", READS_INDEX);
 
   printf("  * Deep SNV search option\n");
-  printf("   --nb-nucleotides-snv-comparison    <INT>   DEFAULT %d\n\n", NUMBER_NUCLEOTIDES_SNP_COMPARISON);
-  
+  printf("   --nb-nucleotides-snv-comparison    <INT>      DEFAULT %d\n\n", NUMBER_NUCLEOTIDES_SNP_COMPARISON);
+
+  printf("  * Stringent Chimera search option\n");
+  printf("   --max-number-of-merges             <INT>      DEFAULT %d\n", STRINGENT_CHIMERA_MAX_NUMBER_OF_MERGES);
+  printf("   --min-stringent-chimera-score      <FLOAT>    DEFAULT %.2f\n", MIN_STRINGENT_CHIMERA_SCORE);
+  printf("   --max_mapping_comparison           <INT>      DEFAULT %d\n\n", MAX_MAPPING_COMPARISON);
   // printf("   --percent-variation-coverage       <FLOAT> DEFAULT %.2f\n", PERCENT_SUPPORT_VARIATION_ALMOST_NORMAL);
   // printf("   --p-value-variation-coverage       <FLOAT> DEFAULT %.2f\n", P_VALUE_VARIATION_BIOLOGICAL);
   // printf("   --score-intra-ambiguous            <FLOAT> DEFAULT %.2f\n", SCORE_INTRA_AMBIGUOUS);
@@ -363,90 +356,99 @@ void print_fullhelp() {
 void print_version() {
   printf("CRAC version " PACKAGE_VERSION "\n\n");
   printf("/******************************************************************************\n");
-  printf("*                                                                             *\n");
-  printf("*  Copyright © 2010-2013 -- IRB/INSERM                                        *\n");
-  printf("*                           (Institut de Recherches en Biothérapie /          *\n");
-  printf("*                           Institut National de la Santé et de la Recherche  *\n");
-  printf("*                           Médicale)                                         *\n");
+  printf("*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *\n");
+  printf("*                           (Laboratoire d'Informatique, de Robotique et de   *\n");
+  printf("*                           Microélectronique de Montpellier /                *\n");
+  printf("*                           Centre National de la Recherche Scientifique)     *\n");
   printf("*                           LIFL/INRIA                                        *\n");
   printf("*                           (Laboratoire d'Informatique Fondamentale de       *\n");
   printf("*                           Lille / Institut National de Recherche en         *\n");
   printf("*                           Informatique et Automatique)                      *\n");
-  printf("*                           LIRMM/CNRS                                        *\n");
-  printf("*                           (Laboratoire d'Informatique, de Robotique et de   *\n");
-  printf("*                           Microélectronique de Montpellier /                *\n");
-  printf("*                           Centre National de la Recherche Scientifique)     *\n");
   printf("*                           LITIS                                             *\n");
   printf("*                           (Laboratoire d'Informatique, du Traitement de     *\n");
   printf("*                           l'Information et des Systèmes).                   *\n");
   printf("*                                                                             *\n");
+  printf("*  Copyright © 2011-2016 -- IRB/INSERM                                        *\n");
+  printf("*                           (Institut de Recherches en Biothérapie /          *\n");
+  printf("*                           Institut National de la Santé et de la Recherche  *\n");
+  printf("*                           Médicale).                                        *\n");
   printf("*                                                                             *\n");
-  printf("*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *\n");
-  printf("*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *\n");
-  printf("*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *\n");
-  printf("*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *\n");
+  printf("*  Copyright © 2015-2016 -- AxLR/SATT                                         *\n");
+  printf("*                           (Lanquedoc Roussilon /                            *\n");
+  printf("*                            Societe d'Acceleration de Transfert de           *\n");
+  printf("*                            Technologie).	                                *\n");
   printf("*                                                                             *\n");
-  printf("*  Programmeurs                                                               *\n");
-  printf("*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *\n");
-  printf("*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *\n");
-  printf("*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *\n");
-  printf("*  with additional contribution for the packaging of:	                      *\n");
-  printf("*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *\n");
+  printf("*  Programmeurs/Progammers:                                                   *\n");
+  printf("*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            *\n");
+  printf("*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *\n");
+  printf("*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *\n");
+  printf("*   with additional contribution for the packaging of:	                *\n");
+  printf("*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *\n");
   printf("*                                                                             *\n");
-  printf("*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *\n");
+  printf("*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *\n");
+  printf("*   Paper:           CRAC: An integrated RNA-Seq read analysis                *\n");
+  printf("*                    Philippe N., Salson M., Commes T., Rivals E.             *\n");
+  printf("*                    Genome Biology 2013; 14:R30.                             *\n");
   printf("*                                                                             *\n");
-  printf("/******************************************************************************\n");
+  printf("*  -------------------------------------------------------------------------  *\n");
+  printf("*                                                                             *\n");
+  printf("*   This File is part of the CRAC program.                                    *\n");
+  printf("*                                                                             *\n");
+  printf("*   This program is free software: you can redistribute it and/or modify      *\n");
+  printf("*   it under the terms of the GNU General Public License as published by      *\n");
+  printf("*   the Free Software Foundation, either version 3 of the License, or (at     *\n");
+  printf("*   your option) any later version.  This program is distributed in the       *\n");
+  printf("*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *\n");
+  printf("*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *\n");
+  printf("*   PURPOSE.  See the GNU General Public License for more details.  You       *\n");
+  printf("*   should have received a copy of the GNU General Public License along       *\n");
+  printf("*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *\n");
+  printf("*                                                                             *\n");
+  printf("******************************************************************************/\n");
 }
 
-void writeSamHeader(ostream *sam
-          , LocateOnGenome *genome
+// Write SamHeader in the specified samFile and return a
+// baù_hdr_t structure
+bam_hdr_t* writeSamHeader(LocateOnGenome *genome
           , int argc
           , char **argv
-          , string sam_filename) {
-  *sam << "@HD\tVN:1.4\tSO:unsorted" << endl;
+          , samFile* sam_file) {
+
+  SamHeader sam_header;
   // Display information on sequence names and lengths
   for (uint i=0; i < genome->getGenomeInfo()->getNbChr(); i++) {
-    *sam << "@SQ\tSN:" << genome->getGenomeInfo()->getChrName(i) 
-         << "\tLN:" << genome->getGenomeInfo()->getChrLength(i) << endl;
+    sam_header.addReference((char *)genome->getGenomeInfo()->getChrName(i),
+        genome->getGenomeInfo()->getChrLength(i));
   }
-  struct tm tm;
-  char tmp[120];
-  time_t t;
-  time(&t);
-  localtime_r(&t,&tm); 
-  sprintf(tmp,"%i-%02i-%02iT%02i:%02i:%02i", tm.tm_year + 1900, tm.tm_mon+1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-  *sam << "@RG\tID:" << rand() << "\tSM:" << sam_filename << "\tDT:" << tmp << endl;
-  *sam << "@PG\tID:crac\tPN:crac\tVN:" << PACKAGE_VERSION;
-  if (argc) {
-    *sam << "\tCL:";
-    for (int i=0; i < argc; i++)
-      *sam << argv[i] << " ";
-    *sam << endl;
-  }
+  sam_header.setVersionNumber(PACKAGE_VERSION);
+  for (int i=0; i < argc; i++)
+    sam_header.addArgument(argv[i]);
+
+  return sam_header.writeBamHeader(sam_file);
 }
 
 int main(int argc, char **argv) {
   fstream file;
   int nb_streams;
-  ostream *streams[19] = {NULL,NULL,NULL
+  ostream *streams[18] = {NULL,NULL,NULL
 			  ,NULL,NULL,NULL
 			  ,NULL,NULL,NULL
 			  ,NULL,NULL,NULL
 			  ,NULL,NULL, NULL
-                          ,NULL,NULL,NULL
-			  ,NULL};
-  const char *extensions[19] = {
+                          ,NULL,NULL,NULL};
+  const char *extensions[18] = {
     "snp", "indel", "error", "splice", 
     "coverlessSplice", "chimera", "undetermined", "repetition", 
     "duplication", "nothing", "normal", "almostNormal", "multiple",
-    "none", "bioUndetermined", "single", "sam", "pairedEndChimera", 
+    "none", "bioUndetermined", "single", "pairedEndChimera", 
     "summary"
   };
-  nb_streams = 19;
+  nb_streams = 18;
 
   bool gzOutput = false;
-  gkArrays *indexTags = NULL;
-  ulong pattern_length = 0;
+  readsReader *reads_reader = NULL;
+  gkArrays *gk = NULL;
+  ReadIndex *indexTags = NULL;
   bool is_stranded = false;
   ClassifyTags *ct;
   LocateOnGenome *log = NULL;
@@ -467,8 +469,11 @@ int main(int argc, char **argv) {
   bool find_output_file = false;
   char *fifo_input_name = NULL;
   char *fifo_output_name = NULL;
+  char *reads_index = NULL;
   string sam_filename;
   ostream *summary = NULL;
+  samFile *sam_f = NULL;
+  bool binary_sam = false;
 
   int option_index = 0;
   int opt;
@@ -541,6 +546,7 @@ int main(int argc, char **argv) {
     { "output-name-server", required_argument, NULL, OUTPUT_FIFO_CST},
     { "emt", no_argument, NULL, DGE },
     { "stringent-chimera", no_argument, NULL, STRINGENT_CHIMERA_CST },
+    { "min-chimera-score", required_argument, NULL, MIN_CHIMERA_SCORE_CST },
     { "no-ambiguity", no_argument, NULL, NO_AMBIGUITY_CST },
     { "paired-end-chimera", required_argument, NULL, PAIRED_END_CHIMERA },
     { "gz", no_argument, NULL, GZ_OUTPUT},
@@ -548,7 +554,16 @@ int main(int argc, char **argv) {
 #ifdef HAVE_LIBPROGRESSBAR
     { "show-progressbar", no_argument, NULL, PROGRESSBAR },
 #endif
-    { "treat-multiple", no_argument, NULL, TREAT_MULTIPLE_CST },
+    { "treat-multiple", required_argument, NULL, TREAT_MULTIPLE_CST },
+    { "max-number-of-merges", required_argument, NULL, STRINGENT_CHIMERA_MAX_NUMBER_OF_MERGES_CST },
+    { "min-stringent-chimera-score", required_argument, NULL, MIN_STRINGENT_CHIMERA_SCORE_CST },
+    { "reads-index", required_argument, NULL, READS_INDEX_CST},
+    { "max-mapping-comparison", required_argument, NULL, MAX_MAPPING_COMPARISON_CST},
+    { "use-x-in-cigar", no_argument, NULL, USE_X_IN_CIGAR_CST},
+    { "fr", no_argument, NULL, FORWARD_REVERSE_ORIENTATION_CST},
+    { "rf", no_argument, NULL, REVERSE_FORWARD_ORIENTATION_CST},
+    { "ff", no_argument, NULL, FORWARD_FORWARD_ORIENTATION_CST},
+    { "bam", no_argument, NULL, BAM},
     { 0, 0, 0, 0 } //terminator
   };
   
@@ -576,21 +591,21 @@ int main(int argc, char **argv) {
       break;
     case 'o':
       sam_filename = (const char *)optarg;
-      if (strcmp(sam_filename.c_str(),"-") != 0){ 
-	streams[16] = create_stream(gzOutput, optarg); 
-      }else{
-	streams[16] = &cout;
-      }
+      //if (strcmp(sam_filename.c_str(),"-") != 0){ 
+	//streams[16] = create_stream(gzOutput, optarg); 
+  //    }else{
+	//streams[16] = &cout;
+  //    }
       break;
     case 'm':
-      pattern_length = atol(optarg);
+      params->reads_length = atol(optarg);
       break;
     case ALL_OUTPUT:
       fileBasename = optarg;
       use_all_outputs = true;
       break;
     case READS_LENGTH:
-      pattern_length = atol(optarg);
+      params->reads_length = atol(optarg);
       break;
     case IS_STRANDED_CST:
       is_stranded = true;
@@ -647,16 +662,16 @@ int main(int argc, char **argv) {
       streams[15] = create_stream(gzOutput, optarg);
       break;
     case SAM:
-      streams[16] = create_stream(gzOutput, optarg);
+      //streams[16] = create_stream(gzOutput, optarg);
       sam_filename = (const char *)optarg;
       break;
     case PAIRED_END_CHIMERA:
-      streams[17] = create_stream(gzOutput, optarg);
+      streams[16] = create_stream(gzOutput, optarg);
       use_paired_end_chimera = true;
       break;
     case SUMMARY:
-      streams[18] = create_stream(gzOutput, optarg);
-      summary = streams[18]; 
+      streams[17] = create_stream(gzOutput, optarg);
+      summary = streams[17]; 
       break;
     case MAX_SPLICE:
       params->max_splice_length = atoi(optarg);
@@ -784,7 +799,38 @@ int main(int argc, char **argv) {
       params->show_progressbar = true;
       break;
     case TREAT_MULTIPLE_CST:
-      params->treat_multiple=true;
+      params->treat_multiple= atoi(optarg);
+      break;
+    case STRINGENT_CHIMERA_MAX_NUMBER_OF_MERGES_CST:
+      params->stringent_chimera_max_number_of_merges = atoi(optarg);
+      break;
+    case MIN_STRINGENT_CHIMERA_SCORE_CST:
+      params->min_stringent_chimera_score = atof(optarg);
+      break;
+    case READS_INDEX_CST:
+      reads_index = new char[strlen(optarg)+1];
+      strcpy(reads_index, optarg);
+      break;
+    case MAX_MAPPING_COMPARISON_CST:
+      params->max_mapping_comparison = atoi(optarg);
+      break;
+    case USE_X_IN_CIGAR_CST:
+      params->use_x_in_cigar = true;
+      break;
+    case BAM:
+      binary_sam = true;
+      break;
+    case FORWARD_REVERSE_ORIENTATION_CST:
+      params->paired_end_orientation = FORWARD_REVERSE;
+      break;
+    case REVERSE_FORWARD_ORIENTATION_CST:
+      params->paired_end_orientation = REVERSE_FORWARD;
+      break;
+    case FORWARD_FORWARD_ORIENTATION_CST:
+      params->paired_end_orientation = FORWARD_FORWARD;
+      break;
+    case MIN_CHIMERA_SCORE_CST:
+      params->min_chimera_score = atof(optarg);
       break;
     case '?':
       print_help();
@@ -822,14 +868,14 @@ int main(int argc, char **argv) {
     for (int i=0; i < nb_streams_to_init; i++) {
       sprintf(filename, "%s.%s", fileBasename, extensions[i]);
       streams[i] = create_stream(gzOutput, filename);
-      if (i==16)
-	sam_filename = filename;
+//      if (i==16)
+//	sam_filename = filename;
     }
     delete [] filename;
   }
 
   if (indexGenome == NULL  || reads == 0 || 
-      threshold == (uint)~0 || (streams[16] == NULL && !use_server)){
+      threshold == (uint)~0 || (sam_filename.empty() && !use_server)){
     print_help();
     cerr << endl << "Missing at least a mandatory argument among: -i <index> -r <reads> -k <k_length> -o <output_SAM>" << endl << endl;    
     exit(1);
@@ -839,6 +885,8 @@ int main(int argc, char **argv) {
 	find_output_file = true;
       }
     }
+    if(!sam_filename.empty())
+      find_output_file = true;
     if (!find_output_file && !use_server){
       print_help();
       cerr << endl << "Obviously, you must specify at least one output argument" << endl << endl;
@@ -849,6 +897,21 @@ int main(int argc, char **argv) {
        print_help();
        cerr << endl << "Please specify a second read input file if you want to use a specific option for paired-end tags." << endl;
     }
+  }
+
+  // We open sam_file with HTS lib
+  if(!sam_filename.empty()) {
+    string mode = "w";
+    if(binary_sam)
+      mode += "b";
+      //mode += "c";
+    else if(gzOutput)
+      mode += "g";
+    if((sam_f = sam_open(sam_filename.c_str(),mode.c_str())) == 0) {
+      cerr << "Failed to open " << sam_filename << "for writing" << endl;
+      exit(1);
+    }
+    //hts_set_fai_filename(sam_f, "/data/genomes/GRCh38/GRCh38.fa.fai");
   }
 
   // Checking fifos for server
@@ -884,9 +947,9 @@ int main(int argc, char **argv) {
     LocateTags *lt; 
     lt = new LocateTags(log, params, reads, threshold);
     // put headers in the sam file
-    writeSamHeader(streams[16],log,argc,argv,sam_filename);
+    bam_hdr_t* sam_h = writeSamHeader(log,argc,argv,sam_f);
     // launch the locate process
-    lt->locate(streams[16]);
+    lt->locate(sam_f,sam_h);
     
     if (summary != NULL) {
       *summary << "Time to locate all tags: "<< log->getElapsedTime() << " s" << endl;       
@@ -898,40 +961,80 @@ int main(int argc, char **argv) {
       *summary << "Multiple: " << lt->getNbMultiple() << " (" << lt->getNbMultiple()*100./lt->getNbTags() << "%)" << endl;
       *summary << "None: " << lt->getNbNone() << " (" << lt->getNbNone()*100./lt->getNbTags() << "%)" << endl;
     }
+    // Close sam file
+    sam_close(sam_f);
+    if(sam_h) {
+      // FIXME
+      //free(sam_h->text);
+      bam_hdr_destroy(sam_h);
+    }
     delete lt;
   }
   // Launching CRAC for RNA-Seq mapping 
   else{
+    if (! reads_index)
+      reads_index = (char *)READS_INDEX;
     // Indexation of reads
     float start = getChrono();
-    // If we have pairedEnd reads we create gkArrays using both reads files
-    try {
-      if (reads2 != 0) {
-        if (summary != NULL)
-          *summary << "Running CRAC using paired-end files." << endl;
-        indexTags = new gkArrays(reads, reads2, threshold, false, pattern_length, is_stranded, params->nb_threads, params->show_progressbar);
+
+    if(reads2 != 0) {
+      reads_reader = new readsReader(reads, reads2, threshold,  params->reads_length);
+    } else {
+      reads_reader = new readsReader(reads, threshold,  params->reads_length);
+    }
+
+    if(strcmp(reads_index,"JELLYFISH") == 0) {
+#ifdef HAVE_LIBJELLYFISH
+      // Stranded in CRAC means not_canonical in Jellyfish 
+      if(reads2 != 0) {
+        //indexTags = new JellyReadIndex(threshold, 10000, !is_stranded, params->nb_threads, reads, reads2);
+        indexTags = new JellyReadIndex(threshold, 10000, false, params->nb_threads, reads, reads2);
       } else {
-        indexTags = new gkArrays(reads, threshold, false, pattern_length, is_stranded, params->nb_threads, params->show_progressbar);
+        //indexTags = new JellyReadIndex(threshold, 10000, !is_stranded, params->nb_threads, reads);
+        indexTags = new JellyReadIndex(threshold, 10000, false, params->nb_threads, reads);
       }
-    } catch (bad_alloc e) {
-      cerr << "You do not have enough memory to store all the reads. Aborting" << endl;
-      exit(42);
+#else
+      cerr << "JELLYFISH READS INDEX NOT FOUND" << endl;
+      exit(1);
+#endif
+    } else if(strcmp(reads_index,"GKARRAYS") == 0) {
+#ifdef HAVE_LIBGKARRAYS
+      try {
+        if(reads2 != 0) {
+          gk = new gkArrays(reads, reads2, threshold, false, params->reads_length, is_stranded, params->nb_threads, params->show_progressbar);
+        } else {
+          gk = new gkArrays(reads, threshold, false, params->reads_length, is_stranded, params->nb_threads, params->show_progressbar);
+        }
+      indexTags = new GkReadIndex(gk);
+      } catch (bad_alloc e) {
+        cerr << "You do not have enough memory to store all the reads. Aborting" << endl;
+        exit(42);
+      }
+#else
+      cerr << "GKARRAYS READS INDEX NOT FOUND" << endl;
+      exit(1);
+#endif
+    } else {
+      cerr << reads_index << " does not correspond to a read index (please see CRAC help)." << endl;
+      exit(1);
     }
 
     if (summary != NULL){
-      if (indexTags->isLarge()){
-	*summary << "Running CRAC version " <<PACKAGE_VERSION <<" optimized for large data set ";
-	if (pattern_length){
-	  *summary << "and fixed read length " ;
+      if (strcmp(reads_index,"GKARRAYS") == 0){
+	if (gk->isLarge()){
+	  *summary << "Running CRAC version " <<PACKAGE_VERSION <<" optimized for large data set ";
+	  if (params->reads_length){
+	    *summary << "and fixed read length " ;
+	  }else{
+	    *summary << "and variable read length ";
+	  }
 	}else{
-	  *summary << "and variable read length ";
-	}
-      }else{
-	*summary << "Running CRAC version " <<PACKAGE_VERSION <<" optimized for small data set < 4Gbp (eg. less than 50M reads of 75 bp) ";
-	if (pattern_length){
-	  *summary << "and fixed read length " ;
-	}else{
-	  *summary << "and variable read length " ;
+	  *summary << "Running CRAC version " <<PACKAGE_VERSION <<" optimized for small data set < 4Gbp (eg. less than 50M reads of 75 bp) ";
+	  if (params->reads_length){
+	    *summary << "and fixed read length " ;
+	  }else{
+	    *summary << "and variable read length " ;
+	  }
 	}
       }
       if (is_stranded)
@@ -941,65 +1044,81 @@ int main(int argc, char **argv) {
       
       *summary << endl <<  "Time to index all reads: " << (getChrono()-start)/1000000. << " s" << endl;
     }      
-
+    
     // Indexation of the genome
     log = new LocateOnGenome((uchar *)indexGenome); 
     log->setNbLocations(params->max_nb_located_occs);
-    
+
     // classify the reads
-    ct = new ClassifyTags(log, indexTags, params);
+    ct = new ClassifyTags(log, indexTags, reads_reader, params);
     if (use_server) {
       locateServer(ct, fifo_input_name, fifo_output_name);
     } else {
       log->startChrono();
       // put headers in the sam file
-      writeSamHeader(streams[16],log,argc,argv,sam_filename);
+      //writeSamHeader(streams[16],log,argc,argv,sam_filename);
+      bam_hdr_t* sam_h = writeSamHeader(log,argc,argv,sam_f);
+      //*streams[16] << sam_h.c_str();
+      //streams[16] << ss.str();
       // put headers with feature for each files
       ct->getHeaders(streams[0], streams[1], streams[2], streams[3],
 		     streams[4], streams[5], streams[6], streams[7],
 		     streams[8], streams[9], streams[10], streams[11],
 		     streams[12], streams[13], streams[14], streams[15],
-		     streams[17]);
+		     streams[16]);
       // and classify
       ct->classify(streams[0], streams[1], streams[2], streams[3],
 		   streams[4], streams[5], streams[6], streams[7],
 		   streams[8], streams[9], streams[10], streams[11],
 		   streams[12], streams[13], streams[14], streams[15],
-		   streams[16], streams[17] );
-     
-      if (summary != NULL){ 
+		   //streams[16], streams[17], bam, sam_h);
+		   streams[16], sam_f, sam_h);
+
+      sam_close(sam_f);
+      if(sam_h) {
+        // FIXME
+        //free(sam_h->text);
+        bam_hdr_destroy(sam_h);
+      }
+
+
+      if (summary != NULL){
+	uint nb_reads = ct->getNbReads();
+	if (reads2 != NULL)
+	  nb_reads*=2;
+	
 	*summary << "Time to classify all reads: "<< log->getElapsedTime() << " s" << endl; 
 	
 	// making statistics on STDOUT
 	*summary << endl << "----------------------------------" << endl;
 	*summary << "           Some STATISTICS            " << endl;
 	*summary << endl << "----------------------------------" << endl;
-	*summary << "Total number of reads analyzed: " << indexTags->getNbTags() << endl << endl;
-	*summary << "Single: " << ct->getNbSingle() << " (" << ct->getNbSingle()*100./indexTags->getNbTags() << "%)" << endl;
-	*summary << "Multiple: " << ct->getNbMultiple() << " (" << ct->getNbMultiple()*100./indexTags->getNbTags() << "%)" << endl;
-	*summary << "None: " << ct->getNbNone() << " (" << ct->getNbNone()*100./indexTags->getNbTags() << "%)" << endl;
-	*summary << "Duplication: " << ct->getNbDuplication() << " (" << ct->getNbDuplication()*100./indexTags->getNbTags() << "%)" << endl;
+	*summary << "Total number of reads analyzed: " << nb_reads << endl << endl;
+	*summary << "Single: " << ct->getNbSingle() << " (" << ct->getNbSingle()*100./nb_reads << "%)" << endl;
+	*summary << "Multiple: " << ct->getNbMultiple() << " (" << ct->getNbMultiple()*100./nb_reads << "%)" << endl;
+	*summary << "None: " << ct->getNbNone() << " (" << ct->getNbNone()*100./nb_reads << "%)" << endl;
+	*summary << "Duplication: " << ct->getNbDuplication() << " (" << ct->getNbDuplication()*100./nb_reads << "%)" << endl;
 	
-	*summary << endl << "Warning: the sum of the four previous categories may not be equal to 100%." << endl << " This is normal: reads are considered by chunks." << endl << " In a given read, a chunk may appear multiple times, while another just appears once." << endl ; 
+	// *summary << endl << "Warning: the sum of the four previous categories may not be equal to 100%." << endl << " This is normal: reads are considered by chunks." << endl << " In a given read, a chunk may appear multiple times, while another just appears once." << endl ; 
 	*summary << endl << "----------------------------------" << endl;
 	
-	*summary << "Explainable: " << ct->getNbExplainable() << " (" << ct->getNbExplainable()*100./indexTags->getNbTags() << "%)" << endl << endl;
+	*summary << "Explainable: " << ct->getNbExplainable() << " (" << ct->getNbExplainable()*100./nb_reads << "%)" << endl << endl;
 	
-	*summary << "Repetition: " << ct->getNbRepetition() << " (" << ct->getNbRepetition()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Normal: " << ct->getNbNormal() << " (" << ct->getNbNormal()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Almost-Normal: " << ct->getNbAlmostNormal() << " (" << ct->getNbAlmostNormal()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Sequence-Errors: " << ct->getNbSeqErr() << " (" << ct->getNbSeqErr()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "SNV: " << ct->getNbSNP() << " (" << ct->getNbSNP()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Short-Indel: " << ct->getNbBioTagIndel() << " (" << ct->getNbBioTagIndel()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Splice: " << ct->getNbSplice() << " (" << ct->getNbSplice()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Weak-Splice: " << ct->getNbSpliceNoCover() << " (" << ct->getNbSpliceNoCover()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Chimera: " << ct->getNbSpliceInter() << " (" << ct->getNbSpliceInter()*100./indexTags->getNbTags() << "%)" << endl ;
-  if(reads2 != NULL) {
-    *summary << "Paired-end Chimera: " << ct->getNbPairedEndChimera() << " (" << ct->getNbPairedEndChimera()*100./indexTags->getNbTags() << "%)" << endl ;
-  }
-	*summary << "Bio-Undetermined: " << ct->getNbBioUndetermined() << " (" << ct->getNbBioUndetermined()*100./indexTags->getNbTags() << "%)" << endl ;
-	*summary << "Undetermined: " << ct->getNbUndetermined() << " (" << ct->getNbUndetermined()*100./indexTags->getNbTags() << "%)" << endl ;
-	// *summary << "Nothing: " << ct->getNbNothing() << " (" << ct->getNbNothing()*100./indexTags->getNbTags() << "%)" << endl ;
+	*summary << "Repetition: " << ct->getNbRepetition() << " (" << ct->getNbRepetition()*100./nb_reads << "%)" << endl ;
+	*summary << "Normal: " << ct->getNbNormal() << " (" << ct->getNbNormal()*100./nb_reads << "%)" << endl ;
+	*summary << "Almost-Normal: " << ct->getNbAlmostNormal() << " (" << ct->getNbAlmostNormal()*100./nb_reads << "%)" << endl ;
+	*summary << "Sequence-Errors: " << ct->getNbSeqErr() << " (" << ct->getNbSeqErr()*100./nb_reads << "%)" << endl ;
+	*summary << "SNV: " << ct->getNbSNP() << " (" << ct->getNbSNP()*100./nb_reads << "%)" << endl ;
+	*summary << "Short-Indel: " << ct->getNbBioTagIndel() << " (" << ct->getNbBioTagIndel()*100./nb_reads << "%)" << endl ;
+	*summary << "Splice: " << ct->getNbSplice() << " (" << ct->getNbSplice()*100./nb_reads << "%)" << endl ;
+	*summary << "Weak-Splice: " << ct->getNbSpliceNoCover() << " (" << ct->getNbSpliceNoCover()*100./nb_reads << "%)" << endl ;
+	*summary << "Chimera: " << ct->getNbSpliceInter() << " (" << ct->getNbSpliceInter()*100./nb_reads << "%)" << endl ;
+	if(reads2 != NULL) {
+	  *summary << "Paired-end Chimera: " << ct->getNbPairedEndChimera() << " (" << ct->getNbPairedEndChimera()*100./nb_reads << "%)" << endl ;
+	}
+	*summary << "Bio-Undetermined: " << ct->getNbBioUndetermined() << " (" << ct->getNbBioUndetermined()*100./nb_reads << "%)" << endl ;
+	*summary << "Undetermined: " << ct->getNbUndetermined() << " (" << ct->getNbUndetermined()*100./nb_reads << "%)" << endl ;
+	// *summary << "Nothing: " << ct->getNbNothing() << " (" << ct->getNbNothing()*100./nb_reads << "%)" << endl ;
       }
     }  
     delete ct;
@@ -1009,8 +1128,16 @@ int main(int argc, char **argv) {
     if (streams[i] != NULL && streams[i] != &cout)
       delete streams[i]; 
   }
+  delete gk;
   delete indexTags;
   delete params;
   delete log;
+  delete reads_reader;
+  if (reads_index && reads_index != (char*) READS_INDEX)
+   delete [] reads_index;
+  if(fifo_input_name)
+   delete fifo_input_name;
+  if(fifo_output_name)
+   delete fifo_output_name;
   return 0;
 }

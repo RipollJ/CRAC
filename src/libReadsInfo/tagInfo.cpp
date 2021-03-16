@@ -1,100 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -107,10 +58,12 @@
 #include <limits.h>
 #include <string>
 #include <sstream>
+#include <assert.h>     /* assert */
 
-TagInfo::TagInfo(LocateOnGenome *genome, Support *s)
+TagInfo::TagInfo(LocateOnGenome *genome, Support *s, Read *r)
   :code(0),genome(genome), nb_each_type(NULL),info_each_type(NULL), nb_causes(0),
-   support(s), current_break(0), read_name(NULL), read_quality(NULL){
+   support(s), current_break(0),
+  read(r) {
 
   if (support->isNone())
     addNone();
@@ -136,7 +89,8 @@ TagInfo::TagInfo(LocateOnGenome *genome, Support *s)
                                                sizeof(ChrPosition*));
   chrpos[END_BREAK] = (ChrPosition **)calloc(support->getNbBreaks(), 
                                              sizeof(ChrPosition*));
-}
+  is_good_location = true;
+  }
 
 
 TagInfo::~TagInfo() {
@@ -158,11 +112,6 @@ TagInfo::~TagInfo() {
         delete (chrpos[j][i]);
     free(chrpos[j]);
   }
-
-  if (read_quality)
-    delete [] read_quality;
-  if (read_name)
-    delete [] read_name;
 
   if (nb_each_type != NULL)
     free(nb_each_type);
@@ -209,7 +158,7 @@ void TagInfo::addGenericElement(byte type, GenericInfo *gi) {
   cerr << "Adding element " <<(int)type<<" for tag " << num << endl;
 #endif
 
-  gi->setReadLength(support->getTagLength());
+  gi->setReadLength(read->getLength());
   info_each_type[type][nb_each_type[type]] = gi;
   nb_each_type[type]++;
 }
@@ -366,7 +315,7 @@ uint *TagInfo::getLocalisations() {
 }
 
 ChrPosition *TagInfo::getLocation() {
-  return support->getLocation();
+  return support->getBestLocation();
 }
 
 uint TagInfo::getLocationEndBreak(uint i) {
@@ -379,6 +328,10 @@ uint TagInfo::getLocationStartBreak(uint i) {
 
 uint TagInfo::getNbBreaks() {
   return support->getNbBreaks();;
+}
+
+int TagInfo::getNbCandidats(uint i) {
+  return support->getBreak(i)->getNbCandidats();
 }
 
 uint TagInfo::getNbDuplicate() {
@@ -409,12 +362,8 @@ uint TagInfo::getPositionStartBreak(uint i, int strand) {
   return support->getBreak(getNbBreaks() - i - 1)->getPositionStartBreak(strand);
 }
 
-char *TagInfo::getReadName() {
-  return read_name;
-}
-
-char *TagInfo::getReadQuality() {
-  return read_quality;
+Read *TagInfo::getRead() {
+  return read;
 }
 
 float TagInfo::getScoreComputedInterExon(uint i) {
@@ -451,10 +400,6 @@ Support *TagInfo::getSupportObject() {
 
 uint TagInfo::getSupportLength() {
   return support->getLength();
-}
-
-char *TagInfo::getTag() {
-  return support->getTag();
 }
 
 ulong TagInfo::getTagPosition() {
@@ -766,24 +711,39 @@ void TagInfo::addBioTagIndel(uint nb_ins, uint nb_del) {
   ChrPosition chrPos = *getChrPosStartBreak(current_break);
 
   if (chrPos.getStrand() == -1) {
-    chrPos += - nb_del;
+    if (nb_ins > 0)
+      chrPos -= 1;
+    else 
+      chrPos -= nb_del + 1;
   } else {
-    chrPos = *getChrPosEndBreak(current_break) - nb_del;
+    if (nb_ins > 0)
+      chrPos = *getChrPosEndBreak(current_break) - 1;
+    else 
+      chrPos = *getChrPosEndBreak(current_break) - nb_del + 1;
   }
-  addGenericElement(INFO_BIOLOGICAL_TAG_INDEL, 
-		    new BioIndelInfo(chrPos,
-				     getPositionEndBreak(current_break),
-				     nb_ins, nb_del, getScoreComputedIntraExon(current_break),isDuplicated(current_break)));
+  if (nb_ins > 0)
+    addGenericElement(INFO_BIOLOGICAL_TAG_INDEL, 
+		      new BioIndelInfo(chrPos,
+				       getPositionEndBreak(current_break) -nb_ins + 1,
+				       nb_ins, nb_del, getScoreComputedIntraExon(current_break),isDuplicated(current_break)));
+  else
+    addGenericElement(INFO_BIOLOGICAL_TAG_INDEL, 
+		      new BioIndelInfo(chrPos,
+				       getPositionEndBreak(current_break) + nb_del,
+				       nb_ins, nb_del, getScoreComputedIntraExon(current_break),isDuplicated(current_break)));
+  
 }
 
-void TagInfo::addBioUndetermined(ChrPosition *chrPos, uint position, 
-				 const char *message, ...) {
+
+void TagInfo::addBioUndetermined(ChrPosition *chrPos, uint position,
+    BioUndeterminedInfo::Type type,
+    const char *message, ...) {
   code |= MASK_BIOLOGICAL_UNDETERMINED;
   char *error = new char[MAX_SIZE_MESSAGE_UNDETERMINED_ERROR];
   va_list args;
   va_start(args, message);
   vsprintf(error, message, args);
-  addGenericElement(INFO_BIOLOGICAL_UNDETERMINED, new BioUndeterminedInfo(chrPos, position, error));
+  addGenericElement(INFO_BIOLOGICAL_UNDETERMINED, new BioUndeterminedInfo(chrPos, position, type, error,support->getParameters()->detailed_sam));
   va_end(args);
 }
 
@@ -881,7 +841,7 @@ void TagInfo::addSpliceIntra(uint gap_length) {
                                         gap_length,isDuplicated(current_break)));
 }
 
-void TagInfo::addSpliceInter() {
+void TagInfo::addSpliceInter(float chimera_score,const string chim_score_info) {
   code |= MASK_INTER_TRANSPLICING;
 
   ChrPosition chrPos1 = *getChrPosStartBreak(current_break), chrPos2;
@@ -891,7 +851,7 @@ void TagInfo::addSpliceInter() {
   chrPos2 = *getChrPosEndBreak(current_break);
   
   if (chrPos2.getStrand() == -1){
-    chrPos2 += getThreshold() - 1;
+    chrPos2 += getThreshold() + 1;
   }
 
   // only for the data simulated otherwise there are many FP
@@ -905,21 +865,23 @@ void TagInfo::addSpliceInter() {
   
   addGenericElement(INFO_INTERSPLICE, 
 		    new SpliceInterInfo(chrPos1, getPositionEndBreak(current_break), 
-					chrPos2, isDuplicated(current_break)));
+					chrPos2, isDuplicated(current_break), 
+					support->getBreak(current_break)->getChimeraClass(),
+					chimera_score, chim_score_info));
 }
 
 
-void TagInfo::addUndeterminedError(const char *format, ...) {
+void TagInfo::addUndeterminedError(UndeterminedErrorInfo::Type type,const char *format, ...) {
   code |= MASK_UNDETERMINED_ERROR;
   char *error = new char[MAX_SIZE_MESSAGE_UNDETERMINED_ERROR];
   va_list args;
   va_start(args, format);
   vsprintf(error, format, args);
-  addGenericElement(INFO_UNDETERMINED_ERROR, new UndeterminedErrorInfo(error));
+  addGenericElement(INFO_UNDETERMINED_ERROR, new UndeterminedErrorInfo(type,error,support->getParameters()->detailed_sam));
   va_end(args);
 }
 
-void TagInfo::removeSpliceInter(uint i,const char* info) {
+void TagInfo::removeSpliceInter(uint i,BioUndeterminedInfo::Type type, const char* info) {
   if (i >= 0 && i < getNbSpliceInter()) {
     SpliceInterInfo *spliceInter = getInfosSpliceInter()[i];
     ChrPosition *chrPos = new ChrPosition(spliceInter->getChrPosition());
@@ -930,13 +892,16 @@ void TagInfo::removeSpliceInter(uint i,const char* info) {
     
     changeGenericElement(INFO_INTERSPLICE,INFO_BIOLOGICAL_UNDETERMINED,
                          MASK_INTER_TRANSPLICING, MASK_BIOLOGICAL_UNDETERMINED,
-                         i,new BioUndeterminedInfo(chrPos, position, error));
+                         i,new BioUndeterminedInfo(chrPos, position, type, error,
+                         support->getParameters()->detailed_sam));
   }
-  // TODO if not raise an exception
 }
 
 SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read) {
   SamLine *sam = new SamLine();
+
+  // Set Read Group ID
+  sam->addOptionalField("RG","1");
 
   if(!loc) {
     loc = getLocation();
@@ -945,7 +910,9 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
 
   //uint flag = 0;
   ChrPosition *loc_to_display = loc ; // Location to be displayed
+
   bool unmapped = ! loc || isNone(); // || (isMultiple() && !support->getParameters()->treat_multiple); 
+
   int strand = 1;
   int bases5_not_in_chromosome = 0; // Bases that are mapped 5' but not
                                     // actually in the chromsome (must ignore
@@ -953,18 +920,18 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
   ostringstream string_stream;
   string qname;
   string rname;
-  string sequence = getTag();
+  string sequence = read->seq;
 
-  if (!getReadName()) {
-    qname = intToString(support->getTagNum());
+  if (!read->name) {
+    qname = intToString(read->id);
   } else {
-    qname = getReadName();
+    qname = read->name;
   }
   sam->setQname(qname);
   sam->setSeq(sequence);
 
-  if(getReadQuality()) {
-    string quality = getReadQuality();
+  if(read->qual) {
+    string quality = read->qual;
     sam->setQual(quality);
   }
 
@@ -1053,7 +1020,8 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
       current_cause_type[i]= (strand == 1) ? 0 : getNbGenericElement(i)-1;
 
     bool ended = false;
-    Cigar cigar;
+    Cigar cigar(support->getParameters()->use_x_in_cigar);
+    //Cigar cigar;
 
     bool started_for_real = false; /* put at true when we have something else
                                       than no start break or undetermined
@@ -1062,6 +1030,12 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
 
     // Do we have at least one nice break?
     if (loc != loc_to_display) {
+
+      // TODO: improve the test in order to update NH field
+      if (strcmp(loc->getChrPosition(),loc_to_display->getChrPosition()) != 0 || loc->getStrand() != loc_to_display->getStrand())
+	is_good_location = false;
+      
+      
       for (uint i=0; i < getNbBreaks(); i++) {
         SupportBreak *sb = getBreak(i, strand);
 
@@ -1120,7 +1094,7 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
                 cigar.append(getPositionStartBreak(i, strand) 
                           + sb->getThreshold() -2
                           - last_match_pos + 1, 'M');
-                cigar.append(getSupportObject()->getTagLength()
+                cigar.append(read->getLength()
                           - (getPositionStartBreak(i, strand) 
                              + sb->getThreshold() -1), 
                           'S');
@@ -1144,7 +1118,7 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
               uint min_last_pos = 
                 min(getPositionStartBreak(i, strand) + sb->getThreshold() -2,
                     sb->hasNoEndBreak(strand)
-                    ? getSupportObject()->getTagLength() - 1 
+                    ? (uint)read->getLength() - 1 
                     : getPositionEndBreak(i, strand) 
                     - (sb->getNbGenomeIndels() < 0 && ! large_insertion
                        ? - sb->getNbGenomeIndels() : 1));
@@ -1189,7 +1163,7 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
               if (sb->hasNoEndBreak(strand)) {
                 // end of read
                 ended = true;
-                cigar.append(getSupportObject()->getTagLength() - 1
+                cigar.append(read->getLength() - 1
                           - (getPositionStartBreak(i, strand) 
                              + sb->getThreshold()-1) + 1, 'S');
               } else {
@@ -1223,7 +1197,7 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
       // at the end of the read after the breaks (but be careful to ignored
       // breaks)
       if (! ended) {
-        cigar.append(getSupportObject()->getTagLength() - last_match_pos,
+        cigar.append(read->getLength() - last_match_pos,
                   'M');
       }
     } else {
@@ -1280,9 +1254,9 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
 
       int bases[2] = {0,0};
       bases[0] = pos_shift[0];
-      if (getSupportObject()->getTagLength() -1
+      if (read->getLength() -1
           > (pos_shift[1] + getThreshold() - 1))
-        bases[1] = getSupportObject()->getTagLength() -1
+        bases[1] = read->getLength() -1
           - (pos_shift[1] + getThreshold() - 1);
       
       // set CIGAR
@@ -1290,7 +1264,7 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
         cigar.append(bases[left_idx], 'S');
       // The match is only considered between the leftmost and rightmost
       // positions
-      cigar.append((support->getTagLength() 
+      cigar.append((read->getLength() 
                  - bases[left_idx]
                  - bases[right_idx]), 'M');
       if (bases[right_idx]) 
@@ -1317,13 +1291,53 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
 
     //sam->setFlag(flag);
     rname = loc_to_display->getChrPosition();
-    sam->setRname(rname);
+    sam->setRname(rname,loc_to_display->getChrId());
     sam->setPos(loc_to_display->getRelativePosition() + 1);
-    sam->setMapQ(254 - (getNbBreaks() > 0 
+    sam->setMapQ(unmapped? 0 : 254 - (getNbBreaks() > 0 
                  ? 204.*nb_suspicious_breaks/getNbBreaks()
                  : 0));
     sam->setCigar(cigar);
+
+    // XS field for splicing event (cufflinks or stringTie)
+    if (hasSplice() || hasSpliceNoCover() || hasSpliceIntraChr()){
+      if (strand == 1)
+	sam->addOptionalField("XS",'+');
+      else
+	sam->addOptionalField("XS",'-');
+    }
+    
+    // Number of causes
+    sam->addOptionalField("XC",getNbCauses());
+    
+    // Repetition, XX field
+    if(hasRepetition()) {
+      string_stream.str("");
+      for (uint i = 0; i < nb_each_type[INFO_REPETITION]; i++) {
+	if(string_stream.str() != "")
+	  string_stream << ";";
+	info_each_type[INFO_REPETITION][i]->samOutput(string_stream, strand);
+      }
+      sam->addOptionalField("XX",string_stream.str());
+    }
   }
+
+  // k-mer chosen
+  // if (pos_of_loc_cause_in_read != (uint)~0) {
+  //   os << "XL:Z:" << loc_cause << "\t";
+  //   os << "XP:i:" << pos_of_loc_cause_in_read << "\t";
+  // }
+  if (loc) {
+    string_stream.str("");
+    string_stream << *loc;
+    sam->addOptionalField("XO",string_stream.str());
+    // XQ was reversed when strand==-1
+    if (sam->isSeqReverseComplemented()) {
+      sam->addOptionalField("XQ",getSupportLength() - 1 - getSupportObject()->getPositionOfLocation());
+    }else{
+      sam->addOptionalField("XQ",getSupportObject()->getPositionOfLocation());
+    }
+  }
+
   
   // reverse complemente sequence and quality
   if (sam->isSeqReverseComplemented()) {
@@ -1343,104 +1357,144 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
   }
   sam->addOptionalField("XN",xn_value);
 
-  // k-mer chosen
-  // if (pos_of_loc_cause_in_read != (uint)~0) {
-  //   os << "XL:Z:" << loc_cause << "\t";
-  //   os << "XP:i:" << pos_of_loc_cause_in_read << "\t";
-  // }
-  if (loc) {
-    string_stream.str("");
-    string_stream << *loc;
-    sam->addOptionalField("XO",string_stream.str());
-    sam->addOptionalField("XQ",getSupportObject()->getPositionOfLocation());
-  }
-
-  // Number of causes
-  sam->addOptionalField("XC",getNbCauses());
-
-  // Reptition, XX field
-  if(hasRepetition()) {
-    string_stream.str("");
-    for (uint i = 0; i < nb_each_type[INFO_REPETITION]; i++) {
-      if(string_stream.str() != "")
-        string_stream << ";";
-      info_each_type[INFO_REPETITION][i]->samOutput(string_stream, strand);
-    }
-    sam->addOptionalField("XX",string_stream.str());
-  }
-
+  
   // Display causes in optional field XE if there is any
-  if(getNbCauses() > 0) {
+  // Events are reversed when strand == -1
+  if(getNbCauses() > 0 && !unmapped) {
     byte *current_each_type = (byte *)calloc(INFO_NB_TYPES, sizeof(byte));
     uint this_break_id = 0;
     uint current_nb_causes_this_break = 0;
+    int strand_info_type = strand;
     string_stream.str("");
-    for (uint i = 0; i < getNbCauses(); i++) {
-      current_nb_causes_this_break++;
-      // add separator in case of multiple events
-      if(string_stream.str() != "")
-        string_stream << ";";
-      string_stream << i << ":" << this_break_id << ":";
-      info_each_type[types_in_order[i]][current_each_type[types_in_order[i]]]->samOutput(string_stream, strand);
-      current_each_type[types_in_order[i]]++;
-      if (nb_causes_per_break[this_break_id] == current_nb_causes_this_break) {
-        this_break_id++;
-        current_nb_causes_this_break = 0;
+    if (sam->isSeqReverseComplemented()) {
+      for (int i = getNbCauses() -1 ; i >= 0; i--) {
+	GenericInfo *info_type = info_each_type[types_in_order[i]][current_each_type[types_in_order[i]]];
+	if (types_in_order[i] == INFO_SNP){
+	  strand_info_type = ((SNPInfo *) info_type)->getChrPosition().getStrand();
+	}else if (types_in_order[i] == INFO_BIOLOGICAL_TAG_INDEL){
+	  strand_info_type = ((BioIndelInfo *) info_type)->getChrPosition().getStrand();
+	}
+	current_nb_causes_this_break++;
+    	// add separator in case of multiple events
+    	if(string_stream.str() != "")
+    	  string_stream << ";";
+    	string_stream << i << ":" << this_break_id << ":";
+    	info_type->samOutput(string_stream, strand_info_type);
+    	current_each_type[types_in_order[i]]++;
+    	if (nb_causes_per_break[this_break_id] == current_nb_causes_this_break) {
+    	  this_break_id++;
+    	  current_nb_causes_this_break = 0;
+    	}
+      }
+    }else{
+      for (uint i = 0; i < getNbCauses(); i++) {
+	GenericInfo *info_type = info_each_type[types_in_order[i]][current_each_type[types_in_order[i]]];
+	if (types_in_order[i] == INFO_SNP){
+	  strand_info_type = ((SNPInfo *) info_type)->getChrPosition().getStrand();
+	}else if (types_in_order[i] == INFO_BIOLOGICAL_TAG_INDEL){
+	  strand_info_type = ((BioIndelInfo *) info_type)->getChrPosition().getStrand();
+	}
+	current_nb_causes_this_break++;
+	// add separator in case of multiple events
+	if(string_stream.str() != "")
+	  string_stream << ";";
+	string_stream << i << ":" << this_break_id << ":";
+	info_type->samOutput(string_stream, strand_info_type);
+	current_each_type[types_in_order[i]]++;
+	if (nb_causes_per_break[this_break_id] == current_nb_causes_this_break) {
+	  this_break_id++;
+	  current_nb_causes_this_break = 0;
+	}
       }
     }
     sam->addOptionalField("XE",string_stream.str());
     free(current_each_type);
   }
 
+  // Breaks are reversed when strand == -1
   if (getSupportObject()->getParameters()->detailed_sam) {
     if(getNbBreaks() > 0) {
       string_stream.str("");
-      for (uint i = 0; i < getNbBreaks(); i++) {
-        if(string_stream.rdbuf()->in_avail() > 0)
-          string_stream << ";";
-        string_stream << i 
-           << ":is_duplicated=" << getBreak(i, strand)->isDuplicated() 
-           << ";genome_indels=" << getBreak(i, strand)->getNbGenomeIndels()
-           << ";score_intra=" << getBreak(i, strand)->getScoreComputedIntraExon()
-           << ";score_inter=" << getBreak(i, strand)->getScoreComputedInterExon()
-           << ";deviation=" << getBreak(i, strand)->getScoreInsideAverages()
-           << ";falling_left=" << getBreak(i, strand)->isSupportFallingLeft(strand)
-           << ";falling_right=" << getBreak(i, strand)->isSupportFallingRight(strand)
-           << ";inside_first_quartile=" 
-           << getBreak(i, strand)->getInsideQuartile1()
-           << ";inside_last_quartile="
-           << getBreak(i, strand)->getInsideQuartile4()
-           << ";inside_score=" << getBreak(i, strand)->getInsideScore()
-           << ";outside_score=" << getBreak(i, strand)->getOutsideScore()
-           << ";average_low_inside=" << getBreak(i, strand)->getAverageLowInside()
-           << ";average_high_inside=" << getBreak(i, strand)->getAverageHighInside()
-           << ";has_no_start_break=" << getBreak(i, strand)->hasNoStartBreak(strand)
-           << ";has_no_end_break=" << getBreak(i, strand)->hasNoEndBreak(strand)
-           << ";is_deviated=" << getBreak(i, strand)->isDeviated()
-           << ";is_nice_break=" << getBreak(i, strand)->isNiceBreak()
-           << ";is_very_nice_break=" << getBreak(i, strand)->isVeryNiceBreak()
-           << ";pos_start_break=" << getPositionStartBreak(i, strand)
-           << ";pos_end_break=" << getPositionEndBreak(i, strand);
+      if (sam->isSeqReverseComplemented()) {
+      	for (int i = getNbBreaks() -1 ; i >= 0 ; i--) {
+      	  if(string_stream.rdbuf()->in_avail() > 0)
+      	    string_stream << ";";
+      	  string_stream << i 
+      			<< ":is_duplicated=" << getBreak(i, strand)->isDuplicated() 
+      			<< ";genome_indels=" << getBreak(i, strand)->getNbGenomeIndels()
+      			<< ";score_intra=" << getBreak(i, strand)->getScoreComputedIntraExon()
+      			<< ";score_inter=" << getBreak(i, strand)->getScoreComputedInterExon()
+      			<< ";deviation=" << getBreak(i, strand)->getScoreInsideAverages()
+      			<< ";falling_left=" << getBreak(i, strand)->isSupportFallingLeft(strand)
+      			<< ";falling_right=" << getBreak(i, strand)->isSupportFallingRight(strand)
+      			<< ";inside_first_quartile=" 
+      			<< getBreak(i, strand)->getInsideQuartile1()
+      			<< ";inside_last_quartile="
+      			<< getBreak(i, strand)->getInsideQuartile4()
+      			<< ";inside_score=" << getBreak(i, strand)->getInsideScore()
+      			<< ";outside_score=" << getBreak(i, strand)->getOutsideScore()
+      			<< ";average_low_inside=" << getBreak(i, strand)->getAverageLowInside()
+      			<< ";average_high_inside=" << getBreak(i, strand)->getAverageHighInside()
+      			<< ";has_no_start_break=" << getBreak(i, strand)->hasNoStartBreak(strand)
+      			<< ";has_no_end_break=" << getBreak(i, strand)->hasNoEndBreak(strand)
+      			<< ";is_deviated=" << getBreak(i, strand)->isDeviated()
+      			<< ";is_nice_break=" << getBreak(i, strand)->isNiceBreak()
+      			<< ";is_very_nice_break=" << getBreak(i, strand)->isVeryNiceBreak()
+      			<< ";pos_start_break=" << getPositionStartBreak(i, strand)
+      			<< ";pos_end_break=" << getPositionEndBreak(i, strand);
+      	}
+      }else{
+	for (uint i = 0; i < getNbBreaks(); i++) {
+	 if(string_stream.rdbuf()->in_avail() > 0)
+	   string_stream << ";";
+	 string_stream << i 
+		       << ":is_duplicated=" << getBreak(i, strand)->isDuplicated() 
+		       << ";genome_indels=" << getBreak(i, strand)->getNbGenomeIndels()
+		       << ";score_intra=" << getBreak(i, strand)->getScoreComputedIntraExon()
+		       << ";score_inter=" << getBreak(i, strand)->getScoreComputedInterExon()
+		       << ";deviation=" << getBreak(i, strand)->getScoreInsideAverages()
+		       << ";falling_left=" << getBreak(i, strand)->isSupportFallingLeft(strand)
+		       << ";falling_right=" << getBreak(i, strand)->isSupportFallingRight(strand)
+		       << ";inside_first_quartile=" 
+		       << getBreak(i, strand)->getInsideQuartile1()
+		       << ";inside_last_quartile="
+		       << getBreak(i, strand)->getInsideQuartile4()
+		       << ";inside_score=" << getBreak(i, strand)->getInsideScore()
+		       << ";outside_score=" << getBreak(i, strand)->getOutsideScore()
+		       << ";average_low_inside=" << getBreak(i, strand)->getAverageLowInside()
+		       << ";average_high_inside=" << getBreak(i, strand)->getAverageHighInside()
+		       << ";has_no_start_break=" << getBreak(i, strand)->hasNoStartBreak(strand)
+		       << ";has_no_end_break=" << getBreak(i, strand)->hasNoEndBreak(strand)
+		       << ";is_deviated=" << getBreak(i, strand)->isDeviated()
+		       << ";is_nice_break=" << getBreak(i, strand)->isNiceBreak()
+		       << ";is_very_nice_break=" << getBreak(i, strand)->isVeryNiceBreak()
+		       << ";pos_start_break=" << getPositionStartBreak(i, strand)
+		       << ";pos_end_break=" << getPositionEndBreak(i, strand); 
+	}
       }
       sam->addOptionalField("XB",string_stream.str());
     }
 
-    // if read is reversed we also reverse the support and the localisation
+
+    // We used to reverse p_support and p_loc, but there was a time where
+    // it was a problem (bug #16502, see J. Audoux the asshole), so we drew back and do not reverse them.
+    // Later, it was an other problem (bug #18524) because pos_junction was always reversed but not the p_loc anymore...
+    // In fact, we have to make a choice: either we must reverse all fieds in order to be "sam consistent"
+    // or none. We choose the first one (ie reverse all) and we update unit tests.
+    // p_loc and p_support are reversed when strand == -1
+
     string_stream.str("");
     string_stream << "p_support=";
-
-    //if (sam->isSeqReverseComplemented()) {
-    //  for (uint j=getSupportLength() -1; j > 0; j--) {
-    //    string_stream << getSupport()[j] << "," ;
-    //  }
-    //  string_stream << getSupport()[0] << ";p_loc=";
-    //  for (uint j=getSupportLength() -1; j > 0; j--) {
-    //    string_stream <<  getLocalisations()[j] << "," ;
-    //  }
-    //  string_stream << getLocalisations()[0];
-    //} else {
-    // We used to reverse the support and the ploc, but not anymore.
-    // See bug #16102 for more informations
+    if (sam->isSeqReverseComplemented()) {
+      for (uint j=getSupportLength() -1; j > 0; j--) {
+        string_stream << getSupport()[j] << "," ;
+      }
+      string_stream << getSupport()[0] << ";p_loc=";
+      for (uint j=getSupportLength() -1; j > 0; j--) {
+        string_stream <<  getLocalisations()[j] << "," ;
+      }
+      string_stream << getLocalisations()[0];
+    } else {
       for (uint j=0; j < getSupportLength()-1; j++) {
         string_stream << getSupport()[j] << "," ;
       }
@@ -1449,10 +1503,10 @@ SamLine *TagInfo::getSamLine(ChrPosition *loc, ulong pos_of_original_loc_in_read
         string_stream <<  getLocalisations()[j] << "," ;
       }
       string_stream << getLocalisations()[getSupportLength()-1];
-    //}
+    }
     sam->addOptionalField("XR",string_stream.str());
   }
-
+  
   if (loc_to_display != loc)
     delete loc_to_display;
 
@@ -1467,7 +1521,8 @@ vector<SamLine*> *TagInfo::getChimericAlignements(SamLine *base_line, uint cigar
     // Clone base line
     SamLine *chimeric_alignement = new SamLine(*base_line);
     // Create a new cigar for this slice
-    Cigar new_cigar;
+    Cigar new_cigar(support->getParameters()->use_x_in_cigar);
+    //Cigar new_cigar;
     
     // Create the cigar for this slice util we found an other chimera
     while(cigar_index < base_line->getCigar().count() && getInfosSpliceInter()[0]->getCigarInfo() != base_line->getCigar().get(cigar_index)) {
@@ -1492,19 +1547,39 @@ vector<SamLine*> *TagInfo::getChimericAlignements(SamLine *base_line, uint cigar
     // be on strand forward only when this is not the primary alignement
     if(splice_id > 0) {
       chimeric_alignement->setChimericAlignement();
+      ChrPosition chr_pos;
+      bool is_chr_dest = false;
+      if(getInfosSpliceInter()[splice_id-1]->getChrPosition().getStrand() == 1) {
+        chr_pos = getInfosSpliceInter()[splice_id-1]->getChromosomeDest();
+        is_chr_dest = true;
+      } else {
+        chr_pos = getInfosSpliceInter()[splice_id-1]->getChrPosition();
+      }
       // If this is not the primary line
       // Update chromosome and start position
       // with chimera info
-      string new_rname = getInfosSpliceInter()[splice_id-1]->getChromosomeDest().getChrPosition();
-      base_line->setRname(new_rname);
-      chimeric_alignement->setPos(getInfosSpliceInter()[splice_id-1]->getChromosomeDest().getRelativePosition());
+      string new_rname = chr_pos.getChrPosition();
+      int new_rid = chr_pos.getChrId();
+      chimeric_alignement->setRname(new_rname,new_rid);
+      if(chr_pos.getStrand() == -1 && is_chr_dest) {
+        uint pos = chr_pos.getRelativePosition();
+        // We start from this end pos and we go back until we reach the last Cigar element
+        for(uint i=0; i < new_cigar.count(); i++) {
+          if(new_cigar.isReferenceBasedElement(i)) {
+            pos -= new_cigar[i].nb;
+          }
+        }
+        chimeric_alignement->setPos(pos);
+      } else {
+        chimeric_alignement->setPos(chr_pos.getRelativePosition());
+      }
       new_cigar.prepend(left_softclip,'S');
-      if(getInfosSpliceInter()[splice_id-1]->getChromosomeDest().getStrand() == -1 && !chimeric_alignement->isSeqReverseComplemented()) {
+      if(chr_pos.getStrand() == -1 && !chimeric_alignement->isSeqReverseComplemented()) {
         chimeric_alignement->setSeqReverseComplemented();
         chimeric_alignement->reverseComplementeSeq();
         chimeric_alignement->reverseQual();
         new_cigar.reverse();
-      } else if(getInfosSpliceInter()[splice_id-1]->getChromosomeDest().getStrand() == 1 && chimeric_alignement->isSeqReverseComplemented()) {
+      } else if(chr_pos.getStrand() == 1 && chimeric_alignement->isSeqReverseComplemented()) {
         chimeric_alignement->unsetSeqReverseComplemented();
         chimeric_alignement->reverseComplementeSeq();
         chimeric_alignement->reverseQual();
@@ -1530,25 +1605,30 @@ vector<SamLine*> *TagInfo::getSamLines() {
   // Multiple alignements
   // we consider several alignments only if there is no break (otherwise it is a little bit tricky)
   if ((
-	    (support->getParameters()->treat_multiple && (support->isMultiple() || support->isDuplicate())) 
+	    (support->getParameters()->treat_multiple > 0 && (support->isMultiple() || support->isDuplicate())) 
 	    //|| (support->isDuplicate() && !support->isMultiple())
 	    )
 	   && support->isContinuous()
      && !support->isSingle()) {
     sam_lines = new vector<SamLine*>;
-    uint pos_loc;
-    pair<ChrPosition **,uint> locs = support->getLocations(pos_loc);
-    for(ulong i = 0; i < locs.second; i++) {
-      SamLine *multiple_alignement = getSamLine(locs.first[i], pos_loc);
+    uint pos_loc = support->getPositionOfLocation();
+    ChrPosition **locs = support->getLocations();
+    uint nb_locs = min(support->getNbLocsMax(), support->getParameters()->treat_multiple);
+    for(ulong i = 0; i < nb_locs ; i++) {
+      SamLine *multiple_alignement = getSamLine(locs[i], pos_loc);
       // If this is not the primary line
+      // We set the proper flag and remove the sequence and qual from the
+      // sam_line to reduce file size (as it recommended in SAM specifications)
       if(i>0) {
         multiple_alignement->setSecondaryAlignement();
+        multiple_alignement->setSeq("*");
+        multiple_alignement->setQual("*");
       }
       sam_lines->push_back(multiple_alignement);
-      delete locs.first[i];
-    }
-    if (locs.first!=NULL)
-      free(locs.first);
+      //      delete locs[i];
+    }        
+    // if (locs!=NULL)
+    //   free(locs);
 
     // Set flags for "Next hit" : CC, CP
     vector<SamLine*>::iterator it = sam_lines->begin() ;
@@ -1569,7 +1649,6 @@ vector<SamLine*> *TagInfo::getSamLines() {
   // we need to provide one SAM line for each alignement
   else {
     SamLine *base_line = getSamLine();
-      
     if(base_line->getCigar().getNbChimeras() > 0) {
       uint right_softclip = 0;
       sam_lines = getChimericAlignements(base_line, 0, 0, 0, &right_softclip);
@@ -1604,13 +1683,91 @@ vector<SamLine*> *TagInfo::getSamLines() {
       sam_lines->push_back(base_line);
     }
   }
+
+
+  // HACK: we check that the given alignements are not going out of scope (ie.
+  // longer than the chromosome length).
+  // If it does we softclip the end of the alignement
+  for (vector<SamLine*>::iterator it = sam_lines->begin() ; it != sam_lines->end(); ++it) {
+    SamLine *sam_line = *it;
+    // We do nothing if the read is not mapped
+    if(!sam_line->isSegmentUnmapped()) {
+      uint chr_length = genome->getGenomeInfo()->getChrLength(sam_line->getRid());
+      uint start = sam_line->getPos();
+      Cigar cigar = sam_line->getCigar();
+      // We first check if the read is going out of scope before we
+      // do some time processing operations
+      if(start + cigar.getReferenceAlignementLength() > chr_length) {
+        Cigar new_cigar(support->getParameters()->use_x_in_cigar);
+        bool find_end = false;
+        for(uint i=0; i < cigar.count(); i++) {
+          // If we have reach the end of the chromose and the cigar operator correspond
+          // to the read sequence we place a softclip or hardclip if it was the case
+          if(find_end) {
+            if(cigar.isQueryBasedElement(i)) {
+              if(cigar[i].type == 'H') {
+                new_cigar.append(cigar[i].nb, 'H');
+              } else {
+                new_cigar.append(cigar[i].nb, 'S');
+              }
+            }
+          } else {
+            if(cigar.isReferenceBasedElement(i) && start + cigar[i].nb > chr_length) {
+              if(cigar.isQueryBasedElement(i)) {
+                // Only append if the value is positive
+                if(chr_length > start)
+                  new_cigar.append(chr_length - start + 1,cigar[i].type);
+                // Append a soft-clip for the remaining length
+                new_cigar.append(start + cigar[i].nb - chr_length - 1, 'S');
+              }
+              find_end = true;
+            } else {
+              new_cigar.append(cigar[i]);
+            }
+          }
+        }
+        // Join duplicates, remove empty operators, ...
+        new_cigar.filter();
+        // We set the newly created cigar
+        sam_line->setCigar(new_cigar);
+      }
+      // Then we check that the alignment is not longer than the read itself
+      if(sam_line->getSeq().compare("*") != 0 && sam_line->getSeq().length() != sam_line->getCigar().getQueryAlignementLength()) {
+        // Display an error message to report a new bug
+        cerr << "TagInfo error: CIGAR and sequence length are inconsistent, read is considered unmapped." << endl;
+        cerr << "Read " << sam_line->getSeq() << 
+          ", sequence length " << sam_line->getSeq().length() << 
+          " vs " << sam_line->getCigar().getQueryAlignementLength() << " from CIGAR" << endl;
+        cerr << "Please submit a new bug report to crac-bugs@lists.gforge.inria.fr" << endl;
+        sam_line->unsetEachSegmentsMapped();
+        sam_line->setSegmentUnmapped();
+        sam_line->setUnknownPos();
+        sam_line->setUnknownRname();
+        sam_line->removeAllUserOptionalFields();
+      }
+    }
+  }
     
 
   // Set optional fields
+  uint i = 1;
   for (vector<SamLine*>::iterator it = sam_lines->begin() ; it != sam_lines->end(); ++it) {
     (*it)->addOptionalField("NM",(*it)->getCigar().getEditDistance());
-    (*it)->addOptionalField("IH",sam_lines->size());
-    (*it)->addOptionalField("NH",support->getNbLocsMax());
+    //(*it)->addOptionalField("IH",sam_lines->size());
+    (*it)->addOptionalField("HI",i);
+    if (isNone()) {
+      (*it)->addOptionalField("NH",0);
+    } else if (is_good_location) {
+       (*it)->addOptionalField("NH",support->getNbLocsMax());
+    } else {
+      // TODO
+      // Since we have change the location k-mer from a chromosome (or strand)
+      // it means that we have at least 2 different hits. But there is maybe more...
+      // How do we choose a nice value for NH field?
+      (*it)->addOptionalField("NH",2);
+      (*it)->setMapQ(0);
+    }
+    i++;
   }
 
   return sam_lines;
@@ -1628,35 +1785,6 @@ ostream &TagInfo::samOutput(ostream &os) {
 
 void TagInfo::setCurrentBreak(uint i) {
   current_break = i;
-}
-
-void TagInfo::setReadName(char *name) {
-  if (read_name) 
-    delete [] read_name;
-  if (name) {
-    read_name = new char[strlen(name)+1];
-    strcpy(read_name, name);
-  } else 
-    read_name = NULL;
-}
-
-void TagInfo::setReadQuality(char *quality) {
-  if (read_quality)
-    delete [] read_quality;
-  if (quality) {
-    uint tag_length = strlen(getTag());
-    read_quality = new char[tag_length+1]();
-    strncpy(read_quality, quality, tag_length);
-  } else 
-    read_quality = NULL;
-}
-
-void TagInfo::setReadNumber(uint tagId) {
-  this->tagId = tagId;
-}
-
-uint TagInfo::getReadNumber() {
-  return tagId;
 }
 
 ostream &operator<<(ostream &os, TagInfo &info) {
@@ -1681,7 +1809,7 @@ ostream &operator<<(ostream &os, TagInfo &info) {
     os << "pos_location=" << info.getPositionOfLocation() << " ";
   }
 
-  os << info.getTag() << " " ;
+  os << info.getRead()->seq << " " ;
   
   for (uint j=0; j < info.getSupportLength()-1; j++) {
     os << info.getSupport()[j] << "," ;
@@ -1696,7 +1824,6 @@ ostream &operator<<(ostream &os, TagInfo &info) {
 
 
 // PRIVATE
-
 pair<ChrPosition, uchar *> TagInfo::retrieveChrPosAndNuc(error_context type,
                                                          uint nb_nuc,
                                                          int &shift) {
@@ -1728,7 +1855,7 @@ pair<ChrPosition, uchar *> TagInfo::retrieveChrPosAndNuc(error_context type,
     else
       cerr << "Warning substring of length " 
            << nb_nuc << " not retrieved from genome (read " 
-           << support->getTagNum() << ")" << endl;
+           << read->id << ")" << endl;
   }
   return pair<ChrPosition, uchar *>(chrPos, dna);
 }

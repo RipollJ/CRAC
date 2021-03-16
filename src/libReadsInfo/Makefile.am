@@ -117,6 +117,8 @@ libReadsInfo_a_SOURCES =                            \
   SpliceNoCoverInfo.cpp SpliceNoCoverInfo.h         \
   SplicingInfo.cpp SplicingInfo.h                   \
 	samLine.cpp samLine.h                             \
+	samHeader.cpp samHeader.h                         \
+	bamUtils.cpp bamUtils.h                           \
   tagInfo.cpp tagInfo.h                             \
   undeterminedErrorInfo.cpp undeterminedErrorInfo.h
 

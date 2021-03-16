@@ -116,6 +116,7 @@
 #include <sys/ioctl.h>
 #ifdef HAVE_LIBPROGRESSBAR
 #include <libProgressBar/progressBar.h>
+#include <unistd.h>
 #endif
 
 // extern "C" {

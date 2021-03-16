@@ -113,7 +113,7 @@ do
 done
 
 if [ $QUIET -eq 0 ]; then
-   echo "This is the client of crac v. 1.5.0";
+   echo "This is the client of crac v. 2.5.0";
 fi
 
 [ -p $PIPE ] || PIPE=${PIPE/`dirname $0`/$PWD}

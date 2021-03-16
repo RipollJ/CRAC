@@ -1,100 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -102,7 +53,8 @@
 #define CLASSIFIER_H
 
 #include <iostream>
-#include <gkArrays.h>
+#include "ReadIndex.h"
+#include "Read.h"
 #include "libReadsInfo/tagInfo.h"
 #include "Support.h"
 #include "const.h"
@@ -123,14 +75,25 @@ public:
   virtual void classify()=0;
 
   /*
-   * Set Informations about read(s) using the readIteror
+   * Init process :
+   * - creating support profil
+   * - creating loc profile
+   * /!\ Heavy treatment!!!
+   *
+   * -> Must be called before calling classify()!
+   * @param pair_support the support of the mate
    */
-  virtual readIterator *setInfos(readIterator *readIt)=0;
+  virtual void init() = 0;
 
   /**
    * Write the line(s) in SAM file
    */
   virtual ostream &samOutput(ostream &os)=0;
+
+  /**
+   * Write the line(s) in SAM file
+   */
+  virtual int samOutput(samFile *out, const bam_hdr_t *h)=0;
 
 
   /**
@@ -157,29 +120,47 @@ public:
   /**
    * Update statitics about classification
    */
-  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable)=0;
+  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable, uint *nb_single, uint *nb_duplication, uint *nb_multiple, uint *nb_none)=0;
 
 };
 
 class SingleReadClassifier : public Classifier {
 private:
-  Support *suppo;
-  TagInfo *taginfo;
-  gkArrays *tags;
+  Read *read;
   LocateOnGenome *genome;
+  ReadIndex *tags;
   Parameters *parameters;
-  uint tagId;
+  Support *suppo;
+  Support *pair_support;
+  TagInfo *taginfo;
+  vector<SamLine*> *sam_lines;
 
 public:
   /**
    * Constructor of SingleReadClassifier
    *
-   * @param tagId the id of the tag in the gkArrays
+   * @param r the read to classify
    * @param genome the LocateOnGenome object
-   * @param tags the gkArrays object
+   * @param tags the ReadIndex object
    * @param parameters the parameters object
    */
-  SingleReadClassifier(uint tagId, LocateOnGenome *genome, gkArrays *tags, Parameters *parameters);
+  SingleReadClassifier(Read *r, LocateOnGenome *genome, ReadIndex *tags, Parameters *parameters);
+
+  /*
+   * Init process :
+   * - creating support profil
+   * - creating loc profile
+   * /!\ Heavy treatment!!!
+   *
+   * -> Must be called before calling classify()!
+   */
+  virtual void init();
+
+  /*
+   * Destructor
+   * - delete the read object that was passed in parameter of the constructor
+   *   (/!\ no copy have been made)
+   */
   ~SingleReadClassifier();
 
   /**
@@ -188,17 +169,16 @@ public:
   virtual void classify();
 
   /**
-   * Set Informations about the read using the iterator.
-   * This method also move the iterator one step further.
-   */
-  virtual readIterator *setInfos(readIterator *readIt);
-
-  /**
    * Print the SAM line of the read in the file in arguement
    *
    * @param os the stream where the SAM line will be written
    */
   virtual ostream &samOutput(ostream &os);
+
+  /**
+   * Write the line(s) in SAM file
+   */
+  virtual int samOutput(samFile *out, const bam_hdr_t *h);
 
   /**
    * Print informations about the classification of the read
@@ -227,19 +207,27 @@ public:
    * @param nb_classes the array containing statistics about each type of classification
    * @param nb_explainable the number of read explainable
    */
-  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable);
+  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable, uint *nb_single, uint *nb_duplication, uint *nb_multiple, uint *nb_none);
 
   /**
-   * @return the tag id of the read handled by the classifier
+   * @return the read handled by the classifier
    */
-  uint getTagId();
+  Read *getRead();
 
   /**
    * @return the tagInfo that has been created by the classifier.
    */
   TagInfo *getTagInfo();
 
+  Support *getSupport();
+
+  void setPairSupport(Support *pair_support);
+
+  vector<SamLine*> *getSamLines();
+
 private:
+
+
   /**
    * Return a substring of the tag of length <length> and which
    * ends at the position corresponding to the end of the break.
@@ -261,27 +249,26 @@ private:
   void perform_deep_snp_search(SupportBreak *, uint break_num);
 
   /**
-   * Tests if the supportBreak that have been classified as a chimera
-   * is a stringent chimera according to stringent classification tests.
-   * This function stops when one of the test has failed and return a 
-   * specific flag for this cause.
-   * This does not mean that the chimera has only failed this tests, but
-   * that this test is the first one that has failed.
+   * Apply several algorithmic filters for each chimera event.
+   * This function returns of score. We consider a bioundetermined event 
+   * when the score < 0.5 (ie one or more tests have failed).
    *
-   * @return 0 if the chimera is stringent
-   *         1 if the chimera has a break_length too small
-   *         2 if the chimera comes from a break with too many merges
-   *         3 if the chimera is in a repeated zone
-   *         4 if the chimera has a high support variation
-   *         5 if the kmer verification test doesn't match the chimera
-   *         6 if no single loc have been found around the break
+   * Tests are:  
+   *         1 the chimera has a break_length too small
+   *         2 the chimera comes from a break with too many merges
+   *         3 the chimera is in a repeated zone
+   *         4 the chimera has a high support variation
+   *         5 the chimera is ambiguous
+   *
+   * @return a score between 0 and 1
    */
-  uint isStringentChimera(SupportBreak *, uint break_num);
+  pair<float,string> getChimeraScore(SupportBreak *sb);
 };
 
 class PairedEndReadClassifier : public Classifier {
 private:
-  gkArrays *tags;
+  Read *r1,*r2;
+  ReadIndex *tags;
   LocateOnGenome *genome;
   Parameters *parameters;
   SingleReadClassifier *classifier1;
@@ -297,13 +284,29 @@ public:
   /**
    * Constructor of PairedEndReadClassifier
    *
-   * @param tagId1 the id of the first tag of the pair in the gkArrays
-   * @param tagId2 the id of the second tag of the pair in the gkArrays
+   * @param r1 the first read of the pair to be classified
+   * @param r2 the second read of the pair to be classified
    * @param genome the LocateOnGenome object
-   * @param tags the gkArrays object
+   * @param tags the ReadIndex object
    * @param parameters the parameters object
    */
-  PairedEndReadClassifier(uint tagId1, uint tagId2, LocateOnGenome *genome, gkArrays *tags, Parameters *parameters);
+  PairedEndReadClassifier(Read *r1, Read *r2, LocateOnGenome *genome, ReadIndex *tags, Parameters *parameters);
+
+  /*
+   * Init process :
+   * - creating support profil
+   * - creating loc profile
+   * /!\ Heavy treatment!!!
+   *
+   * -> Must be called before calling classify()!
+   */
+  virtual void init();
+
+  /*
+   * Destructor
+   * - Delete the two classifiers, this will also delete the two reads passed
+   *   in parameters of the constructor
+   */
   ~PairedEndReadClassifier();
 
   /**
@@ -312,18 +315,17 @@ public:
   virtual void classify();
 
   /**
-   * Set Informations about the paird-end reads using the iterator.
-   * This method also move the iterator two step further.
-   */
-  virtual readIterator *setInfos(readIterator *readIt);
-
-  /**
    * Print two SAM lines corresponding to the paired-end reads classified by the
    * Classifier in the output file in parameter
    *
    * @param os the stream where the SAM lines will be written
    */
   virtual ostream &samOutput(ostream &os);
+
+  /**
+   * Write the line(s) in SAM file
+   */
+  virtual int samOutput(samFile *out, const bam_hdr_t *h);
 
   /**
    * Print informations about the classification of paired-end reads
@@ -351,7 +353,7 @@ public:
    * @param nb_classes the array containing statistics about each type of classification
    * @param nb_explainable the number of read explainable
    */
-  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable);
+  virtual void updateStatistics(uint (*nb_classes)[NB_MASKS+1], uint *nb_explainable, uint *nb_single, uint *nb_duplication, uint *nb_multiple, uint *nb_none);
 
   /**
    * If the paired-end tags contains a chimera in the non sequenced region
@@ -372,7 +374,10 @@ public:
   TagInfo *getFirstTagInfo();
   TagInfo *getSecondTagInfo();
 
+  vector<SamLine*> getSamLines();
+
 private:
+
   /**
    * Check if a chimera is valid according to the informations
    * about its paired read location.
@@ -393,6 +398,6 @@ private:
    * line and the paired-end read primary line the method update some flags to
    * be SAM consistent.
    */
-  void writeSamLines(ostream &os, vector<SamLine*> &sam_lines, SamLine &primary_line, SamLine &paired_primary_line, bool is_first_taginfo);
+  void postProcessSamLines(vector<SamLine*> &sam_lines, SamLine &primary_line, SamLine &paired_primary_line, bool is_first_taginfo);
 };
 #endif

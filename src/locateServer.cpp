@@ -1,100 +1,51 @@
 /******************************************************************************
-*                                                                             *
-*  Copyright © 2010-2013 -- IRB/INSERM                                        *
-*                           (Institut de Recherches en Biothérapie /          *
-*                           Institut National de la Santé et de la Recherche  *
-*                           Médicale)                                         *
+*  Copyright © 2009-2016 -- LIRMM/CNRS                                        *
+*                           (Laboratoire d'Informatique, de Robotique et de   *
+*                           Microélectronique de Montpellier /                *
+*                           Centre National de la Recherche Scientifique)     *
 *                           LIFL/INRIA                                        *
 *                           (Laboratoire d'Informatique Fondamentale de       *
 *                           Lille / Institut National de Recherche en         *
 *                           Informatique et Automatique)                      *
-*                           LIRMM/CNRS                                        *
-*                           (Laboratoire d'Informatique, de Robotique et de   *
-*                           Microélectronique de Montpellier /                *
-*                           Centre National de la Recherche Scientifique)     *
 *                           LITIS                                             *
 *                           (Laboratoire d'Informatique, du Traitement de     *
 *                           l'Information et des Systèmes).                   *
 *                                                                             *
+*  Copyright © 2011-2016 -- IRB/INSERM                                        *
+*                           (Institut de Recherches en Biothérapie /          *
+*                           Institut National de la Santé et de la Recherche  *
+*                           Médicale).                                        *
 *                                                                             *
-*  Auteurs/Authors: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Thérèse COMMES   <commesd@univ-montp2.fr>                 *
-*                   Éric RIVALS      <eric.rivals@lirmm.fr>                   *
+*  Copyright © 2015-2016 -- AxLR/SATT                                         *
+*                           (Lanquedoc Roussilon /                            *
+*                            Societe d'Acceleration de Transfert de           *
+*                            Technologie).	                              *
 *                                                                             *
-*  Programmeurs                                                               *
-*      /Progammers: Nicolas PHILIPPE <nicolas.philippe@lirmm.fr>              *
-*                   Mikaël SALSON    <mikael.salson@lifl.fr>                  *
-*                   Jérôme AUDOUX    <jerome.audoux@univ-montp2.fr            *
-*  with additional contribution for the packaging of:	                      *
-*                   Alban MANCHERON  <alban.mancheron@lirmm.fr>               *
+*  Programmeurs/Progammers:                                                   *
+*                    Nicolas PHILIPPE <nphilippe.resear@gmail.com>            * 
+*                    Mikaël SALSON    <mikael.salson@lifl.fr>                 *
+*                    Jérôme Audoux    <jerome.audoux@gmail.com>               *  
+*   with additional contribution for the packaging of:	                      *
+*                    Alban MANCHERON  <alban.mancheron@lirmm.fr>              *
 *                                                                             *
-*  Contact:         CRAC list        <crac-bugs@lists.gforge.inria.fr>        *
-*                                                                             *
-*  -------------------------------------------------------------------------  *
-*                                                                             *
-*  Ce fichier fait partie du programme CRAC.                                  *
-*                                                                             *
-*  Crac est un outil d'analyse de données de RNA-Seq provenant des NGS.       *
-*                                                                             *
-*  Ce logiciel est régi  par la licence CeCILL  soumise au droit français et  *
-*  respectant les principes  de diffusion des logiciels libres.  Vous pouvez  *
-*  utiliser, modifier et/ou redistribuer ce programme sous les conditions de  *
-*  la licence CeCILL  telle que diffusée par le CEA,  le CNRS et l'INRIA sur  *
-*  le site "http://www.cecill.info".                                          *
-*                                                                             *
-*  En contrepartie de l'accessibilité au code source et des droits de copie,  *
-*  de modification et de redistribution accordés par cette licence, il n'est  *
-*  offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,  *
-*  seule une responsabilité  restreinte pèse  sur l'auteur du programme,  le  *
-*  titulaire des droits patrimoniaux et les concédants successifs.            *
-*                                                                             *
-*  À  cet égard  l'attention de  l'utilisateur est  attirée sur  les risques  *
-*  associés  au chargement,  à  l'utilisation,  à  la modification  et/ou au  *
-*  développement  et à la reproduction du  logiciel par  l'utilisateur étant  *
-*  donné  sa spécificité  de logiciel libre,  qui peut le rendre  complexe à  *
-*  manipuler et qui le réserve donc à des développeurs et des professionnels  *
-*  avertis  possédant  des  connaissances  informatiques  approfondies.  Les  *
-*  utilisateurs  sont donc  invités  à  charger  et  tester  l'adéquation du  *
-*  logiciel  à leurs besoins  dans des conditions  permettant  d'assurer  la  *
-*  sécurité de leurs systêmes et ou de leurs données et,  plus généralement,  *
-*  à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.         *
-*                                                                             *
-*  Le fait  que vous puissiez accéder  à cet en-tête signifie  que vous avez  *
-*  pris connaissance  de la licence CeCILL,  et que vous en avez accepté les  *
-*  termes.                                                                    *
+*   Contact:         CRAC list   <crac-bugs@lists.gforge.inria.fr>            *
+*   Paper:           CRAC: An integrated RNA-Seq read analysis                *
+*                    Philippe N., Salson M., Commes T., Rivals E.             *
+*                    Genome Biology 2013; 14:R30.                             *
 *                                                                             *
 *  -------------------------------------------------------------------------  *
 *                                                                             *
-*  This File is part of the CRAC program.                                     *
+*   This File is part of the CRAC program.                                    *
 *                                                                             *
-*  Crac is a tool to analyse RNA-Seq data provided by NGS.                    *
-*                                                                             *
-*  This software is governed by the CeCILL license under French law and       *
-*  abiding by the rules of distribution of free software. You can use,        *
-*  modify and/ or redistribute the software under the terms of the CeCILL     *
-*  license as circulated by CEA, CNRS and INRIA at the following URL          *
-*  "http://www.cecill.info".                                                  *
-*                                                                             *
-*  As a counterpart to the access to the source code and rights to copy,      *
-*  modify and redistribute granted by the license, users are provided only    *
-*  with a limited warranty and the software's author, the holder of the       *
-*  economic rights, and the successive licensors have only limited            *
-*  liability.                                                                 *
-*                                                                             *
-*  In this respect, the user's attention is drawn to the risks associated     *
-*  with loading, using, modifying and/or developing or reproducing the        *
-*  software by the user in light of its specific status of free software,     *
-*  that may mean that it is complicated to manipulate, and that also          *
-*  therefore means that it is reserved for developers and experienced         *
-*  professionals having in-depth computer knowledge. Users are therefore      *
-*  encouraged to load and test the software's suitability as regards their    *
-*  requirements in conditions enabling the security of their systems and/or   *
-*  data to be ensured and, more generally, to use and operate it in the same  *
-*  conditions as regards security.                                            *
-*                                                                             *
-*  The fact that you are presently reading this means that you have had       *
-*  knowledge of the CeCILL license and that you accept its terms.             *
+*   This program is free software: you can redistribute it and/or modify      *
+*   it under the terms of the GNU General Public License as published by      *
+*   the Free Software Foundation, either version 3 of the License, or (at     *
+*   your option) any later version.  This program is distributed in the       *
+*   hope that it will be useful, but WITHOUT ANY WARRANTY; without even       *
+*   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR       *
+*   PURPOSE.  See the GNU General Public License for more details.  You       *
+*   should have received a copy of the GNU General Public License along       *
+*   with this program.  If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                             *
 ******************************************************************************/
 
@@ -105,11 +56,13 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <string.h>
+#include "classifyTags.h"
 #include "types.h"
 #include "utils.h"
-#include <gkArrays.h>
-#include <gkArraysTypes.h>
-#include "classifyTags.h"
+//#include <gkArrays.h>
+//#include <gkArraysTypes.h>
+#include "ReadIndex.h"
+#include "libReadsReader/readsReader.h"
 #include "libSSA/locateOnGenome.h"
 #include "Parameters.h"
 #include "libReadsInfo/tagInfo.h"
@@ -123,7 +76,7 @@
 #include <pthread.h>
 
 using namespace std;
-using namespace gkarrays;
+//using namespace gkarrays;
 
 #define LINE_MAX_LENGTH 256
 #define NB_POS_LOCATED 3
@@ -176,29 +129,41 @@ void detailed_taginfo_output(ostream &os, uint tag_id, ClassifyTags *ct,
                              uint nb_step_location) {
   TagInfo *info;
   Classifier *classi;
-  if(!ct->getReadIndex()->getReads()->isPairedEnd()) {
-    SingleReadClassifier *classifier = new SingleReadClassifier(tag_id,ct->getGenomeIndex(),ct->getReadIndex(),ct->getParameters());
-    classifier->classify();
+  readIterator *readIt = ct->getReadsReader()->begin();
+  bool is_paired = ct->getReadsReader()->isPairedEnd();
+
+  // We incrment the iterator util we reach the read
+  uint max = tag_id;
+  // if we have paired-end reads and the query tag_id is the second member
+  // of the paire, we want to stop at the first read of the pair in order to
+  // build a proper PairedEndReadClassifier() !
+  if(is_paired && tag_id % 2  != 0) {
+    max--;
+  }
+  for(uint i = 0; i < max; i++) {
+      ++(*readIt);
+  }
+    
+  classi = ct->newClassifier(readIt,false);
+  classi->init();
+  classi->classify();
+  if(!is_paired) {
+    SingleReadClassifier *classifier = dynamic_cast<SingleReadClassifier*>(classi);
     info = classifier->getTagInfo();
-    classi = classifier;
   } else {
-    PairedEndReadClassifier *classifier;
+    PairedEndReadClassifier *classifier = dynamic_cast<PairedEndReadClassifier*>(classi);
     if (tag_id % 2 == 0) {
-      classifier = new PairedEndReadClassifier(tag_id,tag_id+1,ct->getGenomeIndex(),ct->getReadIndex(),ct->getParameters());
-      classifier->classify();
       info = classifier->getFirstTagInfo();
     } else {
-      classifier = new PairedEndReadClassifier(tag_id-1,tag_id,ct->getGenomeIndex(),ct->getReadIndex(),ct->getParameters());
-      classifier->classify();
       info = classifier->getSecondTagInfo();
     }
-    classi = classifier;
   }
-  uchar *tag = (uchar *)info->getTag();
+
+  uchar *tag = (uchar *)info->getRead()->seq;
   LocateOnGenome *genome = ct->getGenomeIndex();
-  gkArrays *indexTags = ct->getReadIndex();
-  uint tag_length = indexTags->getTagLength(tag_id);
-  uint threshold =  indexTags->getThreshold();
+  ReadIndex *indexTags = ct->getReadIndex();
+  uint tag_length = info->getRead()->getLength();
+  uint threshold =  indexTags->getFactorLength();
   
 
   os << endl;
@@ -259,70 +224,72 @@ void detailed_taginfo_output(ostream &os, uint tag_id, ClassifyTags *ct,
     os << "Breaks: " << endl;
     for (uint i=0; i < info->getNbBreaks(); i++) {
       os << i << "\t" << info->getPositionStartBreak(i) 
-                  << " -> "<< info->getPositionEndBreak(i);
+	 << " -> "<< info->getPositionEndBreak(i);
       os << " (distance: " << info->getTagBreakLength(i);
-      // 		    if (info->getIsExtended(i))
-      // 		      os << " -- break extended";
+	// 		    if (info->getIsExtended(i))
+	// 		      os << " -- break extended";
       os  << ")";
       os << "\tscore (out/in): "
-                  << info->getScoreOutsideBreak(i) << "/"
-                  << info->getScoreInsideBreak(i);
+	 << info->getScoreOutsideBreak(i) << "/"
+	 << info->getScoreInsideBreak(i);
       if (info->getScoreOutsideBreak(i) > 1) {
-        os << ", score intra: " 
-                    << info->getScoreComputedIntraExon(i)
-                    << ", score inter: " 
-                    << info->getScoreComputedInterExon(i)
-                    << endl
-                    << "\t\t\t\taverage (high/low): "
-                    << info->getAverageHighInside(i)
-                    << "/"
-                    << info->getAverageLowInside(i)
-                    << "\t score: "
-                    << info->getScoreInsideAverages(i);
-        if (info->getAverageLowInside(i) < 1 + EPSILON) {
-          os << endl << "\t\t\t\tfalling left: " 
-                      << info->isSupportFallingLeft(i)
-                      << "; right: " 
-                      << info->isSupportFallingRight(i);
-        }
+	os << ", score intra: " 
+	   << info->getScoreComputedIntraExon(i)
+	   << ", score inter: " 
+	   << info->getScoreComputedInterExon(i)
+	   << endl
+	   << "\t\t\t\taverage (high/low): "
+	   << info->getAverageHighInside(i)
+	   << "/"
+	   << info->getAverageLowInside(i)
+	   << "\t score: "
+	   << info->getScoreInsideAverages(i);
+	if (info->getAverageLowInside(i) < 1 + EPSILON) {
+	  os << endl << "\t\t\t\tfalling left: " 
+	     << info->isSupportFallingLeft(i)
+	     << "; right: " 
+	     << info->isSupportFallingRight(i);
+	}
       }
       os << endl;
-      // if (! info->isRepeated(i)) {
-      os << "\tLocs: ";
-      if (info->getPositionStartBreak(i) > 0)
-        os << *info->getChrPosStartBreak(i) << " (" 
-                    << info->getLocationStartBreak(i) << ")";
-      else
-        os << "??";
-      os <<  " -> ";
-      if (info->getPositionEndBreak(i) < info->getSupportLength()-1)
-        os << *info->getChrPosEndBreak(i) << " ("
-                    << info->getLocationEndBreak(i) << ")";
-      else
-        os << "??";
-      if (info->getGenomeGapLength(i) != GAP_SIZE_MAX)
-        os << "\t gap length: " << info->getGenomeGapLength(i);
-      os << endl;
-		  
-      if (info->getPositionStartBreak(i) > 0) {
-        if (info->getPositionStartBreak(i) != info->getPositionStartBreak(i))
-          dispLocateFactors(os, info, info->getPositionStartBreak(i)-1,
-                            genome,tag, threshold, 1, nb_pos_located);
-        else
-          dispLocateFactors(os, info, info->getPositionStartBreak(i)-1,
-                            genome,tag, threshold, -1, nb_pos_located);
-        os << "\t-----" << endl;
-      }
-      if (info->getPositionEndBreak(i) < info->getSupportLength()-1) {
-        if (info->getPositionEndBreak(i) != info->getPositionEndBreak(i))
-          dispLocateFactors(os, info, info->getPositionEndBreak(i)+1,
-                            genome, tag, threshold, -1, nb_pos_located);
-        else
-          dispLocateFactors(os, info, info->getPositionEndBreak(i)+1,
-                            genome, tag, threshold, 1, nb_pos_located);
+      if (info->getNbCandidats(i) > 0 || !info->isRepeated(i)){
+	os << "\tLocs: ";
+	if (info->getPositionStartBreak(i) > 0)
+	  os << *info->getChrPosStartBreak(i) << " (" 
+	     << info->getLocationStartBreak(i) << ")";
+	else
+	  os << "??";
+	os <<  " -> ";
+	if (info->getPositionEndBreak(i) < info->getSupportLength()-1)
+	  os << *info->getChrPosEndBreak(i) << " ("
+	     << info->getLocationEndBreak(i) << ")";
+	else
+	  os << "??";
+	if (info->getGenomeGapLength(i) != GAP_SIZE_MAX)
+	  os << "\t gap length: " << info->getGenomeGapLength(i);
+	os << endl;
+	
+	if (info->getPositionStartBreak(i) > 0) {
+	  if (info->getPositionStartBreak(i) != info->getPositionStartBreak(i))
+	    dispLocateFactors(os, info, info->getPositionStartBreak(i)-1,
+			      genome,tag, threshold, 1, nb_pos_located);
+	  else
+	    dispLocateFactors(os, info, info->getPositionStartBreak(i)-1,
+			      genome,tag, threshold, -1, nb_pos_located);
+	  os << "\t-----" << endl;
+	}
+	if (info->getPositionEndBreak(i) < info->getSupportLength()-1) {
+	  if (info->getPositionEndBreak(i) != info->getPositionEndBreak(i))
+	    dispLocateFactors(os, info, info->getPositionEndBreak(i)+1,
+			      genome, tag, threshold, -1, nb_pos_located);
+	  else
+	    dispLocateFactors(os, info, info->getPositionEndBreak(i)+1,
+			      genome, tag, threshold, 1, nb_pos_located);
+	}
+      }else{
+	os << "This break is not considered because there is a repeated kmer directly after it!" << endl;
       }
       os << "----------" << endl;
-      // }
     }
   }
 
@@ -481,6 +448,7 @@ void detailed_taginfo_output(ostream &os, uint tag_id, ClassifyTags *ct,
   } // end else hasNothing()
 
   delete classi;
+  delete readIt;
 }
 
 void *launchSubServer(void *args) {
@@ -490,10 +458,10 @@ void *launchSubServer(void *args) {
   ClassifyTags *ct = (ClassifyTags*)theArgs[ARG_CLASSIFY_TAGS];
   sem_t genome_semaphore = * ((sem_t *)theArgs[ARG_GENOME_SEMAPHORE]);
   LocateOnGenome *genome = ct->getGenomeIndex();
-  gkArrays *indexTags = ct->getReadIndex();
+  ReadIndex *indexTags = ct->getReadIndex();
   Parameters *params = ct->getParameters();
   delete [] theArgs;
-  uint threshold = indexTags->getThreshold();
+  uint threshold = indexTags->getFactorLength();
 
   char *dontCare, *variable, *tag_length, *factor;
   char *end_ptr;
@@ -582,7 +550,7 @@ void *launchSubServer(void *args) {
           name[name_length]=0;
 
           // Searching read whose name is name.
-          readIterator *it = indexTags->getReads()->begin();
+          readIterator *it = ct->getReadsReader()->begin();
           uint tag_id = 0;
 
           while (!it->isFinished()  && it->getName() 
@@ -602,35 +570,37 @@ void *launchSubServer(void *args) {
           delete it;
           delete [] name;
 	} else if (strncmp("tag|",line, 4) == 0) {
-	  // String in format tag|<factor length>|<factor>
-	  dontCare = strtok(line, "|");
-	  tag_length = strtok(NULL, "|");
-	  factor = strtok(NULL, "|");
-	  if (tag_length == NULL || factor == NULL) {
-	    fifo_output << "Error: bad format, should be tag|<factor_length>|<factor> "
-			<< "(eg. tag|13|ACAGTAGCATCAG" << endl;
-	  } else {
-	    uint nb_result;
-	    pair <uint, uint> *occs = indexTags->getTagsWithFactor(factor,
-								   (uint) atol(tag_length),
-								   nb_result);
-	    fifo_output << nb_result << " Tags with " << factor << ": " << endl;
-	    for (size_t i=0; i < nb_result; i++) {
-	      fifo_output << occs[i].first << ":" << occs[i].second << "\t";
-	      if ((i+1) % 5 == 0)
-		fifo_output << endl;
-	    }	      
-	    fifo_output << endl;
-	  }	    
+    fifo_output << "This command is not supported anymore.." << endl;
+	  //// String in format tag|<factor length>|<factor>
+	  //dontCare = strtok(line, "|");
+	  //tag_length = strtok(NULL, "|");
+	  //factor = strtok(NULL, "|");
+	  //if (tag_length == NULL || factor == NULL) {
+	  //  fifo_output << "Error: bad format, should be tag|<factor_length>|<factor> "
+		//	<< "(eg. tag|13|ACAGTAGCATCAG" << endl;
+	  //} else {
+	  //  uint nb_result;
+	  //  pair <uint, uint> *occs = indexTags->getTagsWithFactor(factor,
+		//						   (uint) atol(tag_length),
+		//						   nb_result);
+	  //  fifo_output << nb_result << " Tags with " << factor << ": " << endl;
+	  //  for (size_t i=0; i < nb_result; i++) {
+	  //    fifo_output << occs[i].first << ":" << occs[i].second << "\t";
+	  //    if ((i+1) % 5 == 0)
+		//fifo_output << endl;
+	  //  }	      
+	  //  fifo_output << endl;
+	  //}	    
 	} else if (strncmp("GkSA|", line, 5) == 0) {
-	  dontCare = strtok(line, "|");
-	  value = strtok(NULL, "|");
-	  if (value == NULL) {
-	    fifo_output << "Error: bad format, should be GkSA|<int>" << endl;
-	  } else  {
-	    fifo_output << "GkSA[" << value << "]=" 
-			<< indexTags->getGkSA((uintSA)atoll(value)) << endl;
-	  }
+    fifo_output << "This command is not supported anymore.." << endl;
+	  //dontCare = strtok(line, "|");
+	  //value = strtok(NULL, "|");
+	  //if (value == NULL) {
+	  //  fifo_output << "Error: bad format, should be GkSA|<int>" << endl;
+	  //} else  {
+	  //  fifo_output << "GkSA[" << value << "]=" 
+		//	<< indexTags->getGkSA((uintSA)atoll(value)) << endl;
+	  //}
 	} else if (strncmp("genome|", line, 7) == 0) {
 	  // genome|<chr>|<pos>|<length>
 	  dontCare = strtok(line, "|");
@@ -675,32 +645,33 @@ void *launchSubServer(void *args) {
                           << "There are only " << indexTags->getNbTags() 
                           << " reads indexed." << endl;
             } else if (*end_ptr != '\0') {
-	      if (end_ptr == NULL || end_ptr[0] != ':') {
-		fifo_output << "Error: bad format, you must give the id of tag alone or "
-			    << " <tag id>:<tag pos>" << endl;
-	      } else {
-		uint tag_pos = strtol(&end_ptr[1], NULL, 10);
-	      
-		uint nb_tags = indexTags->getNbTagsWithFactor(tag_id, tag_pos);
-		pair<uint, uint> *tags = indexTags->getTagsWithFactor(tag_id, tag_pos);
-		char *tag_factor = indexTags->getTagFactor(tag_id, tag_pos, threshold);
-	      
-		if (nb_tags >= 2) {
-		  fifo_output << nb_tags << " tags contain the factor " << tag_factor << "." << endl;
-		  fifo_output << "Tags: ";
-		  for (uint i=0; i < nb_tags-1; i++) {
-		    fifo_output << tags[i].first << " pos. " << tags[i].second << "; ";
-		    if ((i+1)%10 == 0)
-		      fifo_output << endl;
-		  }
-		  fifo_output << tags[nb_tags-1].first << " pos. " << tags[nb_tags-1].second << "; ";
-		} else {
-		  fifo_output << "This is the only tag with the factor " << tag_factor << "." ;
-		}
-		fifo_output << endl;
-		delete [] tag_factor;
-		delete [] tags;	      
-	      }
+    fifo_output << "This command is not supported anymore.." << endl;
+	  //    if (end_ptr == NULL || end_ptr[0] != ':') {
+		//fifo_output << "Error: bad format, you must give the id of tag alone or "
+		//	    << " <tag id>:<tag pos>" << endl;
+	  //    } else {
+		//uint tag_pos = strtol(&end_ptr[1], NULL, 10);
+	  //    
+		//uint nb_tags = indexTags->getNbTagsWithFactor(tag_id, tag_pos);
+		//pair<uint, uint> *tags = indexTags->getTagsWithFactor(tag_id, tag_pos);
+		//char *tag_factor = indexTags->getTagFactor(tag_id, tag_pos, threshold);
+	  //    
+		//if (nb_tags >= 2) {
+		//  fifo_output << nb_tags << " tags contain the factor " << tag_factor << "." << endl;
+		//  fifo_output << "Tags: ";
+		//  for (uint i=0; i < nb_tags-1; i++) {
+		//    fifo_output << tags[i].first << " pos. " << tags[i].second << "; ";
+		//    if ((i+1)%10 == 0)
+		//      fifo_output << endl;
+		//  }
+		//  fifo_output << tags[nb_tags-1].first << " pos. " << tags[nb_tags-1].second << "; ";
+		//} else {
+		//  fifo_output << "This is the only tag with the factor " << tag_factor << "." ;
+		//}
+		//fifo_output << endl;
+		//delete [] tag_factor;
+		//delete [] tags;	      
+    //     }
 	    } else {
 	      //   for (tag_id = 32; tag_id < 33; tag_id++) {
               detailed_taginfo_output(fifo_output, tag_id, ct,

@@ -69,7 +69,7 @@ FILE_TO_GREP=
 NO_LAUNCHER=
 IGNORE_WHITESPACES=1
 
-TMP_TAP_FILE=$(mktemp)
+TMP_TAP_FILE=$(mktemp tap.XXXX)
 
 {
 nb_tests=0
@@ -139,8 +139,8 @@ while read line; do
                 know_to_fail=0
                 exact=0
 
-                pattern=$(cut -d: -f2- <<< $line)
-                nb_hits=$(cut -d: -f1 <<< $line)
+                pattern=$(cut -d: -f2- <<< "$line")
+                nb_hits=$(cut -d: -f1 <<< "$line")
 
                 while ! [ "${nb_hits:0:1}" -eq "${nb_hits:0:1}" ] 2> /dev/null; do
                     case ${nb_hits:0:1} in
@@ -190,4 +190,5 @@ done < $BASE
 } > $TMP_TAP_FILE
 
 mv $TMP_TAP_FILE $TAP_FILE
+echo >&2
 exit $error

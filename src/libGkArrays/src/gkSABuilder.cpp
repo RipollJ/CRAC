@@ -118,6 +118,7 @@
 #ifdef HAVE_LIBPROGRESSBAR
 #include <libProgressBar/progressBar.h>
 uintSA PB_thread_master_start_pos = 0;
+#include <unistd.h>
 #endif
 
 using namespace std;

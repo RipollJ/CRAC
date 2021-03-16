@@ -104,20 +104,13 @@ EXTRA_DIST = $(script_tests) should-get.sh $(should_get_files) $(fasta_files) $(
 
 SH_LOG_COMPILER = $(SHELL)
 
-TESTS_ENVIRONMENT =	\
-	cd $(abs_srcdir);	\
-	export	abs_top_builddir='$(abs_top_builddir)'	\
-	abs_top_srcdir='$(abs_top_srcdir)'	\
-	abs_builddir='$(abs_builddir)'	\
-	abs_srcdir='$(abs_srcdir)';
-
 script_tests = index_genomes.sh launch_sg.sh test_index.sh
 
 should_get_files = $(shell find . -name "*.should_get")
 fasta_files = $(shell find . -name "*.fasta" -o -name "*.fa")
 fastq_files = $(shell find . -name "*.fastq" -o -name "*.fq")
 
-SUBDIRS = causes bug cigar
+SUBDIRS = causes bug cigar splices_adjust
 
 MOSTLYCLEANFILES = *~
 CLEANFILES = *~ *.tap *.gcda *.gcno *.valgrind

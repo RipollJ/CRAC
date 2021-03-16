@@ -1,0 +1,9 @@
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/bug/bug-2015-12-08-genome -r bug-2015-12-08-read1.fa bug-2015-12-08-read2.fa -k 22 -o ${abs_top_builddir:-../..}/test_f/bug/bug-2015-12-08.sam --detailed-sam --reads-index GKARRAYS
+!OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/bug/bug-2015-12-08.sam
+!OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/bug
+
+$The first read should map
+1:read.*chr.* 34M 
+
+$The second read should map too
+1:read.*M96262.* 22M 

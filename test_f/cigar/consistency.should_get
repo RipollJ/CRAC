@@ -1,9 +1,9 @@
-!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/cigar/genome -r reads.fasta -k 22 -o ${abs_top_builddir:-../..}/test_f/cigar/consistency.sam
+!LAUNCH: ${abs_top_builddir:-../..}/src/crac -i ${abs_top_builddir:-../..}/test_f/cigar/genome -r reads.fasta -k 22 -o ${abs_top_builddir:-../..}/test_f/cigar/consistency.sam --detailed-sam --reads-index GKARRAYS --use-x-in-cigar --min-chimera-score 0
 !OUTPUT_FILE: ${abs_top_builddir:-../..}/test_f/cigar/consistency.sam
 !OUTPUT_DIR: ${abs_top_builddir:-../..}/test_f/cigar
 
 $CIGAR consistency check (reverse chimera)
-2:^os1000380-90bp-3186262-[1-2]\\s0\\s.*\\s23M120N24M43S\\s
+2:^os1000380-90bp-3186262-[1-2]\\s0\\s.*\\s24M120N23M43S\\s
 2:^os1000380-90bp-3186262-[1-2]\\s2064\\s.*\\s8S35M47S\\s
 
 $CIGAR consistency check (reverse chimera)
@@ -19,8 +19,8 @@ $CIGAR consistency check (reverse chimera)
 2:^os1000380-90bp-6065109-[1-2]\\s2064\\s.*\\s56M34S\\s
 
 $CIGAR consistency check (reverse chimera)
-2:^os1000380-90bp-22131968-[1-2]\\s0\\s.*\\s33M57S\\s
-2:^os1000380-90bp-22131968-[1-2]\\s2064\\s.*\\s57M33S\\s
+2:^os1000380-90bp-22131968-[1-2]\\s0 chr1 660\\s.*\\s33M57S\\s
+2:^os1000380-90bp-22131968-[1-2]\\s2064 chr1 618\\s.*\\s57M33S\\s
 
 $CIGAR consistency check -- bug #15352 part 1 (reverse chimera)
 2:^bug_15352-[1-2]\\s0\\s.*\\s43M35S\\s
@@ -31,4 +31,4 @@ $CIGAR consistency check -- bug #15352 part 2 (reverse chimera)
 2:^bug_15352_bis_[1-2]\\s2064\\s.*\\s33M68S\\s
 
 $CIGAR consistency check -- inconsistency found in GRCh37-200bp dataset
-2:^GRCh37-200bp-r1259_[1-2]\\s0\\s.*\\s11S140M192N30M19S\\s
+2:^GRCh37-200bp-r1259_[1-2]\\s0\\s.*\\s11S141M192N29M19S\\s
