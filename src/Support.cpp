@@ -53,6 +53,7 @@
 #include <utility>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 #include "Support.h"
 #include "BreakList.h"
 #include "utils.h"

@@ -177,16 +177,20 @@ CandidatBreak *SupportBreak::getCandidatChosen(){
 }
 
 int SupportBreak::getChimeraClass(){
-  if (getTagBreakLength() < getThreshold() && hasLongEnoughTagBreak()){
+  if (hasLongEnoughTagBreak()){
+    int insert_in_fusion = 0;
+    if (getTagBreakLength() >= getThreshold())
+      insert_in_fusion = 5;
+    
     if  (getChrId(START_BREAK) != getChrId(END_BREAK))
-      return 1;
+      return 1+insert_in_fusion;
     if (getStrandLocation(START_BREAK) != getStrandLocation(END_BREAK))
-      return 4;
+      return 4+insert_in_fusion;
     if (getGenomeGapLength() < 0)
-      return 3;
+      return 3+insert_in_fusion;
     if (labs(getGenomeGapLength()) > parameters->max_splice_length)
-      return 2;
-  }
+      return 2+insert_in_fusion;
+  } 
   return 0;
 }
 

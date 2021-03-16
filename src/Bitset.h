@@ -53,6 +53,7 @@
 
 #include <cstdlib> // for uint
 #include <vector> // std::vector
+#include "types.h"
 
 class Bitset {
   public:

@@ -98,6 +98,8 @@
 ###############################################################################
 
 
+AUTOMAKE_OPTIONS = subdir-objects
+
 bin_PROGRAMS=crac
 
 CRAC_LINKS = crac-index

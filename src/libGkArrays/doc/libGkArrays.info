@@ -1,4 +1,4 @@
-This is libGkArrays.info, produced by makeinfo version 5.2 from
+This is libGkArrays.info, produced by makeinfo version 6.5 from
 libGkArrays.texi.
 
    CeCILL-C FREE SOFTWARE LICENSE AGREEMENT Version 1.0 dated
@@ -184,7 +184,7 @@ directory.
 #include <cstdio>
 
 int main(int argc, char **argv) {
-
+  
   if (argc < 2) {
     std::cerr << "Usage: " << argv[0] << " filename" << std::endl;
     exit(1);
@@ -199,7 +199,7 @@ int main(int argc, char **argv) {
 
   // Displaying the number of indexed reads
   printf("%d reads in the collection\n", reads->getNbTags());
-
+  
   // Displaying the number of reads with a given k-mer
   printf("%d read(s) share the k-mer %s\n",
          reads->getNbTagsWithFactor(0, 0, false),
@@ -208,7 +208,7 @@ int main(int argc, char **argv) {
   // Displaying the read numbers that contain that specific k-mer
   printf("Read containing the occurrences:\n");
   uint *read_occurrences = reads->getTagNumWithFactor(0, 0);
-  for (uint i = 0; i < reads->getNbTagsWithFactor(0, 0, false); i++)
+  for (uint i = 0; i < reads->getNbTagsWithFactor(0, 0, false); i++) 
     printf("%d\t", read_occurrences[i]);
   printf("\n");
 
@@ -226,7 +226,7 @@ int main(int argc, char **argv) {
   delete [] occurrences;
   delete reads;
   delete [] kmer;
-  exit(0);
+  exit(0);  
 }
 
    If you store this example in a file called test.cpp, you can compile
@@ -874,9 +874,9 @@ Tag Table:
 Node: Top2541
 Node: Instructions3180
 Node: Developing3485
-Node: Copying9304
-Node: Problems32280
-Node: Concept Index32904
+Node: Copying9311
+Node: Problems32287
+Node: Concept Index32911
 
 End Tag Table
 
